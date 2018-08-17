@@ -7,7 +7,7 @@ namespace Data
     public class DataContext: DbContext
     {
        public DbSet<Account> Accounts { get; set; }
-       public DbSet<User> Users { get; set; }
+       public DbSet<UserProfile> UserProfiles { get; set; }
 
         public DataContext(DbContextOptions<DataContext> options): base(options)
         {

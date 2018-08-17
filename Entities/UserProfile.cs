@@ -4,9 +4,9 @@ using System.Text;
 
 namespace Entities
 {
-    public class User
+    public class UserProfile
     {
-        public int UserId { get; set; }
+        public int UserProfileId { get; set; }
         public string FirstName { get; set; }
         public string LastName { get; set; }
 
@@ -17,7 +17,7 @@ namespace Entities
 
         public Account Account { get; set; }
 
-        public User()
+        public UserProfile()
         {
 
         }
