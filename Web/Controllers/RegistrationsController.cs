@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading;
 using System.Threading.Tasks;
 using Data;
 using Microsoft.AspNetCore.Http;
@@ -21,17 +22,19 @@ namespace Web.Controllers
 
         // POST: api/Registrations
         [HttpPost]
-        public void Post([FromBody] NewUser newUser)
+        public IActionResult Post([FromBody] NewAccount newAccount)
         {
-            Context.Users.Add(new Entities.User()
+            var account = new Entities.Account()
             {
-                Account = new Entities.Account()
-                {
-                    Username = newUser.Username,
-                    Password = newUser.Password
-                }
-            });
+                Username = newAccount.Username,
+                Password = newAccount.Password,
+                CreatedBy = "Guest",
+                CreatedOn = DateTime.Now
+            };
+            Context.Accounts.Add(account);
             Context.SaveChanges();
+           
+            return Created($"/api/accounts/{account.AccountId}", account);
         }
     }
 }
