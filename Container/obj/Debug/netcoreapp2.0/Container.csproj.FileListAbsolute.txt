@@ -1,0 +1,14 @@
+c:\projects\ServiceTemplate\Container\bin\Debug\netcoreapp2.0\Container.deps.json
+c:\projects\ServiceTemplate\Container\bin\Debug\netcoreapp2.0\Container.dll
+c:\projects\ServiceTemplate\Container\obj\Debug\netcoreapp2.0\Container.csproj.CoreCompileInputs.cache
+c:\projects\ServiceTemplate\Container\obj\Debug\netcoreapp2.0\Container.AssemblyInfoInputs.cache
+c:\projects\ServiceTemplate\Container\obj\Debug\netcoreapp2.0\Container.AssemblyInfo.cs
+c:\projects\ServiceTemplate\Container\bin\Debug\netcoreapp2.0\Container.pdb
+c:\projects\ServiceTemplate\Container\bin\Debug\netcoreapp2.0\Data.dll
+c:\projects\ServiceTemplate\Container\bin\Debug\netcoreapp2.0\Data.pdb
+c:\projects\ServiceTemplate\Container\obj\Debug\netcoreapp2.0\Container.csprojAssemblyReference.cache
+c:\projects\ServiceTemplate\Container\obj\Debug\netcoreapp2.0\Container.csproj.CopyComplete
+c:\projects\ServiceTemplate\Container\obj\Debug\netcoreapp2.0\Container.dll
+c:\projects\ServiceTemplate\Container\obj\Debug\netcoreapp2.0\Container.pdb
+c:\projects\ServiceTemplate\Container\bin\Debug\netcoreapp2.0\Entities.dll
+c:\projects\ServiceTemplate\Container\bin\Debug\netcoreapp2.0\Entities.pdb
