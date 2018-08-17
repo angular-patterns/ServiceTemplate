@@ -670,11 +670,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "c:\\projects\\ServiceTemplate\\Entities\\Entities.csproj",
+      "projectUniqueName": "C:\\projects\\test2\\ServiceTemplate\\Entities\\Entities.csproj",
       "projectName": "Entities",
-      "projectPath": "c:\\projects\\ServiceTemplate\\Entities\\Entities.csproj",
+      "projectPath": "C:\\projects\\test2\\ServiceTemplate\\Entities\\Entities.csproj",
       "packagesPath": "C:\\Users\\mike\\.nuget\\packages\\",
-      "outputPath": "c:\\projects\\ServiceTemplate\\Entities\\obj\\",
+      "outputPath": "C:\\projects\\test2\\ServiceTemplate\\Entities\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"

@@ -13403,11 +13403,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "c:\\projects\\ServiceTemplate\\Web\\Web.csproj",
+      "projectUniqueName": "C:\\projects\\test2\\ServiceTemplate\\Web\\Web.csproj",
       "projectName": "Web",
-      "projectPath": "c:\\projects\\ServiceTemplate\\Web\\Web.csproj",
+      "projectPath": "C:\\projects\\test2\\ServiceTemplate\\Web\\Web.csproj",
       "packagesPath": "C:\\Users\\mike\\.nuget\\packages\\",
-      "outputPath": "c:\\projects\\ServiceTemplate\\Web\\obj\\",
+      "outputPath": "C:\\projects\\test2\\ServiceTemplate\\Web\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
@@ -13426,8 +13426,8 @@
       "frameworks": {
         "netcoreapp2.0": {
           "projectReferences": {
-            "c:\\projects\\ServiceTemplate\\Container\\Container.csproj": {
-              "projectPath": "c:\\projects\\ServiceTemplate\\Container\\Container.csproj"
+            "C:\\projects\\test2\\ServiceTemplate\\Container\\Container.csproj": {
+              "projectPath": "C:\\projects\\test2\\ServiceTemplate\\Container\\Container.csproj"
             }
           }
         }

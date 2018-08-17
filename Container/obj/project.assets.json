@@ -3850,11 +3850,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "c:\\projects\\ServiceTemplate\\Container\\Container.csproj",
+      "projectUniqueName": "C:\\projects\\test2\\ServiceTemplate\\Container\\Container.csproj",
       "projectName": "Container",
-      "projectPath": "c:\\projects\\ServiceTemplate\\Container\\Container.csproj",
+      "projectPath": "C:\\projects\\test2\\ServiceTemplate\\Container\\Container.csproj",
       "packagesPath": "C:\\Users\\mike\\.nuget\\packages\\",
-      "outputPath": "c:\\projects\\ServiceTemplate\\Container\\obj\\",
+      "outputPath": "C:\\projects\\test2\\ServiceTemplate\\Container\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
@@ -3873,8 +3873,8 @@
       "frameworks": {
         "netcoreapp2.0": {
           "projectReferences": {
-            "c:\\projects\\ServiceTemplate\\Data\\Data.csproj": {
-              "projectPath": "c:\\projects\\ServiceTemplate\\Data\\Data.csproj"
+            "C:\\projects\\test2\\ServiceTemplate\\Data\\Data.csproj": {
+              "projectPath": "C:\\projects\\test2\\ServiceTemplate\\Data\\Data.csproj"
             }
           }
         }
