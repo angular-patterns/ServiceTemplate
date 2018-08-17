@@ -3,19 +3,23 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Autofac;
+using Autofac.Features.AttributeFilters;
 using Container;
-using Data;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using NServiceBus;
 using Swashbuckle.AspNetCore.Swagger;
+using Web.Controllers;
 
 namespace Web
 {
     public class Startup
     {
+        public static IEndpointInstance Endpoint { get; set; }
+
         public Startup(IConfiguration configuration)
         {
             Configuration = configuration;
@@ -36,9 +40,15 @@ namespace Web
 
         public void ConfigureContainer(ContainerBuilder builder)
         {
-            var db = new DbContextOptionsBuilder<DataContext>();
-            db.UseSqlServer(Configuration.GetConnectionString("DefaultConnection"));
-            builder.RegisterModule(new AutofacModule(db.Options));
+            var endpointConfiguration = new EndpointConfiguration("Registration");
+            endpointConfiguration.MakeInstanceUniquelyAddressable("1");
+            endpointConfiguration.EnableCallbacks();
+            endpointConfiguration.UsePersistence<LearningPersistence>();
+            endpointConfiguration.UseTransport<LearningTransport>();
+
+            Endpoint = NServiceBus.Endpoint.Start(endpointConfiguration).GetAwaiter().GetResult();
+
+            builder.RegisterModule(new AutofacModule(Endpoint));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -63,7 +73,7 @@ namespace Web
             app.UseSwaggerUI(c =>
             {
                 c.SwaggerEndpoint("/swagger/v1/swagger.json", "My API V1");
-                //c.RoutePrefix = string.Empty;
+                c.RoutePrefix = "api";
             });
 
             app.UseDefaultFiles();

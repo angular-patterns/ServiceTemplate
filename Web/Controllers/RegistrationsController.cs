@@ -3,38 +3,34 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
-using Data;
+using Autofac.Features.AttributeFilters;
+using Messages.Messages;
+using Messages.Replies;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using NServiceBus;
+using Registration;
 using Web.Models;
 
 namespace Web.Controllers
 {
     [Produces("application/json")]
-    [Route("api/Registrations")]
+    [Route("api/endpoints/Registrations")]
     public class RegistrationsController : Controller
     {
-        public DataContext Context { get; }
-        public RegistrationsController(DataContext context)
+        public RegistrationsController()
         {
-            this.Context = context;
+
         }
 
         // POST: api/Registrations
         [HttpPost]
-        public IActionResult Post([FromBody] NewAccount newAccount)
+        public async Task<IActionResult> Post([FromBody] CreateNewAccount newAccount)
         {
-            var account = new Entities.Account()
-            {
-                Username = newAccount.Username,
-                Password = newAccount.Password,
-                CreatedBy = "Guest",
-                CreatedOn = DateTime.Now
-            };
-            Context.Accounts.Add(account);
-            Context.SaveChanges();
-           
-            return Created($"/api/accounts/{account.AccountId}", account);
+            var sendOptions = new SendOptions();
+            sendOptions.SetDestination("Blue");
+            var createdAccount = await Startup.Endpoint.Request<NewAccountCreated>(newAccount, sendOptions);
+            return Created($"/api/accounts/{createdAccount.AccountId}", createdAccount);
         }
     }
 }
