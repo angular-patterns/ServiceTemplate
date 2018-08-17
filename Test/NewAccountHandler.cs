@@ -17,8 +17,8 @@ namespace Test
         {
 
             Console.WriteLine("Received messages");
-            var created = CreateAccountAsync(message);
-            return created.ContinueWith(t=> context.Reply(created));
+            var created = CreateAccountAsync(message).Result;
+            return context.Reply(created);
         }
 
 
@@ -26,7 +26,7 @@ namespace Test
         {
 
             HttpResponseMessage response = await client.PostAsJsonAsync(
-                "http://localhost:3696/api/endpoints/registrations", account);
+                "http://localhost:3697/api/registrations", account);
             response.EnsureSuccessStatusCode();
             string jsonContent = response.Content.ReadAsStringAsync().Result;
             // return URI of the created resource.
