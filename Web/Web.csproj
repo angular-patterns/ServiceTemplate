@@ -20,7 +20,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\Container\Container.csproj" />
-    <ProjectReference Include="..\Messages\Messages.csproj" />
+    <ProjectReference Include="..\Endpoints\Messaging\Endpoints.Messaging.csproj" />
   </ItemGroup>
 
   <ItemGroup>

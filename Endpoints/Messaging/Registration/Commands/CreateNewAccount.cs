@@ -3,9 +3,9 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace Messages.Messages
+namespace Endpoints.Messaging.Registration.Commands
 {
-    public class CreateNewAccount: IMessage
+    public class CreateNewAccount: ICommand
     {
         public string Username { get; set; }
         public string Password { get; set; }

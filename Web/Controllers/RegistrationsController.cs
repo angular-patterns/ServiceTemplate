@@ -5,8 +5,8 @@ using System.Threading;
 using System.Threading.Tasks;
 using Autofac.Features.AttributeFilters;
 using Endpoints.Api.Core;
-using Messages.Messages;
-using Messages.Replies;
+using Endpoints.Messaging.Registration.Commands;
+using Endpoints.Messaging.Registration.Messages;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using NServiceBus;
@@ -31,8 +31,8 @@ namespace Web.Controllers
         public async Task<IActionResult> Post([FromBody] CreateNewAccount newAccount)
         {
             var sendOptions = new SendOptions();
-            sendOptions.SetDestination("Blue");
-            var createdAccount = await endpointFactory.Get("Registration").Request<NewAccountCreated>(newAccount, sendOptions);
+            sendOptions.SetDestination("Endpoints.Api.Processing.Registration");
+            var createdAccount = await endpointFactory.Get("Endpoints.Api.Gateway.Registration").Request<NewAccountCreated>(newAccount, sendOptions);
             return Created($"/api/accounts/{createdAccount.AccountId}", createdAccount);
         }
     }

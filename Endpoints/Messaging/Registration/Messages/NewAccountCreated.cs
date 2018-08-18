@@ -3,7 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace Messages.Replies
+namespace Endpoints.Messaging.Registration.Messages
 {
     public class NewAccountCreated: IMessage
     {

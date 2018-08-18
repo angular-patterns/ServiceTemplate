@@ -5183,17 +5183,17 @@
           "bin/placeholder/Endpoints.Api.Gateway.Registration.dll": {}
         }
       },
-      "Messages/1.0.0": {
+      "Endpoints.Messaging/1.0.0": {
         "type": "project",
         "framework": ".NETCoreApp,Version=v2.0",
         "dependencies": {
           "NServiceBus": "7.0.1"
         },
         "compile": {
-          "bin/placeholder/Messages.dll": {}
+          "bin/placeholder/Endpoints.Messaging.dll": {}
         },
         "runtime": {
-          "bin/placeholder/Messages.dll": {}
+          "bin/placeholder/Endpoints.Messaging.dll": {}
         }
       }
     }
@@ -13592,10 +13592,10 @@
       "path": "../Endpoints/Api/Gateway/Registration/Endpoints.Api.Gateway.Registration.csproj",
       "msbuildProject": "../Endpoints/Api/Gateway/Registration/Endpoints.Api.Gateway.Registration.csproj"
     },
-    "Messages/1.0.0": {
+    "Endpoints.Messaging/1.0.0": {
       "type": "project",
-      "path": "../Messages/Messages.csproj",
-      "msbuildProject": "../Messages/Messages.csproj"
+      "path": "../Endpoints/Messaging/Endpoints.Messaging.csproj",
+      "msbuildProject": "../Endpoints/Messaging/Endpoints.Messaging.csproj"
     }
   },
   "projectFileDependencyGroups": {
@@ -13603,7 +13603,7 @@
       "Autofac >= 4.8.1",
       "Autofac.Extensions.DependencyInjection >= 4.3.0",
       "Container >= 1.0.0",
-      "Messages >= 1.0.0",
+      "Endpoints.Messaging >= 1.0.0",
       "Microsoft.AspNetCore.All >= 2.0.9",
       "Microsoft.NETCore.App >= 2.0.0",
       "Microsoft.VisualStudio.Web.CodeGeneration.Design >= 2.0.3",
@@ -13644,8 +13644,8 @@
             "c:\\projects\\ServiceTemplate\\Container\\Container.csproj": {
               "projectPath": "c:\\projects\\ServiceTemplate\\Container\\Container.csproj"
             },
-            "c:\\projects\\ServiceTemplate\\Messages\\Messages.csproj": {
-              "projectPath": "c:\\projects\\ServiceTemplate\\Messages\\Messages.csproj"
+            "c:\\projects\\ServiceTemplate\\Endpoints\\Messaging\\Endpoints.Messaging.csproj": {
+              "projectPath": "c:\\projects\\ServiceTemplate\\Endpoints\\Messaging\\Endpoints.Messaging.csproj"
             }
           }
         }

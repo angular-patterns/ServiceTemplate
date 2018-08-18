@@ -206,15 +206,6 @@
           "build/netstandard2.0/NETStandard.Library.targets": {}
         }
       },
-      "Newtonsoft.Json/11.0.2": {
-        "type": "package",
-        "compile": {
-          "lib/netstandard2.0/Newtonsoft.Json.dll": {}
-        },
-        "runtime": {
-          "lib/netstandard2.0/Newtonsoft.Json.dll": {}
-        }
-      },
       "NServiceBus/7.0.1": {
         "type": "package",
         "dependencies": {
@@ -230,18 +221,6 @@
           "lib/netstandard2.0/NServiceBus.Core.dll": {}
         }
       },
-      "NServiceBus.Callbacks/3.0.0": {
-        "type": "package",
-        "dependencies": {
-          "NServiceBus": "[7.0.0, 8.0.0)"
-        },
-        "compile": {
-          "lib/netstandard2.0/NServiceBus.Callbacks.dll": {}
-        },
-        "runtime": {
-          "lib/netstandard2.0/NServiceBus.Callbacks.dll": {}
-        }
-      },
       "System.IO/4.3.0": {
         "type": "package",
         "dependencies": {
@@ -253,19 +232,6 @@
         },
         "compile": {
           "ref/netstandard1.5/System.IO.dll": {}
-        }
-      },
-      "System.Net.Http.Formatting.Extension/5.2.3": {
-        "type": "package",
-        "compile": {
-          "lib/System.Net.Http.Extensions.dll": {},
-          "lib/System.Net.Http.Formatting.dll": {},
-          "lib/System.Net.Http.Primitives.dll": {}
-        },
-        "runtime": {
-          "lib/System.Net.Http.Extensions.dll": {},
-          "lib/System.Net.Http.Formatting.dll": {},
-          "lib/System.Net.Http.Primitives.dll": {}
         }
       },
       "System.Reflection/4.3.0": {
@@ -385,19 +351,6 @@
         },
         "compile": {
           "ref/netstandard1.3/System.Threading.Tasks.dll": {}
-        }
-      },
-      "Messages/1.0.0": {
-        "type": "project",
-        "framework": ".NETCoreApp,Version=v2.0",
-        "dependencies": {
-          "NServiceBus": "7.0.1"
-        },
-        "compile": {
-          "bin/placeholder/Messages.dll": {}
-        },
-        "runtime": {
-          "bin/placeholder/Messages.dll": {}
         }
       }
     }
@@ -873,34 +826,6 @@
         "netstandard.library.nuspec"
       ]
     },
-    "Newtonsoft.Json/11.0.2": {
-      "sha512": "IvJe1pj7JHEsP8B8J8DwlMEx8UInrs/x+9oVY+oCD13jpLu4JbJU2WCIsMRn5C4yW9+DgkaO8uiVE5VHKjpmdQ==",
-      "type": "package",
-      "path": "newtonsoft.json/11.0.2",
-      "files": [
-        "LICENSE.md",
-        "lib/net20/Newtonsoft.Json.dll",
-        "lib/net20/Newtonsoft.Json.xml",
-        "lib/net35/Newtonsoft.Json.dll",
-        "lib/net35/Newtonsoft.Json.xml",
-        "lib/net40/Newtonsoft.Json.dll",
-        "lib/net40/Newtonsoft.Json.xml",
-        "lib/net45/Newtonsoft.Json.dll",
-        "lib/net45/Newtonsoft.Json.xml",
-        "lib/netstandard1.0/Newtonsoft.Json.dll",
-        "lib/netstandard1.0/Newtonsoft.Json.xml",
-        "lib/netstandard1.3/Newtonsoft.Json.dll",
-        "lib/netstandard1.3/Newtonsoft.Json.xml",
-        "lib/netstandard2.0/Newtonsoft.Json.dll",
-        "lib/netstandard2.0/Newtonsoft.Json.xml",
-        "lib/portable-net40+sl5+win8+wp8+wpa81/Newtonsoft.Json.dll",
-        "lib/portable-net40+sl5+win8+wp8+wpa81/Newtonsoft.Json.xml",
-        "lib/portable-net45+win8+wp8+wpa81/Newtonsoft.Json.dll",
-        "lib/portable-net45+win8+wp8+wpa81/Newtonsoft.Json.xml",
-        "newtonsoft.json.11.0.2.nupkg.sha512",
-        "newtonsoft.json.nuspec"
-      ]
-    },
     "NServiceBus/7.0.1": {
       "sha512": "WcKxigQfBYOMN7mrv08pexFqI544VXcQq3vQ8FYbyFOQQP3zzRW4jycwAXEErUBOnvcYBcfjMmVWCbjQsqcudw==",
       "type": "package",
@@ -915,21 +840,6 @@
         "nservicebus.7.0.1.nupkg.sha512",
         "nservicebus.nuspec",
         "tools/init.ps1"
-      ]
-    },
-    "NServiceBus.Callbacks/3.0.0": {
-      "sha512": "nrrW+ar9heZkdmIM9sX63x8mKvUOkk+m7/I1mKOWy0mqNFsc5b9GC7EtTDO4wWslYynba+o9hcIVAXhUBH3/yQ==",
-      "type": "package",
-      "path": "nservicebus.callbacks/3.0.0",
-      "files": [
-        "lib/net452/NServiceBus.Callbacks.dll",
-        "lib/net452/NServiceBus.Callbacks.pdb",
-        "lib/net452/NServiceBus.Callbacks.xml",
-        "lib/netstandard2.0/NServiceBus.Callbacks.dll",
-        "lib/netstandard2.0/NServiceBus.Callbacks.pdb",
-        "lib/netstandard2.0/NServiceBus.Callbacks.xml",
-        "nservicebus.callbacks.3.0.0.nupkg.sha512",
-        "nservicebus.callbacks.nuspec"
       ]
     },
     "System.IO/4.3.0": {
@@ -1009,18 +919,6 @@
         "ref/xamarinwatchos10/_._",
         "system.io.4.3.0.nupkg.sha512",
         "system.io.nuspec"
-      ]
-    },
-    "System.Net.Http.Formatting.Extension/5.2.3": {
-      "sha512": "BlYwj3Mbgc2i+NqtBZ+bea3LiN9WuGpE8PCylBvhxV0wBs0XTkXJmDuzkNnUyPhDBqKMBwDK0ZCnwJ8LpQ0aEg==",
-      "type": "package",
-      "path": "system.net.http.formatting.extension/5.2.3",
-      "files": [
-        "lib/System.Net.Http.Extensions.dll",
-        "lib/System.Net.Http.Formatting.dll",
-        "lib/System.Net.Http.Primitives.dll",
-        "system.net.http.formatting.extension.5.2.3.nupkg.sha512",
-        "system.net.http.formatting.extension.nuspec"
       ]
     },
     "System.Reflection/4.3.0": {
@@ -1538,21 +1436,12 @@
         "system.threading.tasks.4.3.0.nupkg.sha512",
         "system.threading.tasks.nuspec"
       ]
-    },
-    "Messages/1.0.0": {
-      "type": "project",
-      "path": "../Messages/Messages.csproj",
-      "msbuildProject": "../Messages/Messages.csproj"
     }
   },
   "projectFileDependencyGroups": {
     ".NETCoreApp,Version=v2.0": [
-      "Messages >= 1.0.0",
       "Microsoft.NETCore.App >= 2.0.0",
-      "NServiceBus >= 7.0.1",
-      "NServiceBus.Callbacks >= 3.0.0",
-      "Newtonsoft.Json >= 11.0.2",
-      "System.Net.Http.Formatting.Extension >= 5.2.3"
+      "NServiceBus >= 7.0.1"
     ]
   },
   "packageFolders": {
@@ -1562,11 +1451,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "c:\\projects\\ServiceTemplate\\Test\\Test.csproj",
-      "projectName": "Test",
-      "projectPath": "c:\\projects\\ServiceTemplate\\Test\\Test.csproj",
+      "projectUniqueName": "C:\\projects\\ServiceTemplate\\Endpoints\\Messaging\\Endpoints.Messaging.csproj",
+      "projectName": "Endpoints.Messaging",
+      "projectPath": "C:\\projects\\ServiceTemplate\\Endpoints\\Messaging\\Endpoints.Messaging.csproj",
       "packagesPath": "C:\\Users\\mike\\.nuget\\packages\\",
-      "outputPath": "c:\\projects\\ServiceTemplate\\Test\\obj\\",
+      "outputPath": "C:\\projects\\ServiceTemplate\\Endpoints\\Messaging\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
@@ -1584,11 +1473,7 @@
       },
       "frameworks": {
         "netcoreapp2.0": {
-          "projectReferences": {
-            "c:\\projects\\ServiceTemplate\\Messages\\Messages.csproj": {
-              "projectPath": "c:\\projects\\ServiceTemplate\\Messages\\Messages.csproj"
-            }
-          }
+          "projectReferences": {}
         }
       },
       "warningProperties": {
@@ -1601,6 +1486,7 @@
       "netcoreapp2.0": {
         "dependencies": {
           "Microsoft.NETCore.App": {
+            "suppressParent": "All",
             "target": "Package",
             "version": "[2.0.0, )",
             "autoReferenced": true
@@ -1608,18 +1494,6 @@
           "NServiceBus": {
             "target": "Package",
             "version": "[7.0.1, )"
-          },
-          "NServiceBus.Callbacks": {
-            "target": "Package",
-            "version": "[3.0.0, )"
-          },
-          "Newtonsoft.Json": {
-            "target": "Package",
-            "version": "[11.0.2, )"
-          },
-          "System.Net.Http.Formatting.Extension": {
-            "target": "Package",
-            "version": "[5.2.3, )"
           }
         },
         "imports": [
@@ -1629,17 +1503,5 @@
         "warn": true
       }
     }
-  },
-  "logs": [
-    {
-      "code": "NU1701",
-      "level": "Warning",
-      "warningLevel": 1,
-      "message": "Package 'System.Net.Http.Formatting.Extension 5.2.3' was restored using '.NETFramework,Version=v4.6.1' instead of the project target framework '.NETCoreApp,Version=v2.0'. This package may not be fully compatible with your project.",
-      "libraryId": "System.Net.Http.Formatting.Extension",
-      "targetGraphs": [
-        ".NETCoreApp,Version=v2.0"
-      ]
-    }
-  ]
+  }
 }

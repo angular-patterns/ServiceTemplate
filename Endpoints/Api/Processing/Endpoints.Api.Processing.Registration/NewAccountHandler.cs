@@ -1,5 +1,6 @@
-﻿using Messages.Messages;
-using Messages.Replies;
+﻿
+using Endpoints.Messaging.Registration.Commands;
+using Endpoints.Messaging.Registration.Messages;
 using Newtonsoft.Json;
 using NServiceBus;
 using System;
@@ -8,7 +9,7 @@ using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Test
+namespace Endpoints.Api.Processing
 {
     public class NewAccountHandler : IHandleMessages<CreateNewAccount>
     {
