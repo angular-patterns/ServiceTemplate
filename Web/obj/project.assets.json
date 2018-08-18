@@ -5155,20 +5155,6 @@
           "lib/netstandard1.3/Microsoft.WindowsAzure.Storage.dll": {}
         }
       },
-      "ApiSchema/1.0.0": {
-        "type": "project",
-        "framework": ".NETCoreApp,Version=v2.0",
-        "dependencies": {
-          "Business": "1.0.0",
-          "GraphQL": "2.0.0"
-        },
-        "compile": {
-          "bin/placeholder/ApiSchema.dll": {}
-        },
-        "runtime": {
-          "bin/placeholder/ApiSchema.dll": {}
-        }
-      },
       "Business/1.0.0": {
         "type": "project",
         "framework": ".NETCoreApp,Version=v2.0",
@@ -5187,10 +5173,10 @@
         "type": "project",
         "framework": ".NETCoreApp,Version=v2.0",
         "dependencies": {
-          "ApiSchema": "1.0.0",
           "Autofac.Extensions.DependencyInjection": "4.3.0",
           "Business": "1.0.0",
-          "GraphQL": "2.0.0"
+          "GraphQL": "2.0.0",
+          "Schemas": "1.0.0"
         },
         "compile": {
           "bin/placeholder/Container.dll": {}
@@ -5237,6 +5223,20 @@
         },
         "runtime": {
           "bin/placeholder/Models.dll": {}
+        }
+      },
+      "Schemas/1.0.0": {
+        "type": "project",
+        "framework": ".NETCoreApp,Version=v2.0",
+        "dependencies": {
+          "Business": "1.0.0",
+          "GraphQL": "2.0.0"
+        },
+        "compile": {
+          "bin/placeholder/Schemas.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/Schemas.dll": {}
         }
       }
     }
@@ -13645,11 +13645,6 @@
         "windowsazure.storage.nuspec"
       ]
     },
-    "ApiSchema/1.0.0": {
-      "type": "project",
-      "path": "../ApiSchema/ApiSchema.csproj",
-      "msbuildProject": "../ApiSchema/ApiSchema.csproj"
-    },
     "Business/1.0.0": {
       "type": "project",
       "path": "../Business/Business.csproj",
@@ -13674,6 +13669,11 @@
       "type": "project",
       "path": "../Models/Models.csproj",
       "msbuildProject": "../Models/Models.csproj"
+    },
+    "Schemas/1.0.0": {
+      "type": "project",
+      "path": "../Schemas/Schemas.csproj",
+      "msbuildProject": "../Schemas/Schemas.csproj"
     }
   },
   "projectFileDependencyGroups": {

@@ -1,5 +1,4 @@
-﻿using ApiSchema;
-using Autofac;
+﻿using Autofac;
 using Business.Mutations.Accounts;
 using Business.Queries.Accounts;
 using Data;
@@ -8,6 +7,7 @@ using GraphQL;
 using GraphQL.Types;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
+using Schemas;
 using System;
 using System.Linq;
 
@@ -25,10 +25,9 @@ namespace Container
         protected override void Load(ContainerBuilder builder)
         {
             builder.RegisterInstance(new DataContext(Options));
-            builder.RegisterType<DocumentExecuter>().As<IDocumentExecuter>();
-            builder.RegisterType<ServiceSchema>().As<ISchema>();
-            builder.RegisterType<ServiceQuery>().As<IObjectGraphType>();
-            builder.RegisterType<ServiceMutation>();
+            builder.RegisterType<RootSchema>();
+            builder.RegisterType<RootQuery>();
+            builder.RegisterType<RootMutation>();
             builder.RegisterType<FilterAccountsQuery>();
             builder.RegisterType<CreateAccountMutation>();
         }

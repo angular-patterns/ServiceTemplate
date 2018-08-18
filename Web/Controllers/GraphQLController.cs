@@ -7,6 +7,7 @@ using GraphQL;
 using GraphQL.Types;
 
 using Microsoft.AspNetCore.Mvc;
+using Schemas;
 using Web.Models;
 
 namespace Web.Controllers
@@ -14,24 +15,16 @@ namespace Web.Controllers
     [Route("graphql")]
     public class GraphQLController : Controller
     {
-        private ISchema Schema;
-        private IObjectGraphType Query;
-        public GraphQLController(ISchema schema, IObjectGraphType query)
+        private RootSchema Schema;
+        public GraphQLController(RootSchema schema)
         {
             Schema = schema;
-            Query = query;
-            Schema.Query = Query;
         }
         [HttpPost]
         public async Task<IActionResult> Post([FromBody] GraphQLQuery query)
         {
 
-            var result = await new DocumentExecuter().ExecuteAsync(_ =>
-            {
-                _.Schema = Schema;
-                _.Query = query.Query;
-
-            }).ConfigureAwait(false);
+            var result = await Schema.ExecuteQuery(query.Query);
 
             if (result.Errors?.Count > 0)
             {

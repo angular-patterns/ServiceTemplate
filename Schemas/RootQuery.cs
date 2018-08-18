@@ -1,19 +1,16 @@
 ﻿using Business.Queries.Accounts;
-using Data;
-
 using Entities;
 using GraphQL.Types;
 using Models;
 using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Text;
 
-namespace ApiSchema
+namespace Schemas
 {
-    public class ServiceQuery : ObjectGraphType
+    public class RootQuery : ObjectGraphType
     {
-        public ServiceQuery(FilterAccountsQuery query)
+        public RootQuery(FilterAccountsQuery query)
         {
             Field<ListGraphType<AccountType>>(
                 "accounts",
@@ -37,22 +34,21 @@ namespace ApiSchema
                 });
         }
 
-     
     }
 
-    public class InputAccountType: InputObjectGraphType<FilterCriteria>
+
+    public class InputAccountType : InputObjectGraphType<FilterCriteria>
     {
 
         public InputAccountType()
         {
             Field(d => d.Username, nullable: true).Description("The name of the character.");
             Field(d => d.Password, nullable: true).Description("The name of the character.");
-         
+
         }
     }
 
     public class AccountType : ObjectGraphType<Account>
-
     {
 
         public AccountType()

@@ -4356,11 +4356,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\projects\\test2\\ServiceTemplate\\ApiSchema\\ApiSchema.csproj",
-      "projectName": "ApiSchema",
-      "projectPath": "C:\\projects\\test2\\ServiceTemplate\\ApiSchema\\ApiSchema.csproj",
+      "projectUniqueName": "C:\\projects\\test2\\ServiceTemplate\\Schemas\\Schemas.csproj",
+      "projectName": "Schemas",
+      "projectPath": "C:\\projects\\test2\\ServiceTemplate\\Schemas\\Schemas.csproj",
       "packagesPath": "C:\\Users\\mike\\.nuget\\packages\\",
-      "outputPath": "C:\\projects\\test2\\ServiceTemplate\\ApiSchema\\obj\\",
+      "outputPath": "C:\\projects\\test2\\ServiceTemplate\\Schemas\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
