@@ -35,6 +35,7 @@ namespace Web.Controllers
 
             if (result.Errors?.Count > 0)
             {
+                //Console.WriteLine(result.Errors.AsDictionary()
                 return BadRequest();
             }
 

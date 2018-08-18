@@ -2,32 +2,6 @@
   "version": 3,
   "targets": {
     ".NETCoreApp,Version=v2.0": {
-      "Autofac/4.2.0": {
-        "type": "package",
-        "dependencies": {
-          "NETStandard.Library": "1.6.0",
-          "System.ComponentModel": "4.0.1"
-        },
-        "compile": {
-          "lib/netstandard1.1/Autofac.dll": {}
-        },
-        "runtime": {
-          "lib/netstandard1.1/Autofac.dll": {}
-        }
-      },
-      "Autofac.Extensions.DependencyInjection/4.3.0": {
-        "type": "package",
-        "dependencies": {
-          "Autofac": "4.2.0",
-          "Microsoft.Extensions.DependencyInjection.Abstractions": "1.1.0"
-        },
-        "compile": {
-          "lib/netstandard2.0/Autofac.Extensions.DependencyInjection.dll": {}
-        },
-        "runtime": {
-          "lib/netstandard2.0/Autofac.Extensions.DependencyInjection.dll": {}
-        }
-      },
       "GraphQL/2.0.0": {
         "type": "package",
         "dependencies": {
@@ -1201,20 +1175,6 @@
           "lib/netstandard1.3/System.Threading.ThreadPool.dll": {}
         }
       },
-      "ApiSchema/1.0.0": {
-        "type": "project",
-        "framework": ".NETCoreApp,Version=v2.0",
-        "dependencies": {
-          "Business": "1.0.0",
-          "GraphQL": "2.0.0"
-        },
-        "compile": {
-          "bin/placeholder/ApiSchema.dll": {}
-        },
-        "runtime": {
-          "bin/placeholder/ApiSchema.dll": {}
-        }
-      },
       "Business/1.0.0": {
         "type": "project",
         "framework": ".NETCoreApp,Version=v2.0",
@@ -1272,35 +1232,6 @@
     }
   },
   "libraries": {
-    "Autofac/4.2.0": {
-      "sha512": "WHiPMqI8FYa4Mf4yTb0P/aBibHn7Z0B9r02CEXy9oAAkQMJpHxLOE45iIMMW+xthXu26V9nRIz7o5lA7V3ztgw==",
-      "type": "package",
-      "path": "autofac/4.2.0",
-      "files": [
-        "autofac.4.2.0.nupkg.sha512",
-        "autofac.nuspec",
-        "lib/net45/Autofac.dll",
-        "lib/net45/Autofac.xml",
-        "lib/netstandard1.1/Autofac.dll",
-        "lib/netstandard1.1/Autofac.xml"
-      ]
-    },
-    "Autofac.Extensions.DependencyInjection/4.3.0": {
-      "sha512": "q32oTGBjPMpxJfq85AfzEFOLmUqa4DHUjqdN1HVRcUt0ObFDMoAhnit7ieBtyCu4vMhJ7DaNnfGHRSkUp1YMyQ==",
-      "type": "package",
-      "path": "autofac.extensions.dependencyinjection/4.3.0",
-      "files": [
-        ".signature.p7s",
-        "autofac.extensions.dependencyinjection.4.3.0.nupkg.sha512",
-        "autofac.extensions.dependencyinjection.nuspec",
-        "lib/netstandard1.1/Autofac.Extensions.DependencyInjection.dll",
-        "lib/netstandard1.1/Autofac.Extensions.DependencyInjection.pdb",
-        "lib/netstandard1.1/Autofac.Extensions.DependencyInjection.xml",
-        "lib/netstandard2.0/Autofac.Extensions.DependencyInjection.dll",
-        "lib/netstandard2.0/Autofac.Extensions.DependencyInjection.pdb",
-        "lib/netstandard2.0/Autofac.Extensions.DependencyInjection.xml"
-      ]
-    },
     "GraphQL/2.0.0": {
       "sha512": "g5AWT7K6HBYs8GvNx2COdpe6bBC8GCu8sH2lLLGjFO4ImxlV8ARslFM9NsAHtX2Bw/d+DhHvBC2hVjkJ31AK2A==",
       "type": "package",
@@ -4390,11 +4321,6 @@
         "system.threading.threadpool.nuspec"
       ]
     },
-    "ApiSchema/1.0.0": {
-      "type": "project",
-      "path": "../ApiSchema/ApiSchema.csproj",
-      "msbuildProject": "../ApiSchema/ApiSchema.csproj"
-    },
     "Business/1.0.0": {
       "type": "project",
       "path": "../Business/Business.csproj",
@@ -4418,8 +4344,6 @@
   },
   "projectFileDependencyGroups": {
     ".NETCoreApp,Version=v2.0": [
-      "ApiSchema >= 1.0.0",
-      "Autofac.Extensions.DependencyInjection >= 4.3.0",
       "Business >= 1.0.0",
       "GraphQL >= 2.0.0",
       "Microsoft.NETCore.App >= 2.0.0"
@@ -4432,11 +4356,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\projects\\test2\\ServiceTemplate\\Container\\Container.csproj",
-      "projectName": "Container",
-      "projectPath": "C:\\projects\\test2\\ServiceTemplate\\Container\\Container.csproj",
+      "projectUniqueName": "C:\\projects\\test2\\ServiceTemplate\\ApiSchema\\ApiSchema.csproj",
+      "projectName": "ApiSchema",
+      "projectPath": "C:\\projects\\test2\\ServiceTemplate\\ApiSchema\\ApiSchema.csproj",
       "packagesPath": "C:\\Users\\mike\\.nuget\\packages\\",
-      "outputPath": "C:\\projects\\test2\\ServiceTemplate\\Container\\obj\\",
+      "outputPath": "C:\\projects\\test2\\ServiceTemplate\\ApiSchema\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
@@ -4455,9 +4379,6 @@
       "frameworks": {
         "netcoreapp2.0": {
           "projectReferences": {
-            "C:\\projects\\test2\\ServiceTemplate\\ApiSchema\\ApiSchema.csproj": {
-              "projectPath": "C:\\projects\\test2\\ServiceTemplate\\ApiSchema\\ApiSchema.csproj"
-            },
             "C:\\projects\\test2\\ServiceTemplate\\Business\\Business.csproj": {
               "projectPath": "C:\\projects\\test2\\ServiceTemplate\\Business\\Business.csproj"
             }
@@ -4473,10 +4394,6 @@
     "frameworks": {
       "netcoreapp2.0": {
         "dependencies": {
-          "Autofac.Extensions.DependencyInjection": {
-            "target": "Package",
-            "version": "[4.3.0, )"
-          },
           "GraphQL": {
             "target": "Package",
             "version": "[2.0.0, )"

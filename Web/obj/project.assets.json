@@ -5155,12 +5155,41 @@
           "lib/netstandard1.3/Microsoft.WindowsAzure.Storage.dll": {}
         }
       },
+      "ApiSchema/1.0.0": {
+        "type": "project",
+        "framework": ".NETCoreApp,Version=v2.0",
+        "dependencies": {
+          "Business": "1.0.0",
+          "GraphQL": "2.0.0"
+        },
+        "compile": {
+          "bin/placeholder/ApiSchema.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/ApiSchema.dll": {}
+        }
+      },
+      "Business/1.0.0": {
+        "type": "project",
+        "framework": ".NETCoreApp,Version=v2.0",
+        "dependencies": {
+          "Data": "1.0.0",
+          "Models": "1.0.0"
+        },
+        "compile": {
+          "bin/placeholder/Business.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/Business.dll": {}
+        }
+      },
       "Container/1.0.0": {
         "type": "project",
         "framework": ".NETCoreApp,Version=v2.0",
         "dependencies": {
+          "ApiSchema": "1.0.0",
           "Autofac.Extensions.DependencyInjection": "4.3.0",
-          "Data": "1.0.0",
+          "Business": "1.0.0",
           "GraphQL": "2.0.0"
         },
         "compile": {
@@ -5198,6 +5227,16 @@
         },
         "runtime": {
           "bin/placeholder/Entities.dll": {}
+        }
+      },
+      "Models/1.0.0": {
+        "type": "project",
+        "framework": ".NETCoreApp,Version=v2.0",
+        "compile": {
+          "bin/placeholder/Models.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/Models.dll": {}
         }
       }
     }
@@ -13606,6 +13645,16 @@
         "windowsazure.storage.nuspec"
       ]
     },
+    "ApiSchema/1.0.0": {
+      "type": "project",
+      "path": "../ApiSchema/ApiSchema.csproj",
+      "msbuildProject": "../ApiSchema/ApiSchema.csproj"
+    },
+    "Business/1.0.0": {
+      "type": "project",
+      "path": "../Business/Business.csproj",
+      "msbuildProject": "../Business/Business.csproj"
+    },
     "Container/1.0.0": {
       "type": "project",
       "path": "../Container/Container.csproj",
@@ -13620,6 +13669,11 @@
       "type": "project",
       "path": "../Entities/Entities.csproj",
       "msbuildProject": "../Entities/Entities.csproj"
+    },
+    "Models/1.0.0": {
+      "type": "project",
+      "path": "../Models/Models.csproj",
+      "msbuildProject": "../Models/Models.csproj"
     }
   },
   "projectFileDependencyGroups": {
