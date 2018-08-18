@@ -10,17 +10,19 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 var core_1 = require("@angular/core");
-var AppComponent = /** @class */ (function () {
-    function AppComponent() {
+var AddAccountComponent = /** @class */ (function () {
+    function AddAccountComponent() {
     }
-    AppComponent = __decorate([
+    AddAccountComponent.prototype.ngOnInit = function () {
+    };
+    AddAccountComponent = __decorate([
         core_1.Component({
-            selector: 'app-root',
-            templateUrl: './app.component.html',
-            styleUrls: ['./app.component.css']
+            selector: 'app-add-account',
+            templateUrl: './add-account.component.html',
+            styleUrls: ['./add-account.component.css']
         }),
         __metadata("design:paramtypes", [])
-    ], AppComponent);
-    return AppComponent;
+    ], AddAccountComponent);
+    return AddAccountComponent;
 }());
-exports.AppComponent = AppComponent;
+exports.AddAccountComponent = AddAccountComponent;

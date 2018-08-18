@@ -17,7 +17,13 @@ var AccountService = /** @class */ (function () {
     }
     AccountService.prototype.getAccounts = function () {
         var gql = {
-            query: "{\n                accounts {\n                accountId\n                createdBy\n                createdOn\n                password\n                username\n                }\n            }"
+            query: "{\n                accounts {\n                    accountId\n                    username\n                    password\n                }\n            }"
+        };
+        return this.http.post('http://localhost:3697/graphql', gql, { withCredentials: true });
+    };
+    AccountService.prototype.deleteAccount = function (accountId) {
+        var gql = {
+            query: "\n            \n            mutation {\n                deleteAccount(id: " + accountId + ")\n            }"
         };
         return this.http.post('http://localhost:3697/graphql', gql, { withCredentials: true });
     };

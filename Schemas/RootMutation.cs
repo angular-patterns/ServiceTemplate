@@ -8,7 +8,7 @@ namespace Schemas
 {
     public class RootMutation: ObjectGraphType
     {
-        public RootMutation(CreateAccountMutation createAccount)
+        public RootMutation(CreateAccountMutation createAccount, DeleteAccountMutation deleteAccount)
         {
             Field<AccountType>("createAccount",
                 arguments: new QueryArguments(
@@ -21,6 +21,18 @@ namespace Schemas
                     var account = createAccount.Create(username, password);
                     return account;
                 });
+
+            Field<BooleanGraphType>("deleteAccount",
+                arguments: new QueryArguments(
+                    new QueryArgument<IntGraphType>() { Name = "id" }
+                ),
+                resolve: ctx =>
+                {
+                    var accountId = ctx.GetArgument<int>("id");
+                    deleteAccount.Delete(accountId);
+                    return true;
+                });
+
         }
     }
 }

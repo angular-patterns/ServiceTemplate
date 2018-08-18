@@ -8,11 +8,6 @@ import { AccountService } from './core/account.service';
 })
 export class AppComponent {
   title: string;
-  data: any;
-  constructor(private accountService: AccountService) {
-    this.title = 'Hello World!';
-    this.accountService.getAccounts().subscribe(t=> {
-      this.data = t.data;
-    });
+  constructor() {
   }
 }

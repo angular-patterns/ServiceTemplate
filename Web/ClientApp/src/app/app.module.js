@@ -11,12 +11,18 @@ var platform_browser_1 = require("@angular/platform-browser");
 var app_component_1 = require("./app.component");
 var app_routing_module_1 = require("./app-routing.module");
 var core_module_1 = require("./core/core.module");
+var accounts_module_1 = require("./accounts/accounts.module");
 var AppModule = /** @class */ (function () {
     function AppModule() {
     }
     AppModule = __decorate([
         core_1.NgModule({
-            imports: [platform_browser_1.BrowserModule, app_routing_module_1.AppRoutingModule, core_module_1.CoreModule],
+            imports: [
+                platform_browser_1.BrowserModule,
+                app_routing_module_1.AppRoutingModule,
+                core_module_1.CoreModule,
+                accounts_module_1.AccountsModule
+            ],
             declarations: [app_component_1.AppComponent],
             bootstrap: [app_component_1.AppComponent],
             exports: [app_component_1.AppComponent]

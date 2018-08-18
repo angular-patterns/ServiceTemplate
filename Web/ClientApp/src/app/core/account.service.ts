@@ -11,12 +11,24 @@ export class AccountService {
         var gql = {
             query: `{
                 accounts {
+                    accountId
                     username
                     password
                 }
             }` 
         };
           
+        return this.http.post('http://localhost:3697/graphql', gql, { withCredentials: true });
+    }
+
+    deleteAccount(accountId: number) {
+        var gql = {
+            query: `
+            
+            mutation {
+                deleteAccount(id: ${accountId})
+            }` 
+        };
         return this.http.post('http://localhost:3697/graphql', gql, { withCredentials: true });
     }
 }

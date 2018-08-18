@@ -19,6 +19,7 @@ namespace Schemas
             {
                 _.Schema = this;
                 _.Query = query;
+              
 
             }).ConfigureAwait(false);
 

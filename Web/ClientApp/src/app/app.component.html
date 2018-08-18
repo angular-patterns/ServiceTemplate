@@ -2,19 +2,4 @@
 
 <router-outlet></router-outlet>
 
-<table class="table">
-    <thead>
-        <tr>
-            <th>Username</th>
-            <th>Password</th>
-        </tr>
-
-    </thead>
-    <tbody>
-        <tr *ngFor="let item of data?.accounts">
-            <td>{{item.username}}</td>
-            <td>{{item.password}}</td>
-        </tr>
-
-    </tbody>
-</table>
+<app-account-list></app-account-list>

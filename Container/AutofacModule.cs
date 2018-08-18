@@ -30,6 +30,7 @@ namespace Container
             builder.RegisterType<RootMutation>();
             builder.RegisterType<FilterAccountsQuery>();
             builder.RegisterType<CreateAccountMutation>();
+            builder.RegisterType<DeleteAccountMutation>();
         }
     }
 
