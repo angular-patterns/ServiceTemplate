@@ -1,4 +1,5 @@
-﻿using System;
+﻿using GraphQL.Types;
+using System;
 
 namespace Entities
 {
@@ -15,5 +16,7 @@ namespace Entities
         {
 
         }
+
     }
+
 }

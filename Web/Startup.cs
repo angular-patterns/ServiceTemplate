@@ -5,6 +5,8 @@ using System.Threading.Tasks;
 using Autofac;
 using Container;
 using Data;
+using GraphQL.Server.Ui.Playground;
+using GraphQL.Types;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.EntityFrameworkCore;
@@ -72,6 +74,20 @@ namespace Web
 
 
             app.UseMvc();
+
+            //app.UseGraphQL<ISchema>("/graphql");
+
+
+
+            // use graphql-playground at default url /ui/playground
+
+            app.UseGraphQLPlayground(new GraphQLPlaygroundOptions
+
+            {
+
+                Path = "/ui/playground"
+
+            });
         }
     }
 }
