@@ -1,14 +1,22 @@
-﻿using NServiceBus;
+﻿using Endpoints.Api.Core;
+using NServiceBus;
 using System;
 
-namespace Registration
+namespace Endpoints.Api.Gateway.Registration
 {
-    public class RegistrationEndpoint
+    public class RegistrationEndpoint: IEndpoint
     {
         public  IEndpointInstance Instance { get; set; }
-        public IEndpointInstance Create()
+
+        public string Name {
+            get
+            {
+                return "Registration";
+            }
+        }
+        public void Init()
         {
-            var endpointConfiguration = new EndpointConfiguration("Registration");
+            var endpointConfiguration = new EndpointConfiguration(Name);
 
             endpointConfiguration.UsePersistence<LearningPersistence>();
             endpointConfiguration.UseTransport<LearningTransport>();
@@ -16,8 +24,7 @@ namespace Registration
             endpointConfiguration.MakeInstanceUniquelyAddressable("Registration");
             var endpoint = Endpoint.Start(endpointConfiguration).GetAwaiter().GetResult();
             this.Instance = endpoint;
-            return endpoint;
-
+            
 
 
         }

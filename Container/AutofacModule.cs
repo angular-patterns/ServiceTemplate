@@ -1,27 +1,26 @@
 ﻿using Autofac;
-using NServiceBus;
-using Registration;
+using Endpoints.Api.Core;
+using Endpoints.Api.Gateway.Registration;
 using System;
 
 namespace Container
 {
     public class AutofacModule: Module
     {
-        public IEndpointInstance Endpoint { get; }
-        public AutofacModule(IEndpointInstance endpoint)
+        public AutofacModule()
         {
-            Endpoint = endpoint;
         }
         protected override void Load(ContainerBuilder builder)
         {
-            //var endpoint = new RegistrationEndpoint();
-            //endpoint.Create();
-            //builder.RegisterInstance(endpoint);
-           
+            builder.RegisterType<RegistrationEndpoint>();
 
-
-            
-
+            EndpointFactory.Register(builder, t=>
+            {
+                return new IEndpoint[]
+                {
+                    t.Resolve<RegistrationEndpoint>()
+                };
+            });
         }
     }
 }

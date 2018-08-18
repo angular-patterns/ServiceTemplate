@@ -6,10 +6,11 @@
 
   <ItemGroup>
     <PackageReference Include="Autofac.Extensions.DependencyInjection" Version="4.3.0" />
+    <PackageReference Include="Microsoft.AspNetCore" Version="2.1.2" />
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Endpoints\Registration\Registration.csproj" />
+    <ProjectReference Include="..\Endpoints\Api\Gateway\Registration\Endpoints.Api.Gateway.Registration.csproj" />
   </ItemGroup>
 
 </Project>

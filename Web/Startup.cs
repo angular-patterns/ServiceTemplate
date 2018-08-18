@@ -40,15 +40,7 @@ namespace Web
 
         public void ConfigureContainer(ContainerBuilder builder)
         {
-            var endpointConfiguration = new EndpointConfiguration("Registration");
-            endpointConfiguration.MakeInstanceUniquelyAddressable("1");
-            endpointConfiguration.EnableCallbacks();
-            endpointConfiguration.UsePersistence<LearningPersistence>();
-            endpointConfiguration.UseTransport<LearningTransport>();
-
-            Endpoint = NServiceBus.Endpoint.Start(endpointConfiguration).GetAwaiter().GetResult();
-
-            builder.RegisterModule(new AutofacModule(Endpoint));
+            builder.RegisterModule(new AutofacModule());
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

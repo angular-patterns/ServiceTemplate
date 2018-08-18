@@ -1,0 +1,14 @@
+{
+  "NServiceBus.MessageId": "41d3f2fb-83dc-4dd6-8e2d-a9400043fc8a",
+  "NServiceBus.MessageIntent": "Send",
+  "NServiceBus.ConversationId": "4f6285fa-39d7-46b1-99e9-a9400043fc90",
+  "NServiceBus.CorrelationId": "41d3f2fb-83dc-4dd6-8e2d-a9400043fc8a",
+  "NServiceBus.OriginatingMachine": "DESKTOP-9Q92LVS",
+  "NServiceBus.OriginatingEndpoint": "Registration",
+  "$.diagnostics.originating.hostid": "3f83db665d2d1872ab5156fbe5e55a98",
+  "NServiceBus.ReplyToAddress": "Registration-Registration",
+  "NServiceBus.ContentType": "text\/xml",
+  "NServiceBus.EnclosedMessageTypes": "Messages.Messages.CreateNewAccount, Messages, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null",
+  "NServiceBus.Version": "7.0.1",
+  "NServiceBus.TimeSent": "2018-08-18 04:07:31:956412 Z"
+}
