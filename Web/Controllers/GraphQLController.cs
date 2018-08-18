@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 using GraphQL;
 
 using GraphQL.Types;
-
+using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.Mvc;
 using Schemas;
 using Web.Models;

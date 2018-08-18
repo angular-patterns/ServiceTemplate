@@ -10,23 +10,21 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 var core_1 = require("@angular/core");
-var account_service_1 = require("./core/account.service");
-var AppComponent = /** @class */ (function () {
-    function AppComponent(accountService) {
-        this.accountService = accountService;
-        this.title = 'Hello World!';
-        this.accountService.getAccounts().subscribe(function (t) {
-            alert(t.data);
-        });
+var http_1 = require("@angular/common/http");
+var AccountService = /** @class */ (function () {
+    function AccountService(http) {
+        this.http = http;
     }
-    AppComponent = __decorate([
-        core_1.Component({
-            selector: 'app-root',
-            templateUrl: './app.component.html',
-            styleUrls: ['./app.component.css']
-        }),
-        __metadata("design:paramtypes", [account_service_1.AccountService])
-    ], AppComponent);
-    return AppComponent;
+    AccountService.prototype.getAccounts = function () {
+        var gql = {
+            query: "{\n                accounts {\n                accountId\n                createdBy\n                createdOn\n                password\n                username\n                }\n            }"
+        };
+        return this.http.post('http://localhost:3697/graphql', gql, { withCredentials: true });
+    };
+    AccountService = __decorate([
+        core_1.Injectable(),
+        __metadata("design:paramtypes", [http_1.HttpClient])
+    ], AccountService);
+    return AccountService;
 }());
-exports.AppComponent = AppComponent;
+exports.AccountService = AccountService;

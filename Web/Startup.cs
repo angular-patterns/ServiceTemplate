@@ -9,6 +9,8 @@ using GraphQL.Server.Ui.Playground;
 using GraphQL.Types;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Cors.Internal;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -28,13 +30,28 @@ namespace Web
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddMvc();
+
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new Info { Title = "My API", Version = "v1" });
             });
-
-        }
+            services.AddMvc();
+            services.Configure<MvcOptions>(options =>
+            {
+                options.Filters.Add(new CorsAuthorizationFilterFactory("AllowSpecificOrigin"));
+            });
+            services.AddCors(options =>
+            {
+                options.AddPolicy("AllowSpecificOrigin",
+                builder =>
+                {
+                    builder.WithOrigins("http://localhost:8080")
+                        .AllowCredentials()
+                        .AllowAnyHeader()
+                        .AllowAnyMethod();
+                });
+            });
+            }
 
         public void ConfigureContainer(ContainerBuilder builder)
         {
@@ -46,6 +63,7 @@ namespace Web
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IHostingEnvironment env)
         {
+
 
             if (env.IsDevelopment())
             {
@@ -72,22 +90,14 @@ namespace Web
 
             app.UseStaticFiles();
 
-
-            app.UseMvc();
-
-            //app.UseGraphQL<ISchema>("/graphql");
-
-
-
-            // use graphql-playground at default url /ui/playground
-
             app.UseGraphQLPlayground(new GraphQLPlaygroundOptions
-
             {
-
                 Path = "/ui/playground"
-
             });
+            app.UseMvc();
+            app.UseCors("AllowSpecificOrigin");
+
+
         }
     }
 }
