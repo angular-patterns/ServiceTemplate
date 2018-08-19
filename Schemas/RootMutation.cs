@@ -8,28 +8,28 @@ namespace Schemas
 {
     public class RootMutation: ObjectGraphType
     {
-        public RootMutation(CreateAccountMutation createAccount, DeleteAccountMutation deleteAccount)
+        public RootMutation(CreateProductMutation createProduct, DeleteProductMutation deleteProduct)
         {
-            Field<AccountType>("createAccount",
+            Field<ProductType>("createProduct",
                 arguments: new QueryArguments(
-                    new QueryArgument<StringGraphType>() { Name = "username", DefaultValue = "" }
-                    , new QueryArgument<StringGraphType>() { Name = "password", DefaultValue = "" }),
+                    new QueryArgument<StringGraphType>() { Name = "name", DefaultValue = "" }
+                    ,new QueryArgument<DecimalGraphType>() { Name = "price", DefaultValue = "" }),
                 resolve: ctx =>
                 {
-                    var username = ctx.GetArgument<string>("username");
-                    var password = ctx.GetArgument<string>("password");
-                    var account = createAccount.Create(username, password);
-                    return account;
+                    var name = ctx.GetArgument<string>("name");
+                    var price = ctx.GetArgument<decimal>("price");
+                    var product = createProduct.Create(name, price);
+                    return product;
                 });
 
-            Field<BooleanGraphType>("deleteAccount",
+            Field<BooleanGraphType>("deleteProduct",
                 arguments: new QueryArguments(
                     new QueryArgument<IntGraphType>() { Name = "id" }
                 ),
                 resolve: ctx =>
                 {
                     var accountId = ctx.GetArgument<int>("id");
-                    deleteAccount.Delete(accountId);
+                    deleteProduct.Delete(accountId);
                     return true;
                 });
 

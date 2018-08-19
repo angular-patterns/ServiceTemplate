@@ -5,19 +5,19 @@ using System.Text;
 
 namespace Business.Mutations.Accounts
 {
-    public class DeleteAccountMutation: GraphBase
+    public class DeleteProductMutation: GraphBase
     {
-        public DeleteAccountMutation(DataContext context) : base(context)
+        public DeleteProductMutation(DataContext context) : base(context)
         {
 
         }
 
         public void Delete(int id)
         {
-            var entity = Context.Accounts.Find(id);
+            var entity = Context.Products.Find(id);
             if (entity != null)
             {
-                Context.Accounts.Remove(entity);
+                Context.Products.Remove(entity);
                 Context.SaveChanges();
             }
         }

@@ -28,7 +28,7 @@ var AccountService = /** @class */ (function () {
     }
     AccountService.prototype.getAccounts = function () {
         return this.apollo.query({
-            query: graphql_tag_1.default(templateObject_1 || (templateObject_1 = __makeTemplateObject(["\n            {\n                accounts {\n                    id\n                    username\n                    password\n                }\n            }\n            "], ["\n            {\n                accounts {\n                    id\n                    username\n                    password\n                }\n            }\n            "])))
+            query: graphql_tag_1.default(templateObject_1 || (templateObject_1 = __makeTemplateObject(["\n                query GetAllAccounts{\n                    accounts {\n                        id\n                        username\n                        password\n                    }\n                }\n            "], ["\n                query GetAllAccounts{\n                    accounts {\n                        id\n                        username\n                        password\n                    }\n                }\n            "])))
         })
             .pipe(operators_1.map(function (t) { return t.data; }));
     };
@@ -36,7 +36,7 @@ var AccountService = /** @class */ (function () {
         return this.apollo.mutate({
             mutation: graphql_tag_1.default(templateObject_2 || (templateObject_2 = __makeTemplateObject(["\n                mutation DeleteAccount($id:Int!) {\n                    deleteAccount(id: $id)\n                }"], ["\n                mutation DeleteAccount($id:Int!) {\n                    deleteAccount(id: $id)\n                }"]))),
             variables: {
-                'accountId': accountId
+                'id': accountId
             }
         });
     };

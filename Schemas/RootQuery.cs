@@ -1,4 +1,5 @@
-﻿using Business.Queries.Accounts;
+﻿
+using Business.Queries.Products;
 using Entities;
 using GraphQL.Types;
 using Models;
@@ -10,22 +11,20 @@ namespace Schemas
 {
     public class RootQuery : ObjectGraphType
     {
-        public RootQuery(FilterAccountsQuery query)
+        public RootQuery(ProductsQuery query)
         {
-            Field<ListGraphType<AccountType>>(
+            Field<ListGraphType<ProductType>>(
                 "accounts",
-                description: "Retrieves all accounts with option to filter.",
-                arguments: new QueryArguments(new QueryArgument<InputAccountType>() { Name = "where" }),
+                description: "Retrieves all products",
                 resolve: ctx =>
                 {
-                    var criteria = ctx.GetArgument<FilterCriteria>("where");
-                    return query.FilterBy(criteria);
+                    return query.GetAllProducts(); 
                 });
-            Field<AccountType>(
+            Field<ProductType>(
                 "account",
                 description: "Retrieve a single account",
                 arguments: new QueryArguments(
-                    new QueryArgument<NonNullGraphType<IntGraphType>> { Name = "id", Description = "id of the human" }
+                    new QueryArgument<NonNullGraphType<IntGraphType>> { Name = "id", Description = "id of the product" }
                 ),
                 resolve: ctx =>
                 {
@@ -37,32 +36,17 @@ namespace Schemas
     }
 
 
-    public class InputAccountType : InputObjectGraphType<FilterCriteria>
+    public class ProductType : ObjectGraphType<Product>
     {
 
-        public InputAccountType()
-        {
-            Field(d => d.Username, nullable: true).Description("The name of the character.");
-            Field(d => d.Password, nullable: true).Description("The name of the character.");
-
-        }
-    }
-
-    public class AccountType : ObjectGraphType<Account>
-    {
-
-        public AccountType()
+        public ProductType()
 
         {
             Name = "Account";
-            Field("id", d => d.AccountId, nullable: true).Description("The id of the character.");
-            Field(d => d.Username, nullable: true).Description("The name of the character.");
-            Field(d => d.Password, nullable: true).Description("The name of the character.");
-            Field(d => d.CreatedBy, nullable: true).Description("The name of the character.");
-            Field(d => d.CreatedOn, nullable: true).Description("The name of the character.");
-
-
-
+            Field("id", d => d.ProductId, nullable: true).Description("The id of the character.");
+            Field(d => d.Name, nullable: true).Description("The name of the product.");
+            Field(d => d.Price, nullable: true).Description("The price of the product.");
+ 
         }
 
     }

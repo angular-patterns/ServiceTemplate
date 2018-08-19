@@ -9,7 +9,6 @@ using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.Mvc;
 using Models;
 using Schemas;
-using Web.Models;
 
 namespace Web.Controllers
 {
