@@ -13,7 +13,7 @@ namespace Schemas
             Field<ProductType>("createProduct",
                 arguments: new QueryArguments(
                     new QueryArgument<StringGraphType>() { Name = "name", DefaultValue = "" }
-                    ,new QueryArgument<DecimalGraphType>() { Name = "price", DefaultValue = "" }),
+                    ,new QueryArgument<DecimalGraphType>() { Name = "price", DefaultValue = 0.00M }),
                 resolve: ctx =>
                 {
                     var name = ctx.GetArgument<string>("name");

@@ -14,15 +14,15 @@ namespace Schemas
         public RootQuery(ProductsQuery query)
         {
             Field<ListGraphType<ProductType>>(
-                "accounts",
+                "products",
                 description: "Retrieves all products",
                 resolve: ctx =>
                 {
                     return query.GetAllProducts(); 
                 });
             Field<ProductType>(
-                "account",
-                description: "Retrieve a single account",
+                "product",
+                description: "Retrieve a single product",
                 arguments: new QueryArguments(
                     new QueryArgument<NonNullGraphType<IntGraphType>> { Name = "id", Description = "id of the product" }
                 ),
