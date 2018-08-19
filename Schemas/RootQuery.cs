@@ -55,7 +55,7 @@ namespace Schemas
 
         {
             Name = "Account";
-            Field(d => d.AccountId, nullable: true).Description("The id of the character.");
+            Field("id", d => d.AccountId, nullable: true).Description("The id of the character.");
             Field(d => d.Username, nullable: true).Description("The name of the character.");
             Field(d => d.Password, nullable: true).Description("The name of the character.");
             Field(d => d.CreatedBy, nullable: true).Description("The name of the character.");

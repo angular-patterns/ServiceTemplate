@@ -28,25 +28,30 @@ var AccountService = /** @class */ (function () {
     }
     AccountService.prototype.getAccounts = function () {
         return this.apollo.query({
-            query: graphql_tag_1.default(templateObject_1 || (templateObject_1 = __makeTemplateObject(["\n            {\n                accounts {\n                    accountId\n                    username\n                    password\n                }\n            }\n            "], ["\n            {\n                accounts {\n                    accountId\n                    username\n                    password\n                }\n            }\n            "])))
-        });
+            query: graphql_tag_1.default(templateObject_1 || (templateObject_1 = __makeTemplateObject(["\n            {\n                accounts {\n                    id\n                    username\n                    password\n                }\n            }\n            "], ["\n            {\n                accounts {\n                    id\n                    username\n                    password\n                }\n            }\n            "])))
+        })
+            .pipe(operators_1.map(function (t) { return t.data; }));
     };
     AccountService.prototype.deleteAccount = function (accountId) {
         return this.apollo.mutate({
-            mutation: graphql_tag_1.default(templateObject_2 || (templateObject_2 = __makeTemplateObject(["\n                mutation DeleteAccount($accountId:Int!) {\n                    deleteAccount(id: $accountId)\n                }"], ["\n                mutation DeleteAccount($accountId:Int!) {\n                    deleteAccount(id: $accountId)\n                }"]))),
+            mutation: graphql_tag_1.default(templateObject_2 || (templateObject_2 = __makeTemplateObject(["\n                mutation DeleteAccount($id:Int!) {\n                    deleteAccount(id: $id)\n                }"], ["\n                mutation DeleteAccount($id:Int!) {\n                    deleteAccount(id: $id)\n                }"]))),
             variables: {
                 'accountId': accountId
             }
         });
     };
     AccountService.prototype.addAccount = function (username, password) {
+        var _this = this;
         return this.apollo.mutate({
-            mutation: graphql_tag_1.default(templateObject_3 || (templateObject_3 = __makeTemplateObject(["\n                mutation AddAccount($username:String!, $password:String!) {\n                    createAccount(username: $username, password: $password) {\n                        accountId\n                        username\n                        password\n                    }\n                }\n            "], ["\n                mutation AddAccount($username:String!, $password:String!) {\n                    createAccount(username: $username, password: $password) {\n                        accountId\n                        username\n                        password\n                    }\n                }\n            "]))),
+            mutation: graphql_tag_1.default(templateObject_3 || (templateObject_3 = __makeTemplateObject(["\n                mutation AddAccount($username:String!, $password:String!) {\n                    createAccount(username: $username, password: $password) {\n                        id\n                        username\n                        password\n                    }\n                }\n            "], ["\n                mutation AddAccount($username:String!, $password:String!) {\n                    createAccount(username: $username, password: $password) {\n                        id\n                        username\n                        password\n                    }\n                }\n            "]))),
             variables: {
                 'username': username,
                 'password': password
             }
-        }).pipe(operators_1.map(function (t) { return t.data; }));
+        }).pipe(operators_1.map(function (t) { return t.data.createAccount; })).toPromise()
+            .then(function (t) {
+            _this._accountAdded.next(t);
+        });
     };
     AccountService = __decorate([
         core_1.Injectable(),

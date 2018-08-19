@@ -17,13 +17,13 @@ export class AccountService {
     getAccounts(): Observable<any> {          
         return this.apollo.query({
             query: gql`
-            {
-                accounts {
-                    accountId
-                    username
-                    password
+                query GetAllAccounts{
+                    accounts {
+                        id
+                        username
+                        password
+                    }
                 }
-            }
             `
         })
         .pipe(
@@ -34,11 +34,11 @@ export class AccountService {
     deleteAccount(accountId: number) {
         return this.apollo.mutate({
             mutation: gql`
-                mutation DeleteAccount($accountId:Int!) {
-                    deleteAccount(id: $accountId)
+                mutation DeleteAccount($id:Int!) {
+                    deleteAccount(id: $id)
                 }`,
             variables: {
-                'accountId': accountId
+                'id': accountId
             }
         });
         
@@ -49,7 +49,7 @@ export class AccountService {
             mutation: gql`
                 mutation AddAccount($username:String!, $password:String!) {
                     createAccount(username: $username, password: $password) {
-                        accountId
+                        id
                         username
                         password
                     }

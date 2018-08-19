@@ -16,22 +16,22 @@ var AddAccountComponent = /** @class */ (function () {
     function AddAccountComponent(fb, accountService) {
         this.fb = fb;
         this.accountService = accountService;
-        this.formGroup = fb.group({
-            username: [''],
-            password: ['']
-        });
+        this.initForm();
     }
     AddAccountComponent.prototype.ngOnInit = function () {
+    };
+    AddAccountComponent.prototype.initForm = function () {
+        this.formGroup = this.fb.group({
+            username: ['', forms_1.Validators.required],
+            password: ['', forms_1.Validators.required]
+        });
     };
     AddAccountComponent.prototype.onSubmit = function () {
         var _this = this;
         if (this.formGroup.valid) {
             var account = this.formGroup.value;
-            this.accountService.addAccount(account.username, account.password).subscribe(function (t) {
-                _this.formGroup = _this.fb.group({
-                    username: [''],
-                    password: ['']
-                });
+            this.accountService.addAccount(account.username, account.password).then(function (t) {
+                _this.initForm();
             });
         }
     };

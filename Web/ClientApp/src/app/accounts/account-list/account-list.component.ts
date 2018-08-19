@@ -20,7 +20,7 @@ export class AccountListComponent implements OnInit {
 
   }
   onDelete(item: any) {
-    this.accountService.deleteAccount(item.accountId).subscribe(t=> {
+    this.accountService.deleteAccount(item.id).subscribe(t=> {
       var i = this.accounts.indexOf(item);
       if (i >= 0){
          this.accounts.splice(i, 1);

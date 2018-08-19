@@ -18,6 +18,9 @@ var AccountListComponent = /** @class */ (function () {
         this.accountService.getAccounts().subscribe(function (t) {
             _this.accounts = t.data.accounts.slice();
         });
+        this.accountService.accountAdded$.subscribe(function (t) {
+            _this.accounts.push(t);
+        });
     }
     AccountListComponent.prototype.ngOnInit = function () {
     };
