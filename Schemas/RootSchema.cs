@@ -1,5 +1,6 @@
 ﻿using GraphQL;
 using GraphQL.Types;
+using Models;
 using System;
 using System.Threading.Tasks;
 
@@ -13,13 +14,21 @@ namespace Schemas
             Mutation = mutation;
         }
 
-        public async Task<ExecutionResult> ExecuteQuery(string query)
+        public async Task<ExecutionResult> ExecuteQuery(GraphQLQuery query)
         {
             var result = await new DocumentExecuter().ExecuteAsync(_ =>
             {
                 _.Schema = this;
-                _.Query = query;
-              
+                _.Query = query.Query;
+                _.OperationName = query.OperationName;
+                if (query.Variables != null)
+                {
+                    _.Inputs = new Inputs(query.Variables);
+                }
+
+
+
+
 
             }).ConfigureAwait(false);
 

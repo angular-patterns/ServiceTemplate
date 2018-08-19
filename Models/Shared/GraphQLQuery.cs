@@ -1,4 +1,5 @@
-﻿using System.Text;
+﻿using System.Collections.Generic;
+using System.Text;
 
 namespace Models
 {
@@ -14,7 +15,7 @@ namespace Models
 
         public string Query { get; set; }
 
-        public string Variables { get; set; }
+        public Dictionary<string,object> Variables { get; set; }
 
 
 
@@ -50,13 +51,13 @@ namespace Models
 
             }
 
-            if (!string.IsNullOrWhiteSpace(Variables))
+            //if (!string.IsNullOrWhiteSpace(Variables))
 
-            {
+            //{
 
-                builder.AppendLine($"Variables = {Variables}");
+            //    builder.AppendLine($"Variables = {Variables}");
 
-            }
+            //}
 
 
 
