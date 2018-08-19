@@ -49,6 +49,7 @@
     "graphql": "^0.13.2",
     "graphql-tag": "^2.9.2",
     "rxjs": "^6.2.2",
+    "rxjs-compat": "^6.2.2",
     "zone.js": "~0.8.26"
   },
   "devDependencies": {
