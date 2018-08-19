@@ -25,7 +25,10 @@ export class AccountService {
                 }
             }
             `
-        });
+        })
+        .pipe(
+            map(t=>t.data)
+        );
     }
 
     deleteAccount(accountId: number) {

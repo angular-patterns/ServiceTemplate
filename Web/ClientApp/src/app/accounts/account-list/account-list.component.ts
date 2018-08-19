@@ -10,7 +10,7 @@ export class AccountListComponent implements OnInit {
   accounts: any[];
   constructor(private accountService: AccountService) {
     this.accountService.getAccounts().subscribe(t=> {
-      this.accounts = [...t.data.accounts];
+      this.accounts = [...t.accounts];
     });
     this.accountService.accountAdded$.subscribe(t=> {
       this.accounts.push(t);
