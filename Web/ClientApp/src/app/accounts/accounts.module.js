@@ -7,6 +7,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 var common_1 = require("@angular/common");
+var forms_1 = require("@angular/forms");
 var core_1 = require("@angular/core");
 var add_account_component_1 = require("./add-account/add-account.component");
 var account_list_component_1 = require("./account-list/account-list.component");
@@ -16,7 +17,9 @@ var AccountsModule = /** @class */ (function () {
     AccountsModule = __decorate([
         core_1.NgModule({
             imports: [
-                common_1.CommonModule
+                common_1.CommonModule,
+                forms_1.FormsModule,
+                forms_1.ReactiveFormsModule
             ],
             declarations: [
                 add_account_component_1.AddAccountComponent,

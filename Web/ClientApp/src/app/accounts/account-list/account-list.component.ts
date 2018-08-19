@@ -12,6 +12,9 @@ export class AccountListComponent implements OnInit {
     this.accountService.getAccounts().subscribe(t=> {
       this.accounts = [...t.data.accounts];
     });
+    this.accountService.accountAdded$.subscribe(t=> {
+      this.accounts.push(t);
+    });
   }
   ngOnInit() {
 

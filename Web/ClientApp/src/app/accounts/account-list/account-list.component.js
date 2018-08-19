@@ -16,7 +16,7 @@ var AccountListComponent = /** @class */ (function () {
         var _this = this;
         this.accountService = accountService;
         this.accountService.getAccounts().subscribe(function (t) {
-            _this.data = t.data;
+            _this.accounts = t.data.accounts.slice();
         });
     }
     AccountListComponent.prototype.ngOnInit = function () {
@@ -24,9 +24,9 @@ var AccountListComponent = /** @class */ (function () {
     AccountListComponent.prototype.onDelete = function (item) {
         var _this = this;
         this.accountService.deleteAccount(item.accountId).subscribe(function (t) {
-            var i = _this.data.accounts.indexOf(item);
+            var i = _this.accounts.indexOf(item);
             if (i >= 0) {
-                _this.data.accounts.splice(i, 1);
+                _this.accounts.splice(i, 1);
             }
         });
     };

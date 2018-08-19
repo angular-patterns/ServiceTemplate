@@ -10,10 +10,30 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 var core_1 = require("@angular/core");
+var forms_1 = require("@angular/forms");
+var account_service_1 = require("../../core/account.service");
 var AddAccountComponent = /** @class */ (function () {
-    function AddAccountComponent() {
+    function AddAccountComponent(fb, accountService) {
+        this.fb = fb;
+        this.accountService = accountService;
+        this.formGroup = fb.group({
+            username: [''],
+            password: ['']
+        });
     }
     AddAccountComponent.prototype.ngOnInit = function () {
+    };
+    AddAccountComponent.prototype.onSubmit = function () {
+        var _this = this;
+        if (this.formGroup.valid) {
+            var account = this.formGroup.value;
+            this.accountService.addAccount(account.username, account.password).subscribe(function (t) {
+                _this.formGroup = _this.fb.group({
+                    username: [''],
+                    password: ['']
+                });
+            });
+        }
     };
     AddAccountComponent = __decorate([
         core_1.Component({
@@ -21,7 +41,7 @@ var AddAccountComponent = /** @class */ (function () {
             templateUrl: './add-account.component.html',
             styleUrls: ['./add-account.component.css']
         }),
-        __metadata("design:paramtypes", [])
+        __metadata("design:paramtypes", [forms_1.FormBuilder, account_service_1.AccountService])
     ], AddAccountComponent);
     return AddAccountComponent;
 }());
