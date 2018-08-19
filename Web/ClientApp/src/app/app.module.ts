@@ -5,13 +5,12 @@ import { AppRoutingModule } from './app-routing.module';
 import { CoreModule } from './core/core.module';
 import { AccountsModule } from './accounts/accounts.module';
 
-
 @NgModule({
   imports:      [ 
     BrowserModule, 
     AppRoutingModule, 
     CoreModule,
-    AccountsModule 
+    AccountsModule ,
   ],
   declarations: [ AppComponent ],
   bootstrap:    [ AppComponent ],

@@ -7,10 +7,10 @@ import { AccountService } from '../../core/account.service';
   styleUrls: ['./account-list.component.css']
 })
 export class AccountListComponent implements OnInit {
-  data: any;
+  accounts: any[];
   constructor(private accountService: AccountService) {
     this.accountService.getAccounts().subscribe(t=> {
-      this.data = t.data;
+      this.accounts = [...t.data.accounts];
     });
   }
   ngOnInit() {
@@ -18,9 +18,9 @@ export class AccountListComponent implements OnInit {
   }
   onDelete(item: any) {
     this.accountService.deleteAccount(item.accountId).subscribe(t=> {
-      var i = this.data.accounts.indexOf(item);
+      var i = this.accounts.indexOf(item);
       if (i >= 0){
-        this.data.accounts.splice(i, 1);
+         this.accounts.splice(i, 1);
       }
     });
   }
