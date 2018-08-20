@@ -42,7 +42,7 @@ namespace Schemas
         public ProductType()
 
         {
-            Name = "Account";
+            Name = "Product";
             Field("id", d => d.ProductId, nullable: true).Description("The id of the character.");
             Field(d => d.Name, nullable: true).Description("The name of the product.");
             Field(d => d.Price, nullable: true).Description("The price of the product.");
