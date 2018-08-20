@@ -19,53 +19,45 @@ namespace Data.Migrations
                 .HasAnnotation("Relational:MaxIdentifierLength", 128)
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-            modelBuilder.Entity("Entities.Account", b =>
+            modelBuilder.Entity("Entities.ShoppingCart", b =>
                 {
-                    b.Property<int>("AccountId")
+                    b.Property<int>("ShoppingCartId")
                         .ValueGeneratedOnAdd()
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<string>("CreatedBy");
-
                     b.Property<DateTime>("CreatedOn");
 
-                    b.Property<string>("Password");
+                    b.Property<string>("UserId");
 
-                    b.Property<string>("Username");
+                    b.HasKey("ShoppingCartId");
 
-                    b.HasKey("AccountId");
-
-                    b.ToTable("Accounts");
+                    b.ToTable("ShoppingCarts");
                 });
 
-            modelBuilder.Entity("Entities.UserProfile", b =>
+            modelBuilder.Entity("Entities.ShoppingCartItem", b =>
                 {
-                    b.Property<int>("UserProfileId")
+                    b.Property<int>("ShoppingCartItemId")
                         .ValueGeneratedOnAdd()
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<int>("AccountId");
+                    b.Property<int>("ProductId");
 
-                    b.Property<string>("CreatedBy");
+                    b.Property<int>("Quantity");
 
-                    b.Property<DateTime>("CreatedOn");
+                    b.Property<int>("ShoppingCartId");
 
-                    b.Property<string>("FirstName");
+                    b.HasKey("ShoppingCartItemId");
 
-                    b.Property<string>("LastName");
+                    b.HasIndex("ShoppingCartId");
 
-                    b.HasKey("UserProfileId");
-
-                    b.HasIndex("AccountId");
-
-                    b.ToTable("UserProfiles");
+                    b.ToTable("ShoppingCartItems");
                 });
 
-            modelBuilder.Entity("Entities.UserProfile", b =>
+            modelBuilder.Entity("Entities.ShoppingCartItem", b =>
                 {
-                    b.HasOne("Entities.Account", "Account")
+                    b.HasOne("Entities.ShoppingCart", "ShoppingCart")
                         .WithMany()
-                        .HasForeignKey("AccountId")
+                        .HasForeignKey("ShoppingCartId")
                         .OnDelete(DeleteBehavior.Cascade);
                 });
 #pragma warning restore 612, 618

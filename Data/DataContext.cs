@@ -6,8 +6,8 @@ namespace Data
 {
     public class DataContext: DbContext
     {
-       public DbSet<Account> Accounts { get; set; }
-       public DbSet<UserProfile> UserProfiles { get; set; }
+       public DbSet<ShoppingCart> ShoppingCarts { get; set; }
+       public DbSet<ShoppingCartItem> ShoppingCartItems { get; set; }
 
         public DataContext(DbContextOptions<DataContext> options): base(options)
         {

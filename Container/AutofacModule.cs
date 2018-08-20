@@ -1,6 +1,7 @@
 ﻿using Autofac;
-using Business.Mutations.Accounts;
+using Business.Mutations.ShoppingCarts;
 using Business.Queries.Accounts;
+using Business.Services;
 using Data;
 using Entities;
 using GraphQL;
@@ -28,9 +29,12 @@ namespace Container
             builder.RegisterType<RootSchema>();
             builder.RegisterType<RootQuery>();
             builder.RegisterType<RootMutation>();
-            builder.RegisterType<FilterAccountsQuery>();
-            builder.RegisterType<CreateAccountMutation>();
-            builder.RegisterType<DeleteAccountMutation>();
+            builder.RegisterType<ShoppingCartQuery>();
+            builder.RegisterType<ShoppingCartItemMutations>();
+            builder.RegisterType<ShoppingCartMutations>();
+            builder.RegisterType<ShoppingCartService>();
+            builder.RegisterType<ShoppingCartType>();
+            
         }
     }
 

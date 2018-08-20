@@ -1,0 +1,5 @@
+C:\projects\test2\ServiceTemplate\Web
+--output-path=obj\Release\netcoreapp2.0\
+--application-name=Web
+--content-root=C:\projects\test2\ServiceTemplate\Web
+--file=

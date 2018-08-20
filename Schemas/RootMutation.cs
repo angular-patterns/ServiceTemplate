@@ -1,4 +1,4 @@
-﻿using Business.Mutations.Accounts;
+﻿using Business.Services;
 using GraphQL.Types;
 using System;
 using System.Collections.Generic;
@@ -8,28 +8,22 @@ namespace Schemas
 {
     public class RootMutation: ObjectGraphType
     {
-        public RootMutation(CreateAccountMutation createAccount, DeleteAccountMutation deleteAccount)
+        public RootMutation(ShoppingCartService service)
         {
-            Field<AccountType>("createAccount",
-                arguments: new QueryArguments(
-                    new QueryArgument<StringGraphType>() { Name = "username", DefaultValue = "" }
-                    , new QueryArgument<StringGraphType>() { Name = "password", DefaultValue = "" }),
+            Field<ShoppingCartType>("createCart",
                 resolve: ctx =>
                 {
-                    var username = ctx.GetArgument<string>("username");
-                    var password = ctx.GetArgument<string>("password");
-                    var account = createAccount.Create(username, password);
-                    return account;
+                    return service.StartNewCart();
                 });
 
-            Field<BooleanGraphType>("deleteAccount",
+            Field<BooleanGraphType>("deleteCart",
                 arguments: new QueryArguments(
                     new QueryArgument<IntGraphType>() { Name = "id" }
                 ),
                 resolve: ctx =>
                 {
-                    var accountId = ctx.GetArgument<int>("id");
-                    deleteAccount.Delete(accountId);
+                    var cartId = ctx.GetArgument<int>("id");
+                    service.AbandonCart(cartId);
                     return true;
                 });
 

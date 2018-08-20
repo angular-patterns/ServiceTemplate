@@ -1,4 +1,5 @@
 ﻿using Business.Queries.Accounts;
+using Business.Services;
 using Entities;
 using GraphQL.Types;
 using Models;
@@ -10,61 +11,69 @@ namespace Schemas
 {
     public class RootQuery : ObjectGraphType
     {
-        public RootQuery(FilterAccountsQuery query)
+        public static ShoppingCartService Service;
+        public RootQuery(ShoppingCartService service)
         {
-            Field<ListGraphType<AccountType>>(
-                "accounts",
-                description: "Retrieves all accounts with option to filter.",
-                arguments: new QueryArguments(new QueryArgument<InputAccountType>() { Name = "where" }),
+            Service = service;
+
+            Field<ListGraphType<ShoppingCartType>>(
+                "shoppingCarts",
+                description: "Retrieves all shopping carts.",
+               
                 resolve: ctx =>
                 {
-                    var criteria = ctx.GetArgument<FilterCriteria>("where");
-                    return query.FilterBy(criteria);
+                    return service.GetAllCarts();
                 });
-            Field<AccountType>(
-                "account",
-                description: "Retrieve a single account",
+            Field<ShoppingCartType>(
+                "shoppingCart",
+                description: "Retrieve a single cart",
                 arguments: new QueryArguments(
-                    new QueryArgument<NonNullGraphType<IntGraphType>> { Name = "id", Description = "id of the human" }
+                    new QueryArgument<NonNullGraphType<IntGraphType>> { Name = "id", Description = "id of the cart" }
                 ),
                 resolve: ctx =>
                 {
                     var id = ctx.GetArgument<int>("id");
-                    return query.FindById(id);
+                    return service.GetCart(id);
                 });
         }
 
     }
 
 
-    public class InputAccountType : InputObjectGraphType<FilterCriteria>
+    public class ShoppingCartType : ObjectGraphType<ShoppingCart>
     {
-
-        public InputAccountType()
-        {
-            Field(d => d.Username, nullable: true).Description("The name of the character.");
-            Field(d => d.Password, nullable: true).Description("The name of the character.");
-
-        }
-    }
-
-    public class AccountType : ObjectGraphType<Account>
-    {
-
-        public AccountType()
+        public ShoppingCartType()
 
         {
-            Name = "Account";
-            Field("id", d => d.AccountId, nullable: true).Description("The id of the character.");
-            Field(d => d.Username, nullable: true).Description("The name of the character.");
-            Field(d => d.Password, nullable: true).Description("The name of the character.");
-            Field(d => d.CreatedBy, nullable: true).Description("The name of the character.");
+            var service = RootQuery.Service;
+
+            Name = "ShoppingCart";
+            Field("id", d => d.ShoppingCartId, nullable: true).Description("The id of the shopping cart.");
+            Field(d => d.UserId, nullable: true).Description("The name of the character.");
             Field(d => d.CreatedOn, nullable: true).Description("The name of the character.");
-
-
+            Field<ListGraphType<ShoppingCartItemType>>(
+                "items",
+                description: "Retrieve items for a cart",
+                resolve: ctx =>
+                {
+                    
+                    return service.GetItems(ctx.Source.ShoppingCartId);
+                });
 
         }
 
     }
+    public class ShoppingCartItemType : ObjectGraphType<ShoppingCartItem>
+    {
 
+        public ShoppingCartItemType()
+
+        {
+            Name = "ShoppingCartItem";
+            Field("id", d => d.ShoppingCartItemId, nullable: true).Description("The id of the shopping cart item.");
+            Field(d => d.ProductId, nullable: true).Description("The product ID.");
+            Field(d => d.Quantity, nullable: true).Description("The quantity.");
+        }
+
+    }
 }

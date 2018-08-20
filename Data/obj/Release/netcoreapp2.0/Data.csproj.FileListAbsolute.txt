@@ -1,0 +1,14 @@
+C:\projects\test2\ServiceTemplate\Data\bin\Release\netcoreapp2.0\Data.deps.json
+C:\projects\test2\ServiceTemplate\Data\bin\Release\netcoreapp2.0\Data.runtimeconfig.json
+C:\projects\test2\ServiceTemplate\Data\bin\Release\netcoreapp2.0\Data.runtimeconfig.dev.json
+C:\projects\test2\ServiceTemplate\Data\bin\Release\netcoreapp2.0\Data.dll
+C:\projects\test2\ServiceTemplate\Data\bin\Release\netcoreapp2.0\Data.pdb
+C:\projects\test2\ServiceTemplate\Data\bin\Release\netcoreapp2.0\Entities.dll
+C:\projects\test2\ServiceTemplate\Data\bin\Release\netcoreapp2.0\Entities.pdb
+C:\projects\test2\ServiceTemplate\Data\obj\Release\netcoreapp2.0\Data.csprojAssemblyReference.cache
+C:\projects\test2\ServiceTemplate\Data\obj\Release\netcoreapp2.0\Data.csproj.CoreCompileInputs.cache
+C:\projects\test2\ServiceTemplate\Data\obj\Release\netcoreapp2.0\Data.AssemblyInfoInputs.cache
+C:\projects\test2\ServiceTemplate\Data\obj\Release\netcoreapp2.0\Data.AssemblyInfo.cs
+C:\projects\test2\ServiceTemplate\Data\obj\Release\netcoreapp2.0\Data.csproj.CopyComplete
+C:\projects\test2\ServiceTemplate\Data\obj\Release\netcoreapp2.0\Data.dll
+C:\projects\test2\ServiceTemplate\Data\obj\Release\netcoreapp2.0\Data.pdb
