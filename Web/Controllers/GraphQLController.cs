@@ -1,5 +1,5 @@
 ﻿using System;
-
+using System.Security.Claims;
 using System.Threading.Tasks;
 
 using GraphQL;
@@ -22,15 +22,15 @@ namespace Web.Controllers
             Schema = schema;
         }
         [HttpPost]
-        public async Task<IActionResult> Post([FromBody] GraphQLQuery query)
+        public async Task<IActionResult> Post([FromBody] GraphQLQuery query, ClaimsPrincipal user)
         {
 
-            var result = await Schema.ExecuteQuery(query);
+            var result = await Schema.ExecuteQuery(query, user);
 
             if (result.Errors?.Count > 0)
             {
                 //Console.WriteLine(result.Errors.AsDictionary()
-                return BadRequest();
+                //return BadRequest();
             }
 
             return Ok(result);

@@ -2,6 +2,7 @@
 using GraphQL.Types;
 using Models;
 using System;
+using System.Security.Claims;
 using System.Threading.Tasks;
 
 namespace Schemas
@@ -14,13 +15,14 @@ namespace Schemas
             Mutation = mutation;
         }
 
-        public async Task<ExecutionResult> ExecuteQuery(GraphQLQuery query)
+        public async Task<ExecutionResult> ExecuteQuery(GraphQLQuery query, ClaimsPrincipal user)
         {
             var result = await new DocumentExecuter().ExecuteAsync(_ =>
             {
                 _.Schema = this;
                 _.Query = query.Query;
                 _.OperationName = query.OperationName;
+                _.UserContext = user;
                 if (query.Variables != null)
                 {
                     _.Inputs = new Inputs(query.Variables);
