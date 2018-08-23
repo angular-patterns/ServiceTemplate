@@ -17,5 +17,6 @@ namespace Entities
         public string BusinessId { get; set; }
 
         public string Message { get; set; }
+
     }
 }

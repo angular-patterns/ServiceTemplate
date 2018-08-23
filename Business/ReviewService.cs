@@ -1,6 +1,7 @@
 ﻿using Data;
 using DynamicRules.Interfaces;
 using Entities;
+using Models;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
@@ -20,27 +21,35 @@ namespace Business
             DataContext = dataContext;
         }
 
-        public Review Run(int ruleSetId, string jsonValue)
-        {
+       
 
+        public Review Run(int ruleSetId, ForModel forModel)
+        {
             var ruleSet = ServiceLocator.Instance.GetService<RuleSetService>().GetById(ruleSetId);
             var model = ServiceLocator.Instance.GetService<ModelService>().GetById(ruleSet.ModelId);
             var schemaInfo = ServiceLocator.Instance.GetService<JsonSchemaService>().GetSchemaInfo(ruleSet.ModelId);
             var reviewRunner = ServiceLocator.Instance.GetService<ReviewRunner>();
-            var reviewResult = reviewRunner.Run(schemaInfo, ruleSetId, jsonValue);
+            var reviewResult = reviewRunner.Run(schemaInfo, ruleSetId, forModel.Json);
 
             var review = new Review()
             {
                 RuleSetId = ruleSetId,
                 CreatedOn = DateTime.Now,
-                JsonValue = jsonValue,
+                JsonValue = forModel.Json,
+                Code = forModel.Code,
+                VersionNumber = forModel.VersionNumber,
+                RevisionNumber = forModel.RevisionNumber,
                 ReviewRules = reviewResult.Rules
             };
             DataContext.Reviews.Add(review);
             DataContext.SaveChanges();
 
             return review;
+
+
         }
+
+
 
         public Review GetById(int reviewId)
         {

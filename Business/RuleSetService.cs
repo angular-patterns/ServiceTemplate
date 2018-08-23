@@ -25,11 +25,27 @@ namespace Business
             DataContext = dataContext;
         }
 
-        public RuleSet CreateNew(int modelId, string name)
+        public RuleSet FindRuleSet(string code, int? ruleSetId)
+        {
+            IQueryable<RuleSet> ruleSets = DataContext.RuleSets;
+            if (ruleSetId != null)
+            {
+                ruleSets = ruleSets.Where(t => t.RuleSetId == ruleSetId);
+            }
+            if (code != null)
+            {
+                ruleSets = ruleSets.Where(t=>t.Code == code);
+            }
+
+            return ruleSets.First();
+        }
+
+        public RuleSet CreateNew(int modelId, string name, string code)
         {
             return CreateRuleSetMutation.Create(new RuleSet()
             {
                 ModelId = modelId,
+                Code = code,
                 Name = name,
                 CreatedOn = DateTime.Now
             });

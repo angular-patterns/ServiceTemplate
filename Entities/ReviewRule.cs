@@ -21,8 +21,6 @@ namespace Entities
 
         public bool IsSatisfied { get; set; }
 
-        //public virtual Review Review { get; set; }
-
         public virtual ReviewType ReviewType { get; set; }
 
     }

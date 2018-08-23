@@ -32,6 +32,25 @@ namespace Schemas
             }
         }
 
+        public class InputWithRuleSet: InputObjectGraphType<WithRuleSet> {
+            public InputWithRuleSet()
+            {
+                Field(t => t.RuleSetId, nullable: true).Description("The rule set id");
+                Field(t => t.Code, nullable: true).Description("The rule set code");
+            }
+        }
+
+        public class InputForModel : InputObjectGraphType<ForModel>
+        {
+            public InputForModel()
+            {
+                Field(t => t.Json, nullable: true).Description("The model json");
+                Field(t => t.Code, nullable: true).Description("The review code");
+                Field(t => t.VersionNumber, nullable: true).Description("The version number");
+                Field(t => t.RevisionNumber, nullable: true).Description("The reversion number");
+            }
+        }
+
         public RootMutation(ServiceLocator serviceLocator)
         {
             Field<ModelType>("createModel",
@@ -70,14 +89,15 @@ namespace Schemas
                 name: "createRuleSet",
                 arguments: new QueryArguments(
                     new QueryArgument<IntGraphType>() { Name = "modelId" },
-                    new QueryArgument<StringGraphType>() { Name = "name" }
+                    new QueryArgument<StringGraphType>() { Name = "name" },
+                    new QueryArgument<StringGraphType>() { Name = "code" }
                  ),
                 resolve: ctx =>
                 {
                     var modelId = ctx.GetArgument<int>("modelId");
                     var name = ctx.GetArgument<string>("name");
-
-                    return ServiceLocator.Instance.GetService<RuleSetService>().CreateNew(modelId, name);
+                    var code = ctx.GetArgument<string>("code");
+                    return ServiceLocator.Instance.GetService<RuleSetService>().CreateNew(modelId, name, code);
                 });
 
             Field<ReviewTypeType>(
@@ -105,15 +125,18 @@ namespace Schemas
             Field<ReviewModelType>(
                 name: "runReviews",
                 arguments: new QueryArguments(
-                    new QueryArgument<IntGraphType>() { Name = "ruleSetId" },
-                    new QueryArgument<StringGraphType>() { Name = "model" }
+                    new QueryArgument<InputWithRuleSet>() { Name = "with" },
+                    new QueryArgument<InputForModel>() { Name = "for" }
                  ),
                 resolve: ctx =>
                 {
 
-                    var ruleSetId = ctx.GetArgument<int>("ruleSetId");
-                    var model = ctx.GetArgument<string>("model");
-                    return ServiceLocator.Instance.GetService<ReviewService>().Run(ruleSetId, model);
+                    var withRuleSet = ctx.GetArgument<WithRuleSet>("with");
+                    var forModel = ctx.GetArgument<ForModel>("for");
+                    var ruleSetId = ServiceLocator.Instance.GetService<RuleSetService>()
+                        .FindRuleSet(withRuleSet.Code, withRuleSet.RuleSetId).RuleSetId;
+
+                    return ServiceLocator.Instance.GetService<ReviewService>().Run(ruleSetId, forModel);
                 });
 
 

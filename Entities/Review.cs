@@ -13,6 +13,12 @@ namespace Entities
         public int RuleSetId { get; set; }
         public string JsonValue { get; set; }
 
+        public string Code { get; set; }
+
+        public int VersionNumber { get; set; }
+
+        public int RevisionNumber { get; set; }
+
         public DateTime CreatedOn { get; set; }
 
         
