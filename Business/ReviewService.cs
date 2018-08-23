@@ -68,5 +68,15 @@ namespace Business
         {
             return DataContext.Reviews.Find(reviewId);
         }
+
+        public IList<Review> GetAll()
+        {
+            return DataContext.Reviews.ToList();
+        }
+
+        public IList<Review> GetByRuleSetId(int ruleSetId)
+        {
+            return DataContext.Reviews.Where(t => t.RuleSetId == ruleSetId).ToList();
+        }
     }
 }

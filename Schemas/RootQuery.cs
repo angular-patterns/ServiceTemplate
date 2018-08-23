@@ -49,7 +49,10 @@ namespace Schemas
                 });
             Field<ListGraphType<ReviewModelType>>(
                 name: "reviews",
-                arguments: new QueryArguments(new QueryArgument<IntGraphType>() { Name = "id" }),
+                arguments: new QueryArguments(
+                    new QueryArgument<IntGraphType>() { Name = "id" },
+                    new QueryArgument<IntGraphType>() { Name = "ruleSetId" }
+                    ),
                 resolve: ctx =>
                 {
                     if (ctx.HasArgument("id"))
@@ -58,10 +61,16 @@ namespace Schemas
                         var review = ServiceLocator.Instance.GetService<ReviewService>().GetById(reviewId);
                         return new List<Review>() { review };
                     }
+                    else if (ctx.HasArgument("ruleSetId"))
+                    {
+                        var ruleSetId = ctx.GetArgument<int>("ruleSetId");
+                        return ServiceLocator.Instance.GetService<ReviewService>().GetByRuleSetId(ruleSetId);
+
+                    }
                     else
                     {
 
-                        return ServiceLocator.Instance.GetService<RuleSetService>().GetAll();
+                        return ServiceLocator.Instance.GetService<ReviewService>().GetAll();
                     }
 
                 }
