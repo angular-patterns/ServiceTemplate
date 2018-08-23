@@ -15,6 +15,8 @@ namespace Data
 
        public DbSet<Review> Reviews { get; set; }
 
+       public DbSet<ReviewRule> ReviewRules { get; set; }
+
         public DataContext(DbContextOptions<DataContext> options): base(options)
         {
            
@@ -22,7 +24,12 @@ namespace Data
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            
+            modelBuilder.Entity<Review>()
+            .HasOne(t=>t.RuleSet)
+            .WithMany(t=>t.Reviews)
+            .HasForeignKey(t=>t.RuleSetId)
+            .OnDelete(DeleteBehavior.Restrict); // set ON DELETE CASCADE
+
         }
 
     }

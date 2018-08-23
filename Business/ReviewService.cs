@@ -43,12 +43,11 @@ namespace Business
                 };
                 var modelObj = JsonConvert.DeserializeObject(value, schemaInfo.ModelType);
 
-                review.Rules = ruleSet.ReviewTypes.ToList().Select(t =>
+                review.ReviewRules = ruleSet.ReviewTypes.ToList().Select(t =>
                 {
                     var result = ruleEvaluator.RunPredicate(schemaInfo.ModelType, modelObj, t.Logic);
                     return new ReviewRule()
                     {
-                        RuleSetId = t.RuleSetId,
                         ReviewTypeId = t.ReviewTypeId,
                         BusinessId = t.BusinessId,
                         Message = t.Message,
@@ -77,6 +76,11 @@ namespace Business
         public IList<Review> GetByRuleSetId(int ruleSetId)
         {
             return DataContext.Reviews.Where(t => t.RuleSetId == ruleSetId).ToList();
+        }
+
+        public IList<ReviewRule> GetRules(int reviewId)
+        {
+            return DataContext.ReviewRules.Where(t => t.ReviewId == reviewId).ToList();
         }
     }
 }

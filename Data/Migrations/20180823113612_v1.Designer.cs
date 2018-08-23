@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Data.Migrations
 {
     [DbContext(typeof(DataContext))]
-    [Migration("20180823075744_v4")]
-    partial class v4
+    [Migration("20180823113612_v1")]
+    partial class v1
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -56,6 +56,8 @@ namespace Data.Migrations
 
                     b.HasKey("ReviewId");
 
+                    b.HasIndex("RuleSetId");
+
                     b.ToTable("Reviews");
                 });
 
@@ -71,17 +73,15 @@ namespace Data.Migrations
 
                     b.Property<string>("Message");
 
-                    b.Property<int?>("ReviewId");
+                    b.Property<int>("ReviewId");
 
                     b.Property<int>("ReviewTypeId");
-
-                    b.Property<int>("RuleSetId");
 
                     b.HasKey("ReviewRuleId");
 
                     b.HasIndex("ReviewId");
 
-                    b.ToTable("ReviewRule");
+                    b.ToTable("ReviewRules");
                 });
 
             modelBuilder.Entity("Entities.ReviewType", b =>
@@ -124,11 +124,20 @@ namespace Data.Migrations
                     b.ToTable("RuleSets");
                 });
 
+            modelBuilder.Entity("Entities.Review", b =>
+                {
+                    b.HasOne("Entities.RuleSet", "RuleSet")
+                        .WithMany("Reviews")
+                        .HasForeignKey("RuleSetId")
+                        .OnDelete(DeleteBehavior.Restrict);
+                });
+
             modelBuilder.Entity("Entities.ReviewRule", b =>
                 {
                     b.HasOne("Entities.Review")
-                        .WithMany("Rules")
-                        .HasForeignKey("ReviewId");
+                        .WithMany("ReviewRules")
+                        .HasForeignKey("ReviewId")
+                        .OnDelete(DeleteBehavior.Cascade);
                 });
 
             modelBuilder.Entity("Entities.ReviewType", b =>

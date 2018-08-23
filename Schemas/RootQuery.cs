@@ -155,6 +155,7 @@ namespace Schemas
         {
             Name = "ReviewRule";
             Field("id", d => d.ReviewRuleId, nullable: true);
+            Field(d => d.ReviewId, nullable: true);
             Field(d => d.ReviewTypeId, nullable: true);
             Field<ReviewTypeType>(
                 name: "reviewType", 
@@ -164,14 +165,7 @@ namespace Schemas
                 });
             Field(d => d.BusinessId, nullable: true);
             Field(d => d.Message, nullable: true);
-            Field(d => d.RuleSetId, nullable: true);
             Field(d => d.IsSatisfied, nullable: true);
-            Field<RuleSetType>("ruleSet",
-            resolve: ctx =>
-            {
-
-                return ServiceLocator.Instance.GetService<RuleSetService>().GetById(ctx.Source.RuleSetId);
-            });
 
 
 
@@ -197,7 +191,8 @@ namespace Schemas
                 name: "rules",
                 resolve: ctx =>
                 {
-                    return ServiceLocator.Instance.GetService<ReviewService>().GetById(ctx.Source.ReviewId).Rules;
+                    var rules = ServiceLocator.Instance.GetService<ReviewService>().GetRules(ctx.Source.ReviewId);
+                    return rules;
                 });
 
 
