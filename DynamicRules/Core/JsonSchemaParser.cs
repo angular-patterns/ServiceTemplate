@@ -4,7 +4,6 @@ using System.Text;
 using System.Threading.Tasks;
 using DynamicRules.Interfaces;
 
-
 namespace DynamicRules.Core
 {
     public class JsonSchemaParser : IJsonSchemaParser

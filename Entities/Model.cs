@@ -17,6 +17,8 @@ namespace Entities
 
         public string TypeName { get; set; }
 
+        public string Source { get; set; }
+
         public Model()
         {
 

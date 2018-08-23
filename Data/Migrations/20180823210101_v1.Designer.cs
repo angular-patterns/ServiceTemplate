@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Data.Migrations
 {
     [DbContext(typeof(DataContext))]
-    [Migration("20180823115741_v3")]
-    partial class v3
+    [Migration("20180823210101_v1")]
+    partial class v1
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -34,6 +34,8 @@ namespace Data.Migrations
                     b.Property<string>("JsonSchema");
 
                     b.Property<string>("Namespace");
+
+                    b.Property<string>("Source");
 
                     b.Property<string>("TypeName");
 

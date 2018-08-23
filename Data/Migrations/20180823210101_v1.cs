@@ -4,7 +4,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace Data.Migrations
 {
-    public partial class v3 : Migration
+    public partial class v1 : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -18,7 +18,8 @@ namespace Data.Migrations
                     JsonSchema = table.Column<string>(nullable: true),
                     CSharpSource = table.Column<string>(nullable: true),
                     Namespace = table.Column<string>(nullable: true),
-                    TypeName = table.Column<string>(nullable: true)
+                    TypeName = table.Column<string>(nullable: true),
+                    Source = table.Column<string>(nullable: true)
                 },
                 constraints: table =>
                 {

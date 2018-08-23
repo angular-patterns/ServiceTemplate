@@ -33,6 +33,8 @@ namespace Data.Migrations
 
                     b.Property<string>("Namespace");
 
+                    b.Property<string>("Source");
+
                     b.Property<string>("TypeName");
 
                     b.HasKey("ModelId");

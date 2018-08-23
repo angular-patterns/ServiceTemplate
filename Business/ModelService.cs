@@ -33,7 +33,7 @@ namespace Business
                 Namespace = schemaInfo.Namespace,
                 TypeName = schemaInfo.TypeName
             };
-
+            model.Source = "JsonSchema";
             return CreateModelMutation.Create(model);
         }
 
@@ -48,7 +48,7 @@ namespace Business
                 Namespace = schemaInfo.Namespace,
                 TypeName = schemaInfo.TypeName
             };
-
+            model.Source = "CSharpSource";
             return CreateModelMutation.Create(model);
 
         }

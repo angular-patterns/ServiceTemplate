@@ -14,7 +14,7 @@ namespace DynamicRules.Tests
         public class SampleClass
         {
             public string FirstName { get; set; }
-
+            
             public string LastName { get; set; }
         }
         public string SampleSchema = @"

@@ -4,6 +4,7 @@ using Data;
 using DynamicRules.Interfaces;
 using Entities;
 using Microsoft.EntityFrameworkCore;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -52,6 +53,7 @@ namespace Business
         public ReviewType AddReviewType(int ruleSetId, string businessId, string message, string logic)
         {
             var ruleSet = DataContext.RuleSets.Find(ruleSetId);
+            var schemaInfo = ServiceLocator.Instance.GetService<JsonSchemaService>().GetSchemaInfo(ruleSet.ModelId);
 
             var reviewType = new ReviewType
             {
@@ -60,13 +62,17 @@ namespace Business
                 Message = message,
                 Logic = logic
             };
-
-
-            var model = ruleSet.Model;
-            var schemaParser = ServiceLocator.Instance.GetService<IJsonSchemaParser>();
-            var schemaInfo = schemaParser.FromSchema(model.JsonSchema, model.TypeName, model.Namespace).Result;
             var ruleEvaluator = ServiceLocator.Instance.GetService<IRuleEvaluator>();
-            ruleEvaluator.RunPredicate(schemaInfo.ModelType, Activator.CreateInstance(schemaInfo.ModelType), logic);
+            var modelInstance = Activator.CreateInstance(schemaInfo.ModelType);
+            //var jsonModel = JsonConvert.SerializeObject(modelInstance, schemaInfo.ModelType, Formatting.Indented, 
+            //    new JsonSerializerSettings
+            //    {
+            //        ObjectCreationHandling = ObjectCreationHandling.Replace,
+            //        ConstructorHandling = ConstructorHandling.Default,
+                
+            //    });
+
+            ruleEvaluator.RunPredicate(schemaInfo.ModelType,modelInstance, logic);
             DataContext.ReviewTypes.Add(reviewType);
             DataContext.SaveChanges();
             return reviewType;

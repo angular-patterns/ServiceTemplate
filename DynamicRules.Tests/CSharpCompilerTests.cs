@@ -1,6 +1,8 @@
 using DynamicRules.Core;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using Newtonsoft.Json;
 using System;
+using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using System.Reflection;
 
@@ -139,6 +141,141 @@ namespace DynamicRules.Tests
 
         }
 
+        [TestMethod]
+        public void TestPerson()
+        {
+            var person = Test.Models.Person;
+        }
+
+        public const string PersonString = @"
+using Newtonsoft.Json;
+using System.ComponentModel;
+namespace Test {
+    public class Person
+    {
+        [DefaultValue(""Blue"")]
+        public string FirstName { get; set; }
+        [DefaultValue(""Blue"")]
+        public string LastName { get; set; }
+        
+        [JsonProperty(DefaultValueHandling = DefaultValueHandling.Populate)]
+        public Address Address { get; set; }
+        public Person() {
+            Address = new Address();
+        }
+    }
+    public class Address
+    {
+        [DefaultValue(""Blue"")]
+        [JsonProperty(DefaultValueHandling = DefaultValueHandling.Populate)]
+        public string City { get; set; }
+        [DefaultValue(""Blue"")]
+        [JsonProperty(DefaultValueHandling = DefaultValueHandling.Populate)]
+        public string Province { get; set; }
+    }
+}
+";
+
+        public class Person
+        {
+            [DefaultValue("")]
+            public string FirstName { get; set; }
+            [DefaultValue("")]
+            public string LastName { get; set; }
+
+            public Address Address { get; set; }
+            public Person()
+            {
+                FirstName = "";
+                LastName = "";
+                Address = new Address();
+            }
+        }
+        public class Address
+        {
+            [DefaultValue("")]
+            [JsonProperty(DefaultValueHandling = DefaultValueHandling.Populate)]
+            public string City { get; set; }
+            [DefaultValue("")]
+            [JsonProperty(DefaultValueHandling = DefaultValueHandling.Populate)]
+            public string Province { get; set; }
+        }
+
+        const string jsonSchema = @"
+{
+  ""$schema"": ""http://json-schema.org/draft-04/schema#"",
+  ""title"": ""Person"",
+  ""type"": ""object"",
+  ""additionalProperties"": false,
+  ""properties"": {
+    ""FirstName"": {
+      ""type"": [
+        ""null"",
+        ""string""
+      ],
+      ""default"": ""Blue""
+    },
+    ""LastName"": {
+      ""type"": [
+        ""null"",
+        ""string""
+      ],
+      ""default"": ""Blue""
+    },
+    ""Address"": {
+      ""oneOf"": [
+        {
+          ""type"": ""null""
+        },
+        {
+          ""$ref"": ""#/definitions/Address""
+        }
+      ]
+    }
+  },
+  ""definitions"": {
+    ""Address"": {
+      ""type"": ""object"",
+      ""additionalProperties"": false,
+      ""properties"": {
+        ""City"": {
+          ""type"": [
+            ""null"",
+            ""string""
+          ],
+          ""default"": ""Blue""
+        },
+        ""Province"": {
+          ""type"": [
+            ""null"",
+            ""string""
+          ],
+          ""default"": ""Blue""
+        }
+      }
+    }
+  }
+}
+";
+
+        [TestMethod]
+        public void ShouldSetDefaultValue()
+        {
+            var a = Activator.CreateInstance(typeof(Person));
+            var t = JsonConvert.SerializeObject(a, typeof(Person), new JsonSerializerSettings()
+            {
+                NullValueHandling = NullValueHandling.Include,
+                DefaultValueHandling = DefaultValueHandling.Include | DefaultValueHandling.Populate
+            });
+
+            var z = JsonConvert.DeserializeObject<Person>("{}");
+            var schema = NJsonSchema.JsonSchema4.FromTypeAsync<Person>().Result;
+            var json = schema.ToJson();
+            var schema2 = NJsonSchema.JsonSchema4.FromJsonAsync(jsonSchema).Result;
+            var generator = new NJsonSchema.CodeGeneration.CSharp.CSharpGenerator(schema, new NJsonSchema.CodeGeneration.CSharp.CSharpGeneratorSettings() { Namespace = "Test" });
+            var file = generator.GenerateFile();
+
+        }
         private bool HasAttribute(Type type, string propertyName, Type attributeType)
         {
             var attribute = type.GetProperty(propertyName).GetCustomAttribute(typeof(RequiredAttribute));

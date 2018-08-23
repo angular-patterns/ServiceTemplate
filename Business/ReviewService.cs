@@ -20,47 +20,26 @@ namespace Business
             DataContext = dataContext;
         }
 
-        public Review Run(int ruleSetId, string value)
+        public Review Run(int ruleSetId, string jsonValue)
         {
-            var schemaValidator = ServiceLocator.Instance.GetService<IJsonValidator>();
+
             var ruleSet = ServiceLocator.Instance.GetService<RuleSetService>().GetById(ruleSetId);
             var model = ServiceLocator.Instance.GetService<ModelService>().GetById(ruleSet.ModelId);
-            var results = schemaValidator.Validate(model.JsonSchema, value).Result;
-            if (!results.Success)
+            var schemaInfo = ServiceLocator.Instance.GetService<JsonSchemaService>().GetSchemaInfo(ruleSet.ModelId);
+            var reviewRunner = ServiceLocator.Instance.GetService<ReviewRunner>();
+            var reviewResult = reviewRunner.Run(schemaInfo, ruleSetId, jsonValue);
+
+            var review = new Review()
             {
-                throw new Exception("Failed schema validation" + JsonConvert.SerializeObject(results.Errors));
-            }
-            else
-            {
-                var schemaParser = ServiceLocator.Instance.GetService<IJsonSchemaParser>();
-                var schemaInfo = schemaParser.FromSchema(model.JsonSchema, model.TypeName, model.Namespace).Result;
-                var ruleEvaluator = ServiceLocator.Instance.GetService<IRuleEvaluator>();
-                var review = new Review()
-                {
-                    RuleSetId = ruleSetId,
-                    CreatedOn = DateTime.Now,
-                    JsonValue = value
-                };
-                var modelObj = JsonConvert.DeserializeObject(value, schemaInfo.ModelType);
+                RuleSetId = ruleSetId,
+                CreatedOn = DateTime.Now,
+                JsonValue = jsonValue,
+                ReviewRules = reviewResult.Rules
+            };
+            DataContext.Reviews.Add(review);
+            DataContext.SaveChanges();
 
-                review.ReviewRules = ruleSet.ReviewTypes.ToList().Select(t =>
-                {
-                    var result = ruleEvaluator.RunPredicate(schemaInfo.ModelType, modelObj, t.Logic);
-                    return new ReviewRule()
-                    {
-                        ReviewTypeId = t.ReviewTypeId,
-                        BusinessId = t.BusinessId,
-                        Message = t.Message,
-                        IsSatisfied = result
-
-                    };
-                }).ToList();
-
-                DataContext.Reviews.Add(review);
-                DataContext.SaveChanges();
-
-                return review;
-            }
+            return review;
         }
 
         public Review GetById(int reviewId)
