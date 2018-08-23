@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Text;
 
 namespace Entities
@@ -8,6 +9,7 @@ namespace Entities
     {
         public int RuleSetId { get; set; }
 
+        [ForeignKey("Model")]
         public int ModelId { get; set; }
 
         public string Name { get; set;  }

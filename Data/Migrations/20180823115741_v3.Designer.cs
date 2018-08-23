@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Data.Migrations
 {
     [DbContext(typeof(DataContext))]
-    [Migration("20180823113612_v1")]
-    partial class v1
+    [Migration("20180823115741_v3")]
+    partial class v3
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -81,6 +81,8 @@ namespace Data.Migrations
 
                     b.HasIndex("ReviewId");
 
+                    b.HasIndex("ReviewTypeId");
+
                     b.ToTable("ReviewRules");
                 });
 
@@ -137,6 +139,11 @@ namespace Data.Migrations
                     b.HasOne("Entities.Review")
                         .WithMany("ReviewRules")
                         .HasForeignKey("ReviewId")
+                        .OnDelete(DeleteBehavior.Cascade);
+
+                    b.HasOne("Entities.ReviewType", "ReviewType")
+                        .WithMany()
+                        .HasForeignKey("ReviewTypeId")
                         .OnDelete(DeleteBehavior.Cascade);
                 });
 

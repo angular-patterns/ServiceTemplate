@@ -4,7 +4,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace Data.Migrations
 {
-    public partial class v1 : Migration
+    public partial class v3 : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -110,12 +110,23 @@ namespace Data.Migrations
                         principalTable: "Reviews",
                         principalColumn: "ReviewId",
                         onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_ReviewRules_ReviewTypes_ReviewTypeId",
+                        column: x => x.ReviewTypeId,
+                        principalTable: "ReviewTypes",
+                        principalColumn: "ReviewTypeId",
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateIndex(
                 name: "IX_ReviewRules_ReviewId",
                 table: "ReviewRules",
                 column: "ReviewId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_ReviewRules_ReviewTypeId",
+                table: "ReviewRules",
+                column: "ReviewTypeId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Reviews_RuleSetId",
@@ -139,10 +150,10 @@ namespace Data.Migrations
                 name: "ReviewRules");
 
             migrationBuilder.DropTable(
-                name: "ReviewTypes");
+                name: "Reviews");
 
             migrationBuilder.DropTable(
-                name: "Reviews");
+                name: "ReviewTypes");
 
             migrationBuilder.DropTable(
                 name: "RuleSets");
