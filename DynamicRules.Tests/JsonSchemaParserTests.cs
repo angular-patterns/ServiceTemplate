@@ -141,11 +141,17 @@ public class SampleClass
             });
 
             var subject = new JsonSchemaParser(compiler, converter);
-            var exception = subject.FromSchema(SampleSchemaString, "SampleClass", "Test").Exception;
-            Assert.AreEqual(exception.GetType(), typeof(AggregateException));
-            Assert.AreEqual(exception.InnerException.GetType(), typeof(CompilerException));
-            Assert.AreEqual(((CompilerException)exception.InnerException).Errors, errors);
-
+            var exceptionTask = subject.FromSchema(SampleSchemaString, "SampleClass", "Test");
+            try
+            {
+                var result = exceptionTask.Result;
+            }
+            catch (Exception exception)
+            {
+                Assert.AreEqual(exception.GetType(), typeof(AggregateException));
+                Assert.AreEqual(exception.InnerException.GetType(), typeof(CompilerException));
+                Assert.AreEqual(((CompilerException)exception.InnerException).Errors, errors);
+            }
 
         }
 
@@ -170,10 +176,17 @@ public class SampleClass
 
 
             var subject = new JsonSchemaParser(compiler, converter);
-            var exception = subject.FromCSharp(SampleClassString, "Test.SampleClass").Exception;
-            Assert.AreEqual(exception.GetType(), typeof(AggregateException));
-            Assert.AreEqual(exception.InnerException.GetType(), typeof(CompilerException));
-            Assert.AreEqual(((CompilerException)exception.InnerException).Errors, errors);
+            var exceptionTask = subject.FromCSharp(SampleClassString, "Test.SampleClass");
+            try
+            {
+                var result = exceptionTask.Result;
+            }
+            catch (Exception exception)
+            {
+                Assert.AreEqual(exception.GetType(), typeof(AggregateException));
+                Assert.AreEqual(exception.InnerException.GetType(), typeof(CompilerException));
+                Assert.AreEqual(((CompilerException)exception.InnerException).Errors, errors);
+            }
 
 
         }

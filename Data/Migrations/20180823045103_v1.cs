@@ -1,5 +1,4 @@
-﻿using System;
-using Microsoft.EntityFrameworkCore.Metadata;
+﻿using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace Data.Migrations
@@ -9,26 +8,27 @@ namespace Data.Migrations
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.CreateTable(
-                name: "Accounts",
+                name: "Models",
                 columns: table => new
                 {
-                    AccountId = table.Column<int>(nullable: false)
+                    ModelId = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
-                    Username = table.Column<string>(nullable: true),
-                    Password = table.Column<string>(nullable: true),
-                    CreatedBy = table.Column<DateTime>(nullable: false),
-                    CreatedOn = table.Column<string>(nullable: true)
+                    AccountId = table.Column<int>(nullable: false),
+                    JsonSchema = table.Column<string>(nullable: true),
+                    CSharpSource = table.Column<string>(nullable: true),
+                    Namespace = table.Column<string>(nullable: true),
+                    TypeName = table.Column<string>(nullable: true)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Accounts", x => x.AccountId);
+                    table.PrimaryKey("PK_Models", x => x.ModelId);
                 });
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
-                name: "Accounts");
+                name: "Models");
         }
     }
 }

@@ -29,6 +29,10 @@ namespace Web.Controllers
 
             if (result.Errors?.Count > 0)
             {
+                foreach (var error in result.Errors)
+                {
+                    //error.Message = error.InnerException.Message;
+                }
                 //Console.WriteLine(result.Errors.AsDictionary()
                 //return BadRequest();
             }

@@ -1,4 +1,4 @@
-﻿using Business.Queries.Accounts;
+﻿using Business;
 using Entities;
 using GraphQL.Types;
 using Models;
@@ -10,61 +10,72 @@ namespace Schemas
 {
     public class RootQuery : ObjectGraphType
     {
-        public RootQuery(FilterAccountsQuery query)
+
+        public RootQuery(ServiceLocator serviceLocator)
         {
-            Field<ListGraphType<AccountType>>(
-                "accounts",
-                description: "Retrieves all accounts with option to filter.",
-                arguments: new QueryArguments(new QueryArgument<InputAccountType>() { Name = "where" }),
+            Field<ListGraphType<ModelType>>(
+                name: "models",
                 resolve: ctx =>
                 {
-                    var criteria = ctx.GetArgument<FilterCriteria>("where");
-                    return query.FilterBy(criteria);
+                    
+                    var models = ServiceLocator.Instance.GetService<ModelService>().GetAll();
+                    return models;
                 });
-            Field<AccountType>(
-                "account",
-                description: "Retrieve a single account",
-                arguments: new QueryArguments(
-                    new QueryArgument<NonNullGraphType<IntGraphType>> { Name = "id", Description = "id of the human" }
-                ),
+
+            Field<ListGraphType<RuleSetType>>(
+                name: "ruleSets",
+                arguments: new QueryArguments(new QueryArgument<IntGraphType>() { Name= "modelId" }),
                 resolve: ctx =>
                 {
-                    var id = ctx.GetArgument<int>("id");
-                    return query.FindById(id);
+                    if (ctx.HasArgument("modelId"))
+                    {
+                        var modelId = ctx.GetArgument<int>("modelId");
+                        return ServiceLocator.Instance.GetService<RuleSetService>().GetByModelId(modelId);
+                    }
+                    else
+                    {
+
+                        return ServiceLocator.Instance.GetService<RuleSetService>().GetAll();
+                    }
                 });
         }
 
     }
 
 
-    public class InputAccountType : InputObjectGraphType<FilterCriteria>
+
+    public class ModelType : ObjectGraphType<Model>
     {
 
-        public InputAccountType()
+        public ModelType()
+
         {
-            Field(d => d.Username, nullable: true).Description("The name of the character.");
-            Field(d => d.Password, nullable: true).Description("The name of the character.");
+            Name = "Model";
+            Field("id", d => d.ModelId, nullable: true).Description("The id of the character.");
+            Field(d => d.AccountId, nullable: true).Description("The name of the character.");
+            Field(d => d.CSharpSource, nullable: true).Description("The name of the character.");
+            Field(d => d.JsonSchema, nullable: true).Description("The name of the character.");
+            Field(d => d.TypeName, nullable: true).Description("The name of the character.");
+            Field(d => d.Namespace, nullable: true).Description("The name of the character.");
 
         }
     }
-
-    public class AccountType : ObjectGraphType<Account>
+    public class RuleSetType: ObjectGraphType<RuleSet>
     {
 
-        public AccountType()
-
+        public RuleSetType()
         {
-            Name = "Account";
-            Field("id", d => d.AccountId, nullable: true).Description("The id of the character.");
-            Field(d => d.Username, nullable: true).Description("The name of the character.");
-            Field(d => d.Password, nullable: true).Description("The name of the character.");
-            Field(d => d.CreatedBy, nullable: true).Description("The name of the character.");
-            Field(d => d.CreatedOn, nullable: true).Description("The name of the character.");
-
-
-
+            Name = "RuleSet";
+            Field("id", d => d.RuleSetId, nullable: true);
+            Field(d => d.ModelId, nullable: true);
+            Field(d => d.Name, nullable: true);
+            Field(d => d.CreatedOn, nullable: true);
+            Field<ModelType>("model",
+                resolve: ctx =>
+                {
+                    
+                    return ServiceLocator.Instance.GetService<ModelService>().GetById(ctx.Source.ModelId);
+                });
         }
-
     }
-
 }

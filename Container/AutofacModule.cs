@@ -1,7 +1,12 @@
 ﻿using Autofac;
-using Business.Mutations.Accounts;
-using Business.Queries.Accounts;
+using Business;
+using Business.Mutations.Models;
+using Business.Mutations.RuleSets;
+using Business.Queries;
+using Business.Queries.RuleSets;
 using Data;
+using DynamicRules.Core;
+using DynamicRules.Interfaces;
 using Entities;
 using GraphQL;
 using GraphQL.Types;
@@ -28,10 +33,25 @@ namespace Container
             builder.RegisterType<RootSchema>();
             builder.RegisterType<RootQuery>();
             builder.RegisterType<RootMutation>();
-            builder.RegisterType<FilterAccountsQuery>();
-            builder.RegisterType<CreateAccountMutation>();
-            builder.RegisterType<DeleteAccountMutation>();
+            builder.RegisterType<ModelQuery>();
+            builder.RegisterType<RuleSetQuery>();
+            builder.RegisterType<CreateRuleSetMutation>();
+            builder.RegisterType<CreateModelMutation>();
+            builder.RegisterType<ModelService>();
+            builder.RegisterType<RuleSetService>();
+
+            builder.RegisterType<CSharpCompiler>().As<ICSharpCompiler>();
+            builder.RegisterType<JsonSchemaConverter>().As<IJsonSchemaConverter>();
+            builder.RegisterType<JsonSchemaParser>().As<IJsonSchemaParser>();
+            builder.RegisterType<JsonValidator>().As<IJsonValidator>();
+            builder.RegisterType<RuleEvaluator>().As<IRuleEvaluator>();
+            builder.RegisterType<ServiceLocator>();
+          
+
         }
+
+        
+
     }
 
 

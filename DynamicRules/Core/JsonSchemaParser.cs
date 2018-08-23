@@ -25,12 +25,13 @@ namespace DynamicRules.Core
             if (!result.Success)
                 throw new CompilerException("Failed to compile", result.Errors);
 
-            var type = result.Assembly.GetType(nameSpace + "." + typeName);
+            var type = result.Assembly.GetType(nameSpace + "." + typeName, true);
             return new JsonSchemaInfo
             {
                 TypeName = typeName,
                 Namespace = nameSpace,
                 Schema = jsonSchema,
+                CSharpSource = csharp,
                 ModelType = type,
                 ModelAssembly = result.Assembly
             };
@@ -42,13 +43,14 @@ namespace DynamicRules.Core
             if (!result.Success)
                 throw new CompilerException("Failed to compile", result.Errors);
 
-            var type = result.Assembly.GetType(typeName);
+            var type = result.Assembly.GetType(typeName, true);
             var schema = await Converter.CSharpToJsonSchema(type);
             return new JsonSchemaInfo
             {
                 TypeName = type.Name,
                 Namespace = type.Namespace,
                 Schema = schema,
+                CSharpSource = csharpFile,
                 ModelType = type,
                 ModelAssembly = result.Assembly
             };

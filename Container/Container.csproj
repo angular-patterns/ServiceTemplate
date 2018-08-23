@@ -11,6 +11,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\Business\Business.csproj" />
+    <ProjectReference Include="..\DynamicRules\DynamicRules.csproj" />
     <ProjectReference Include="..\Schemas\Schemas.csproj" />
   </ItemGroup>
 
