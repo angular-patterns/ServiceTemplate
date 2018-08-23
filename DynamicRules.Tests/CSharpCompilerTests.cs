@@ -4,6 +4,7 @@ using Newtonsoft.Json;
 using System;
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
+using System.IO;
 using System.Reflection;
 
 namespace DynamicRules.Tests
@@ -141,11 +142,7 @@ namespace DynamicRules.Tests
 
         }
 
-        [TestMethod]
-        public void TestPerson()
-        {
-            var person = Test.Models.Person;
-        }
+  
 
         public const string PersonString = @"
 using Newtonsoft.Json;
@@ -259,21 +256,31 @@ namespace Test {
 ";
 
         [TestMethod]
-        public void ShouldSetDefaultValue()
+        public void ShouldOutputModels()
         {
-            var a = Activator.CreateInstance(typeof(Person));
-            var t = JsonConvert.SerializeObject(a, typeof(Person), new JsonSerializerSettings()
-            {
-                NullValueHandling = NullValueHandling.Include,
-                DefaultValueHandling = DefaultValueHandling.Include | DefaultValueHandling.Populate
-            });
+            var directory = Directory.GetCurrentDirectory();
+            var person = File.ReadAllText("..\\..\\..\\models\\person.cs");
+var createModel = @"
+mutation CreateModel($accountId: Int!, $cSharpSource: String!, $typeName: String!) {
+  createModel(fromCSharp: {accountId: $accountId, cSharpSource: $cSharpSource, typeName: $typeName}) {
+    id
+  }
+}
+varables {
+    ""accountId"": {accountId},
+    ""cSharpSource"": ""{cSharpSource}"",
+    ""typeName"": ""{typeName}""  
+}
+";
+            var accountId = 1;
+            var typeName = "Test.Person";
+            var cSharpSource = person.Replace("\r\n", "\\n").Replace("\"", "\\\"");
+            var personModel = $"{createModel}"
+                            .Replace("{accountId}", accountId.ToString())
+                            .Replace("{cSharpSource}", cSharpSource)
+                            .Replace("{typeName}", typeName);
 
-            var z = JsonConvert.DeserializeObject<Person>("{}");
-            var schema = NJsonSchema.JsonSchema4.FromTypeAsync<Person>().Result;
-            var json = schema.ToJson();
-            var schema2 = NJsonSchema.JsonSchema4.FromJsonAsync(jsonSchema).Result;
-            var generator = new NJsonSchema.CodeGeneration.CSharp.CSharpGenerator(schema, new NJsonSchema.CodeGeneration.CSharp.CSharpGeneratorSettings() { Namespace = "Test" });
-            var file = generator.GenerateFile();
+            Console.WriteLine(personModel);
 
         }
         private bool HasAttribute(Type type, string propertyName, Type attributeType)
