@@ -13,5 +13,9 @@ namespace Entities
         public string Name { get; set;  }
 
         public DateTime CreatedOn { get; set; }
+
+        public virtual Model Model { get; set; }
+
+        public virtual IList<ReviewType> ReviewTypes { get; set; }
     }
 }

@@ -39,6 +39,8 @@ namespace Container
             builder.RegisterType<CreateModelMutation>();
             builder.RegisterType<ModelService>();
             builder.RegisterType<RuleSetService>();
+            builder.RegisterType<ReviewTypeService>();
+            builder.RegisterType<ReviewService>();
 
             builder.RegisterType<CSharpCompiler>().As<ICSharpCompiler>();
             builder.RegisterType<JsonSchemaConverter>().As<IJsonSchemaConverter>();

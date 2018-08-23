@@ -13,6 +13,7 @@ namespace Data
 
        public DbSet<ReviewType> ReviewTypes { get; set; }
 
+       public DbSet<Review> Reviews { get; set; }
 
         public DataContext(DbContextOptions<DataContext> options): base(options)
         {

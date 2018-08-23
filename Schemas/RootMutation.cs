@@ -1,4 +1,5 @@
 ﻿using Business;
+using DynamicRules.Interfaces;
 using Entities;
 using GraphQL.Types;
 using Models;
@@ -78,6 +79,43 @@ namespace Schemas
 
                     return ServiceLocator.Instance.GetService<RuleSetService>().CreateNew(modelId, name);
                 });
+
+            Field<ReviewTypeType>(
+                name: "addReviewType",
+                arguments: new QueryArguments(
+                    new QueryArgument<IntGraphType>() { Name = "ruleSetId" },
+                    new QueryArgument<StringGraphType>() { Name = "businessId" },
+                    new QueryArgument<StringGraphType>() { Name = "message" },
+                    new QueryArgument<StringGraphType>() { Name = "logic" }
+                 ),
+                resolve: ctx =>
+                {
+                    var ruleSetId = ctx.GetArgument<int>("ruleSetId");
+                    var businessId = ctx.GetArgument<string>("businessId");
+                    var message = ctx.GetArgument<string>("message");
+                    var logic = ctx.GetArgument<string>("logic");
+              
+                    return ServiceLocator.Instance.GetService<RuleSetService>().AddReviewType(
+                        ruleSetId,
+                        businessId, 
+                        message, 
+                        logic);
+                });
+
+            Field<ReviewModelType>(
+                name: "runReviews",
+                arguments: new QueryArguments(
+                    new QueryArgument<IntGraphType>() { Name = "ruleSetId" },
+                    new QueryArgument<StringGraphType>() { Name = "model" }
+                 ),
+                resolve: ctx =>
+                {
+
+                    var ruleSetId = ctx.GetArgument<int>("ruleSetId");
+                    var model = ctx.GetArgument<string>("model");
+                    return ServiceLocator.Instance.GetService<ReviewService>().Run(ruleSetId, model);
+                });
+
 
         }
     }

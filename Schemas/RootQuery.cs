@@ -15,11 +15,20 @@ namespace Schemas
         {
             Field<ListGraphType<ModelType>>(
                 name: "models",
+                arguments: new QueryArguments(new QueryArgument<IntGraphType>() { Name = "id" }),
                 resolve: ctx =>
                 {
-                    
-                    var models = ServiceLocator.Instance.GetService<ModelService>().GetAll();
-                    return models;
+                    if (ctx.HasArgument("id"))
+                    {
+                        var modelId = ctx.GetArgument<int>("id");
+                        var model = ServiceLocator.Instance.GetService<ModelService>().GetById(modelId);
+                        return new List<Model>() { model };
+                    }
+                    else
+                    {
+                        var models = ServiceLocator.Instance.GetService<ModelService>().GetAll();
+                        return models;
+                    }
                 });
 
             Field<ListGraphType<RuleSetType>>(
@@ -38,6 +47,25 @@ namespace Schemas
                         return ServiceLocator.Instance.GetService<RuleSetService>().GetAll();
                     }
                 });
+            Field<ListGraphType<ReviewModelType>>(
+                name: "reviews",
+                arguments: new QueryArguments(new QueryArgument<IntGraphType>() { Name = "id" }),
+                resolve: ctx =>
+                {
+                    if (ctx.HasArgument("id"))
+                    {
+                        var reviewId = ctx.GetArgument<int>("id");
+                        var review = ServiceLocator.Instance.GetService<ReviewService>().GetById(reviewId);
+                        return new List<Review>() { review };
+                    }
+                    else
+                    {
+
+                        return ServiceLocator.Instance.GetService<RuleSetService>().GetAll();
+                    }
+
+                }
+                );
         }
 
     }
@@ -57,6 +85,13 @@ namespace Schemas
             Field(d => d.JsonSchema, nullable: true).Description("The name of the character.");
             Field(d => d.TypeName, nullable: true).Description("The name of the character.");
             Field(d => d.Namespace, nullable: true).Description("The name of the character.");
+            Field<ListGraphType<RuleSetType>>(
+                name: "ruleSets",
+                resolve: ctx =>
+                {
+                    var modelId = ctx.Source.ModelId;
+                    return ServiceLocator.Instance.GetService<RuleSetService>().GetByModelId(modelId);
+                });
 
         }
     }
@@ -76,6 +111,87 @@ namespace Schemas
                     
                     return ServiceLocator.Instance.GetService<ModelService>().GetById(ctx.Source.ModelId);
                 });
+            Field<ListGraphType<ReviewTypeType>>(
+                name: "reviewTypes",
+                resolve: ctx =>
+                {
+                    return ServiceLocator.Instance.GetService<RuleSetService>().GetReviewTypes(ctx.Source.RuleSetId);
+                });
+        }
+    }
+
+    public class ReviewTypeType: ObjectGraphType<ReviewType>
+    {
+        public ReviewTypeType()
+        {
+            Name = "ReviewType";
+            Field("id", d => d.ReviewTypeId, nullable: true);
+            Field(d => d.RuleSetId, nullable: true);
+            Field(d => d.Logic, nullable: true);
+            Field(d => d.Message, nullable: true);
+            Field(d => d.BusinessId, nullable: true);
+            Field<RuleSetType>("ruleSet",
+                resolve: ctx =>
+                {
+
+                    return ServiceLocator.Instance.GetService<RuleSetService>().GetById(ctx.Source.RuleSetId);
+                });
+
+        }
+    }
+
+    public class ReviewRuleType: ObjectGraphType<ReviewRule>
+    {
+        public ReviewRuleType()
+        {
+            Name = "ReviewRule";
+            Field("id", d => d.ReviewRuleId, nullable: true);
+            Field(d => d.ReviewTypeId, nullable: true);
+            Field<ReviewTypeType>(
+                name: "reviewType", 
+                resolve: ctx =>
+                {
+                    return ServiceLocator.Instance.GetService<ReviewTypeService>().GetById(ctx.Source.ReviewTypeId);
+                });
+            Field(d => d.BusinessId, nullable: true);
+            Field(d => d.Message, nullable: true);
+            Field(d => d.RuleSetId, nullable: true);
+            Field(d => d.IsSatisfied, nullable: true);
+            Field<RuleSetType>("ruleSet",
+            resolve: ctx =>
+            {
+
+                return ServiceLocator.Instance.GetService<RuleSetService>().GetById(ctx.Source.RuleSetId);
+            });
+
+
+
+        }
+    }
+
+    public class ReviewModelType : ObjectGraphType<Review>
+    {
+        public ReviewModelType()
+        {
+            Name = "Review";
+            Field("id", d => d.ReviewId, nullable: true);
+            Field(d => d.RuleSetId, nullable: true);
+            Field<RuleSetType>("ruleSet",
+                resolve: ctx =>
+                {
+
+                    return ServiceLocator.Instance.GetService<RuleSetService>().GetById(ctx.Source.RuleSetId);
+                });
+            Field(d => d.JsonValue, nullable: true);
+            Field(d => d.CreatedOn, nullable: true);
+            Field<ListGraphType<ReviewRuleType>>(
+                name: "rules",
+                resolve: ctx =>
+                {
+                    return ServiceLocator.Instance.GetService<ReviewService>().GetById(ctx.Source.ReviewId).Rules;
+                });
+
+
         }
     }
 }
