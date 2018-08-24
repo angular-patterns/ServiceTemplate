@@ -32,5 +32,10 @@ namespace Data
 
         }
 
+        public void Seed()
+        {
+            
+        }
+
     }
 }

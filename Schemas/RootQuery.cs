@@ -33,25 +33,44 @@ namespace Schemas
 
             Field<ListGraphType<RuleSetType>>(
                 name: "ruleSets",
-                arguments: new QueryArguments(new QueryArgument<IntGraphType>() { Name= "modelId" }),
+                arguments: new QueryArguments(
+                    new QueryArgument<IntGraphType>() { Name= "modelId" },
+                    new QueryArgument<IntGraphType>() { Name = "id" }
+                ),
                 resolve: ctx =>
                 {
+                    var list = new List<RuleSet>();
                     if (ctx.HasArgument("modelId"))
                     {
+                       
                         var modelId = ctx.GetArgument<int>("modelId");
-                        return ServiceLocator.Instance.GetService<RuleSetService>().GetByModelId(modelId);
+                        var ruleSets = ServiceLocator.Instance.GetService<RuleSetService>().GetByModelId(modelId);
+                        if (ruleSets != null)
+                            list.AddRange(ruleSets);
                     }
-                    else
+
+                    if (ctx.HasArgument("id"))
+                    {
+                        var ruleSetId = ctx.GetArgument<int>("id");
+                        var ruleSet = ServiceLocator.Instance.GetService<RuleSetService>().GetById(ruleSetId);
+                        if (ruleSet != null)
+                            list.Add(ruleSet);
+
+                    }
+
+                    if (list.Count == 0)
                     {
 
-                        return ServiceLocator.Instance.GetService<RuleSetService>().GetAll();
+                        list.AddRange(ServiceLocator.Instance.GetService<RuleSetService>().GetAll());
                     }
+                    return list;
                 });
             Field<ListGraphType<ReviewModelType>>(
                 name: "reviews",
                 arguments: new QueryArguments(
                     new QueryArgument<IntGraphType>() { Name = "id" },
-                    new QueryArgument<IntGraphType>() { Name = "ruleSetId" }
+                    new QueryArgument<IntGraphType>() { Name = "ruleSetId" },
+                    new QueryArgument<StringGraphType>() { Name ="businessId" }
                     ),
                 resolve: ctx =>
                 {
@@ -65,6 +84,12 @@ namespace Schemas
                     {
                         var ruleSetId = ctx.GetArgument<int>("ruleSetId");
                         return ServiceLocator.Instance.GetService<ReviewService>().GetByRuleSetId(ruleSetId);
+
+                    }
+                    else if (ctx.HasArgument("businessId"))
+                    {
+                        var businessId = ctx.GetArgument<string>("businessId");
+                        return ServiceLocator.Instance.GetService<ReviewService>().GetReviewsByBusinessId(businessId);
 
                     }
                     else

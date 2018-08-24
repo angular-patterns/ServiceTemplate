@@ -35,8 +35,8 @@ namespace Schemas
         public class InputWithRuleSet: InputObjectGraphType<WithRuleSet> {
             public InputWithRuleSet()
             {
-                Field(t => t.RuleSetId, nullable: true).Description("The rule set id");
-                Field(t => t.Code, nullable: true).Description("The rule set code");
+                Field(t => t.Id, nullable: true).Description("The rule set id");
+                Field(t => t.BusinessId, nullable: true).Description("The rule set code");
             }
         }
 
@@ -46,8 +46,8 @@ namespace Schemas
             {
                 Field(t => t.Json, nullable: false).Description("The model json");
                 Field(t => t.BusinessId, nullable: false).Description("The business Id");
-                Field(t => t.VersionNumber, nullable: false).Description("The version number").DefaultValue(1);
-                Field(t => t.RevisionNumber, nullable: false).Description("The reversion number").DefaultValue(1);
+                Field(t => t.VersionNumber, nullable: true).Description("The version number");
+                Field(t => t.RevisionNumber, nullable: true).Description("The reversion number");
             }
         }
 
@@ -125,16 +125,16 @@ namespace Schemas
             Field<ReviewModelType>(
                 name: "runReviews",
                 arguments: new QueryArguments(
-                    new QueryArgument<InputWithRuleSet>() { Name = "with" },
-                    new QueryArgument<InputForModel>() { Name = "for" }
+                    new QueryArgument<InputWithRuleSet>() { Name = "withRuleSet" },
+                    new QueryArgument<InputForModel>() { Name = "forModel" }
                  ),
                 resolve: ctx =>
                 {
 
-                    var withRuleSet = ctx.GetArgument<WithRuleSet>("with");
-                    var forModel = ctx.GetArgument<ForModel>("for");
+                    var withRuleSet = ctx.GetArgument<WithRuleSet>("withRuleSet");
+                    var forModel = ctx.GetArgument<ForModel>("forModel");
                     var ruleSetId = ServiceLocator.Instance.GetService<RuleSetService>()
-                        .FindRuleSet(withRuleSet.Code, withRuleSet.RuleSetId).RuleSetId;
+                        .ResolveRuleSet(withRuleSet.BusinessId, withRuleSet.Id).RuleSetId;
 
                     return ServiceLocator.Instance.GetService<ReviewService>().Run(ruleSetId, forModel);
                 });

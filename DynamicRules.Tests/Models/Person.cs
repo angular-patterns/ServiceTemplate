@@ -5,9 +5,9 @@ namespace Models
 {
     public class Person
     {
-        [DefaultValue("Blue")]
+        [DefaultValue("")]
         public string FirstName { get; set; }
-        [DefaultValue("Blue")]
+        [DefaultValue("")]
         public string LastName { get; set; }
 
         [JsonProperty(DefaultValueHandling = DefaultValueHandling.Populate)]
@@ -19,10 +19,10 @@ namespace Models
     }
     public class Address
     {
-        [DefaultValue("Blue")]
+        [DefaultValue("")]
         [JsonProperty(DefaultValueHandling = DefaultValueHandling.Populate)]
         public string City { get; set; }
-        [DefaultValue("Blue")]
+        [DefaultValue("")]
         [JsonProperty(DefaultValueHandling = DefaultValueHandling.Populate)]
         public string Province { get; set; }
     }

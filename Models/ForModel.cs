@@ -8,8 +8,8 @@ namespace Models
     {
         public string Json { get; set; }
         public string BusinessId { get; set; }
-        public int VersionNumber { get; set; }
+        public int? VersionNumber { get; set; }
 
-        public int RevisionNumber { get; set; }
+        public int? RevisionNumber { get; set; }
     }
 }

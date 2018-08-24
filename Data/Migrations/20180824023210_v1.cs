@@ -33,7 +33,8 @@ namespace Data.Migrations
                     RuleSetId = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
                     ModelId = table.Column<int>(nullable: false),
-                    Name = table.Column<string>(nullable: true),
+                    BusinessId = table.Column<string>(nullable: true),
+                    Title = table.Column<string>(nullable: true),
                     CreatedOn = table.Column<DateTime>(nullable: false)
                 },
                 constraints: table =>
@@ -55,6 +56,9 @@ namespace Data.Migrations
                         .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
                     RuleSetId = table.Column<int>(nullable: false),
                     JsonValue = table.Column<string>(nullable: true),
+                    BusinessId = table.Column<string>(nullable: true),
+                    VersionNumber = table.Column<int>(nullable: false),
+                    RevisionNumber = table.Column<int>(nullable: false),
                     CreatedOn = table.Column<DateTime>(nullable: false)
                 },
                 constraints: table =>

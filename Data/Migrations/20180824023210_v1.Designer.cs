@@ -10,7 +10,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Data.Migrations
 {
     [DbContext(typeof(DataContext))]
-    [Migration("20180823210101_v1")]
+    [Migration("20180824023210_v1")]
     partial class v1
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -50,11 +50,17 @@ namespace Data.Migrations
                         .ValueGeneratedOnAdd()
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
+                    b.Property<string>("BusinessId");
+
                     b.Property<DateTime>("CreatedOn");
 
                     b.Property<string>("JsonValue");
 
+                    b.Property<int>("RevisionNumber");
+
                     b.Property<int>("RuleSetId");
+
+                    b.Property<int>("VersionNumber");
 
                     b.HasKey("ReviewId");
 
@@ -115,11 +121,13 @@ namespace Data.Migrations
                         .ValueGeneratedOnAdd()
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
+                    b.Property<string>("BusinessId");
+
                     b.Property<DateTime>("CreatedOn");
 
                     b.Property<int>("ModelId");
 
-                    b.Property<string>("Name");
+                    b.Property<string>("Title");
 
                     b.HasKey("RuleSetId");
 

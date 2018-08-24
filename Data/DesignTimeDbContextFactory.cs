@@ -19,7 +19,11 @@ namespace Data
             var builder = new DbContextOptionsBuilder<DataContext>();
             var connectionString = configuration.GetConnectionString("DefaultConnection");
             builder.UseSqlServer(connectionString);
+
+
             return new DataContext(builder.Options);
         }
+
+
     }
 }

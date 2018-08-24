@@ -25,7 +25,7 @@ namespace Business
             DataContext = dataContext;
         }
 
-        public RuleSet FindRuleSet(string businessId, int? ruleSetId)
+        public RuleSet ResolveRuleSet(string businessId, int? ruleSetId)
         {
             IQueryable<RuleSet> ruleSets = DataContext.RuleSets;
             if (ruleSetId != null)

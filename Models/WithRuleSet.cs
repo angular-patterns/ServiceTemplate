@@ -6,7 +6,7 @@ namespace Models
 {
     public class WithRuleSet
     {
-        public int? RuleSetId { get; set; }
-        public string Code { get; set; }
+        public int? Id { get; set; }
+        public string BusinessId { get; set; }
     }
 }

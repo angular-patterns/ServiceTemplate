@@ -21,27 +21,58 @@ namespace Business
             DataContext = dataContext;
         }
 
-       
+        public Review GetReview(int ruleSetId, string businessId, int versionNumber, int revisionNumber)
+        {
+            return DataContext.Reviews
+                .Where(t=> t.RuleSetId == ruleSetId)
+                .Where(t => t.BusinessId == businessId)
+                .Where(t => t.VersionNumber == versionNumber)
+                .Where(t => t.RevisionNumber == revisionNumber).FirstOrDefault();
+        }
 
         public Review Run(int ruleSetId, ForModel forModel)
         {
+            forModel.VersionNumber = forModel.VersionNumber ?? 1;
+            forModel.RevisionNumber = forModel.RevisionNumber ?? 1;
             var ruleSet = ServiceLocator.Instance.GetService<RuleSetService>().GetById(ruleSetId);
             var model = ServiceLocator.Instance.GetService<ModelService>().GetById(ruleSet.ModelId);
             var schemaInfo = ServiceLocator.Instance.GetService<JsonSchemaService>().GetSchemaInfo(ruleSet.ModelId);
             var reviewRunner = ServiceLocator.Instance.GetService<ReviewRunner>();
-            var reviewResult = reviewRunner.Run(schemaInfo, ruleSetId, forModel.Json);
-
-            var review = new Review()
+            var review = GetReview(ruleSetId, forModel.BusinessId, forModel.VersionNumber.GetValueOrDefault(), forModel.RevisionNumber.GetValueOrDefault());
+            if (review == null)
             {
-                RuleSetId = ruleSetId,
-                CreatedOn = DateTime.Now,
-                JsonValue = forModel.Json,
-                BusinessId = forModel.BusinessId,
-                VersionNumber = forModel.VersionNumber,
-                RevisionNumber = forModel.RevisionNumber,
-                ReviewRules = reviewResult.Rules
-            };
-            DataContext.Reviews.Add(review);
+                review = new Review
+                {
+                    RuleSetId = ruleSetId,
+                    BusinessId = forModel.BusinessId,
+                    CreatedOn = DateTime.Now,
+                    VersionNumber = forModel.VersionNumber.GetValueOrDefault(),
+                    RevisionNumber = forModel.RevisionNumber.GetValueOrDefault(),
+                    ReviewRules = new List<ReviewRule>()
+                };
+                DataContext.Reviews.Add(review);
+
+            }
+            else
+            {
+                var reviewRules = DataContext.ReviewRules.Where(t => t.ReviewId == review.ReviewId).ToList();
+                reviewRules.ForEach(t =>
+                {
+                    DataContext.ReviewRules.Remove(t);
+                });
+            }
+
+            review.JsonValue = forModel.Json;
+
+
+
+            var reviewResult = reviewRunner.Run(schemaInfo, ruleSetId, forModel.Json);
+            if (!reviewResult.Success)
+            {
+                throw new Exception(reviewResult.SchemaErrors.ToString());
+            }
+            review.ReviewRules = reviewResult.Rules;
+
             DataContext.SaveChanges();
 
             return review;
@@ -69,6 +100,11 @@ namespace Business
         public IList<ReviewRule> GetRules(int reviewId)
         {
             return DataContext.ReviewRules.Where(t => t.ReviewId == reviewId).ToList();
+        }
+
+        public IList<Review> GetReviewsByBusinessId(string businessId)
+        {
+            return DataContext.Reviews.Where(t => t.BusinessId == businessId).ToList();
         }
     }
 }
