@@ -341,6 +341,13 @@ namespace Schemas
                     return rules;
                 });
 
+            Field<ReviewContextType>(
+                name: "reviewContext",
+                resolve: ctx =>
+                {
+                    var reviewContextId = ctx.Source.ReviewContextId;
+                    return ServiceLocator.Instance.GetService<ReviewContextService>().GetById(reviewContextId);
+                });
 
         }
     }
