@@ -25,28 +25,28 @@ namespace Business
             DataContext = dataContext;
         }
 
-        public RuleSet FindRuleSet(string code, int? ruleSetId)
+        public RuleSet FindRuleSet(string businessId, int? ruleSetId)
         {
             IQueryable<RuleSet> ruleSets = DataContext.RuleSets;
             if (ruleSetId != null)
             {
                 ruleSets = ruleSets.Where(t => t.RuleSetId == ruleSetId);
             }
-            if (code != null)
+            if (businessId != null)
             {
-                ruleSets = ruleSets.Where(t=>t.Code == code);
+                ruleSets = ruleSets.Where(t=>t.BusinessId == businessId);
             }
 
             return ruleSets.First();
         }
 
-        public RuleSet CreateNew(int modelId, string name, string code)
+        public RuleSet CreateNew(int modelId, string name, string businessId)
         {
             return CreateRuleSetMutation.Create(new RuleSet()
             {
                 ModelId = modelId,
-                Code = code,
-                Name = name,
+                BusinessId = businessId,
+                Title = name,
                 CreatedOn = DateTime.Now
             });
         }
@@ -80,13 +80,6 @@ namespace Business
             };
             var ruleEvaluator = ServiceLocator.Instance.GetService<IRuleEvaluator>();
             var modelInstance = Activator.CreateInstance(schemaInfo.ModelType);
-            //var jsonModel = JsonConvert.SerializeObject(modelInstance, schemaInfo.ModelType, Formatting.Indented, 
-            //    new JsonSerializerSettings
-            //    {
-            //        ObjectCreationHandling = ObjectCreationHandling.Replace,
-            //        ConstructorHandling = ConstructorHandling.Default,
-                
-            //    });
 
             ruleEvaluator.RunPredicate(schemaInfo.ModelType,modelInstance, logic);
             DataContext.ReviewTypes.Add(reviewType);

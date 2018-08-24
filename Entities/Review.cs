@@ -13,7 +13,7 @@ namespace Entities
         public int RuleSetId { get; set; }
         public string JsonValue { get; set; }
 
-        public string Code { get; set; }
+        public string BusinessId { get; set; }
 
         public int VersionNumber { get; set; }
 

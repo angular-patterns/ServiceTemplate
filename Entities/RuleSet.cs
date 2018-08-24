@@ -12,9 +12,9 @@ namespace Entities
         [ForeignKey("Model")]
         public int ModelId { get; set; }
 
-        public string Code { get; set; }
+        public string BusinessId { get; set; }
 
-        public string Name { get; set;  }
+        public string Title { get; set;  }
 
         public DateTime CreatedOn { get; set; }
 

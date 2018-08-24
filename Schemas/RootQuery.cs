@@ -112,8 +112,8 @@ namespace Schemas
             Name = "RuleSet";
             Field("id", d => d.RuleSetId, nullable: true);
             Field(d => d.ModelId, nullable: true);
-            Field(d => d.Name, nullable: true);
-            Field(d => d.Code, nullable: true);
+            Field(d => d.Title, nullable: true);
+            Field(d => d.BusinessId, nullable: true);
             Field(d => d.CreatedOn, nullable: true);
             Field<ModelType>("model",
                 resolve: ctx =>
@@ -187,7 +187,7 @@ namespace Schemas
                     return ServiceLocator.Instance.GetService<RuleSetService>().GetById(ctx.Source.RuleSetId);
                 });
             Field(d => d.JsonValue, nullable: true);
-            Field(d => d.Code, nullable: true);
+            Field(d => d.BusinessId, nullable: true);
             Field(d => d.VersionNumber, nullable: true);
             Field(d => d.RevisionNumber, nullable: true);
             Field(d => d.CreatedOn, nullable: true);

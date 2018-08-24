@@ -36,7 +36,7 @@ namespace Business
                 RuleSetId = ruleSetId,
                 CreatedOn = DateTime.Now,
                 JsonValue = forModel.Json,
-                Code = forModel.Code,
+                BusinessId = forModel.BusinessId,
                 VersionNumber = forModel.VersionNumber,
                 RevisionNumber = forModel.RevisionNumber,
                 ReviewRules = reviewResult.Rules

@@ -44,10 +44,10 @@ namespace Schemas
         {
             public InputForModel()
             {
-                Field(t => t.Json, nullable: true).Description("The model json");
-                Field(t => t.Code, nullable: true).Description("The review code");
-                Field(t => t.VersionNumber, nullable: true).Description("The version number");
-                Field(t => t.RevisionNumber, nullable: true).Description("The reversion number");
+                Field(t => t.Json, nullable: false).Description("The model json");
+                Field(t => t.BusinessId, nullable: false).Description("The business Id");
+                Field(t => t.VersionNumber, nullable: false).Description("The version number").DefaultValue(1);
+                Field(t => t.RevisionNumber, nullable: false).Description("The reversion number").DefaultValue(1);
             }
         }
 
@@ -89,15 +89,15 @@ namespace Schemas
                 name: "createRuleSet",
                 arguments: new QueryArguments(
                     new QueryArgument<IntGraphType>() { Name = "modelId" },
-                    new QueryArgument<StringGraphType>() { Name = "name" },
-                    new QueryArgument<StringGraphType>() { Name = "code" }
+                    new QueryArgument<StringGraphType>() { Name = "title" },
+                    new QueryArgument<StringGraphType>() { Name = "businessId" }
                  ),
                 resolve: ctx =>
                 {
                     var modelId = ctx.GetArgument<int>("modelId");
-                    var name = ctx.GetArgument<string>("name");
-                    var code = ctx.GetArgument<string>("code");
-                    return ServiceLocator.Instance.GetService<RuleSetService>().CreateNew(modelId, name, code);
+                    var name = ctx.GetArgument<string>("title");
+                    var businessId = ctx.GetArgument<string>("businessId");
+                    return ServiceLocator.Instance.GetService<RuleSetService>().CreateNew(modelId, name, businessId);
                 });
 
             Field<ReviewTypeType>(
