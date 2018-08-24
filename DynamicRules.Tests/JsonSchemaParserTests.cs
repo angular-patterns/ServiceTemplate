@@ -77,7 +77,7 @@ public class SampleClass
                 Assembly = assembly
             });
 
-            assembly.GetType(Arg.Is("Test.SampleClass")).Returns(typeof(Test.SampleClass));
+            assembly.GetType(Arg.Is("Test.SampleClass"), Arg.Is(true)).Returns(typeof(Test.SampleClass));
 
 
             var subject = new JsonSchemaParser(compiler, converter);
@@ -98,7 +98,7 @@ public class SampleClass
             var compiler = Substitute.For<ICSharpCompiler>();
             var converter = Substitute.For<IJsonSchemaConverter>();
             var assembly = Substitute.For<Assembly>();
-            assembly.GetType(Arg.Is("Test.SampleClass")).Returns(typeof(Test.SampleClass));
+            assembly.GetType(Arg.Is("Test.SampleClass"), Arg.Is(true)).Returns(typeof(Test.SampleClass));
 
 
             var csharpToJsonSchemaResult = Task.Run(() => SampleSchemaString);
