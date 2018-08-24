@@ -4,58 +4,22 @@ using Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace Data.Migrations
 {
     [DbContext(typeof(DataContext))]
-    partial class DataContextModelSnapshot : ModelSnapshot
+    [Migration("20180824041533_v2")]
+    partial class v2
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
                 .HasAnnotation("ProductVersion", "2.1.1-rtm-30846")
                 .HasAnnotation("Relational:MaxIdentifierLength", 128)
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-            modelBuilder.Entity("Entities.Context", b =>
-                {
-                    b.Property<int>("ContextId")
-                        .ValueGeneratedOnAdd()
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<DateTime>("CreatedOn");
-
-                    b.Property<bool>("IsActive");
-
-                    b.Property<string>("Name");
-
-                    b.HasKey("ContextId");
-
-                    b.ToTable("Contexts");
-                });
-
-            modelBuilder.Entity("Entities.ContextItem", b =>
-                {
-                    b.Property<int>("ContextItemId")
-                        .ValueGeneratedOnAdd()
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<int>("ContextId");
-
-                    b.Property<string>("JsonValue");
-
-                    b.Property<string>("Key");
-
-                    b.Property<int>("ModelId");
-
-                    b.HasKey("ContextItemId");
-
-                    b.HasIndex("ContextId");
-
-                    b.ToTable("ContextItems");
-                });
 
             modelBuilder.Entity("Entities.Model", b =>
                 {
@@ -92,8 +56,6 @@ namespace Data.Migrations
 
                     b.Property<string>("JsonValue");
 
-                    b.Property<int>("ReviewContextId");
-
                     b.Property<int>("RevisionNumber");
 
                     b.Property<int>("RuleSetId");
@@ -113,11 +75,11 @@ namespace Data.Migrations
                         .ValueGeneratedOnAdd()
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<int>("ContextId");
-
                     b.Property<DateTime>("CreatedOn");
 
-                    b.Property<bool>("IsActive");
+                    b.Property<int>("IsActive");
+
+                    b.Property<int>("RuleContextId");
 
                     b.HasKey("ReviewContextId");
 
@@ -130,19 +92,11 @@ namespace Data.Migrations
                         .ValueGeneratedOnAdd()
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<int>("ContextItemId");
-
                     b.Property<string>("JsonValue");
-
-                    b.Property<string>("Key");
 
                     b.Property<int>("ModelId");
 
-                    b.Property<int>("ReviewContextId");
-
                     b.HasKey("ReviewContextItemId");
-
-                    b.HasIndex("ReviewContextId");
 
                     b.ToTable("ReviewContextItems");
                 });
@@ -201,11 +155,11 @@ namespace Data.Migrations
 
                     b.Property<string>("BusinessId");
 
-                    b.Property<int>("ContextId");
-
                     b.Property<DateTime>("CreatedOn");
 
                     b.Property<int>("ModelId");
+
+                    b.Property<int>("RuleSetContextId");
 
                     b.Property<string>("Title");
 
@@ -216,12 +170,34 @@ namespace Data.Migrations
                     b.ToTable("RuleSets");
                 });
 
-            modelBuilder.Entity("Entities.ContextItem", b =>
+            modelBuilder.Entity("Entities.RuleSetContext", b =>
                 {
-                    b.HasOne("Entities.Context")
-                        .WithMany("ContextItems")
-                        .HasForeignKey("ContextId")
-                        .OnDelete(DeleteBehavior.Cascade);
+                    b.Property<int>("RuleSetContextId")
+                        .ValueGeneratedOnAdd()
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<DateTime>("CreatedOn");
+
+                    b.Property<int>("RuleSetId");
+
+                    b.HasKey("RuleSetContextId");
+
+                    b.ToTable("RuleSetContexts");
+                });
+
+            modelBuilder.Entity("Entities.RuleSetContextItem", b =>
+                {
+                    b.Property<int>("RuleSetContextItemId")
+                        .ValueGeneratedOnAdd()
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("JsonValue");
+
+                    b.Property<int>("ModelId");
+
+                    b.HasKey("RuleSetContextItemId");
+
+                    b.ToTable("RuleSetContextItems");
                 });
 
             modelBuilder.Entity("Entities.Review", b =>
@@ -230,14 +206,6 @@ namespace Data.Migrations
                         .WithMany("Reviews")
                         .HasForeignKey("RuleSetId")
                         .OnDelete(DeleteBehavior.Restrict);
-                });
-
-            modelBuilder.Entity("Entities.ReviewContextItem", b =>
-                {
-                    b.HasOne("Entities.ReviewContext")
-                        .WithMany("ContextItems")
-                        .HasForeignKey("ReviewContextId")
-                        .OnDelete(DeleteBehavior.Cascade);
                 });
 
             modelBuilder.Entity("Entities.ReviewRule", b =>

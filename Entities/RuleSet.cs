@@ -12,6 +12,9 @@ namespace Entities
         [ForeignKey("Model")]
         public int ModelId { get; set; }
 
+        [ForeignKey("Context")]
+        public int ContextId { get; set; }
+
         public string BusinessId { get; set; }
 
         public string Title { get; set;  }

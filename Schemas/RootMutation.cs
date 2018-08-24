@@ -53,6 +53,46 @@ namespace Schemas
 
         public RootMutation(ServiceLocator serviceLocator)
         {
+            Field<ReviewContextType>("createReviewContext",
+                arguments: new QueryArguments(
+                    new QueryArgument<IntGraphType>() { Name = "contextId" }
+                ),
+                resolve: ctx =>
+                {
+                    var contextId = ctx.GetArgument<int>("contextId");
+                    var contextService = ServiceLocator.Instance.GetService<ReviewContextService>();
+                    return contextService.PublishContext(contextId);
+                });
+
+            Field<ContextType>("createContext",
+                arguments: new QueryArguments(
+                    new QueryArgument<StringGraphType>() { Name = "name" }
+                ),
+                resolve: ctx =>
+                {
+                    var name = ctx.GetArgument<string>("name");
+                    var contextService = ServiceLocator.Instance.GetService<ContextService>();
+                    return contextService.Create(name);
+                });
+            Field<ContextItemType>("addContextItem",
+                arguments: new QueryArguments(
+                    new QueryArgument<IntGraphType>() {  Name="contextId"},
+                    new QueryArgument<StringGraphType>() { Name = "key"},
+                    new QueryArgument<StringGraphType>() { Name = "json" },
+                    new QueryArgument<IntGraphType>() {  Name="modelId"}
+                ),
+                resolve: ctx =>
+                {
+                    var contextId = ctx.GetArgument<int>("contextId");
+                    var key = ctx.GetArgument<string>("key");
+                    var json = ctx.GetArgument<string>("json");
+                    var modelId = ctx.GetArgument<int>("modelId");
+
+                    var contextService = ServiceLocator.Instance.GetService<ContextService>();
+                    return contextService.AddContextItem(contextId, modelId, key, json);
+
+                    
+                });
             Field<ModelType>("createModel",
                 arguments: new QueryArguments(
                     new QueryArgument<InputCSharpGraphType>() { Name = "fromCSharp" },
@@ -88,16 +128,18 @@ namespace Schemas
             Field<RuleSetType>(
                 name: "createRuleSet",
                 arguments: new QueryArguments(
+                    new QueryArgument<IntGraphType>() {  Name="contextId"},
                     new QueryArgument<IntGraphType>() { Name = "modelId" },
                     new QueryArgument<StringGraphType>() { Name = "title" },
                     new QueryArgument<StringGraphType>() { Name = "businessId" }
                  ),
                 resolve: ctx =>
                 {
+                    var contextId = ctx.GetArgument<int>("contextId");
                     var modelId = ctx.GetArgument<int>("modelId");
                     var name = ctx.GetArgument<string>("title");
                     var businessId = ctx.GetArgument<string>("businessId");
-                    return ServiceLocator.Instance.GetService<RuleSetService>().CreateNew(modelId, name, businessId);
+                    return ServiceLocator.Instance.GetService<RuleSetService>().CreateNew(contextId, modelId, name, businessId);
                 });
 
             Field<ReviewTypeType>(
@@ -138,6 +180,8 @@ namespace Schemas
 
                     return ServiceLocator.Instance.GetService<ReviewService>().Run(ruleSetId, forModel);
                 });
+
+
 
 
         }

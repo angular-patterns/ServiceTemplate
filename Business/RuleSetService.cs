@@ -40,15 +40,21 @@ namespace Business
             return ruleSets.First();
         }
 
-        public RuleSet CreateNew(int modelId, string name, string businessId)
+        public RuleSet CreateNew(int contextId, int modelId, string name, string businessId)
         {
-            return CreateRuleSetMutation.Create(new RuleSet()
+            var ruleSetContextService = ServiceLocator.Instance.GetService<ContextService>();
+           
+            var ruleSet = CreateRuleSetMutation.Create(new RuleSet()
             {
                 ModelId = modelId,
                 BusinessId = businessId,
                 Title = name,
+                ContextId = contextId,
                 CreatedOn = DateTime.Now
             });
+
+            return ruleSet;
+
         }
 
         public IList<RuleSet> GetByModelId(int modelId)
@@ -70,6 +76,9 @@ namespace Business
         {
             var ruleSet = DataContext.RuleSets.Find(ruleSetId);
             var schemaInfo = ServiceLocator.Instance.GetService<JsonSchemaService>().GetSchemaInfo(ruleSet.ModelId);
+            var reviewContextService = ServiceLocator.Instance.GetService<ReviewContextService>();
+            var reviewContext = reviewContextService.GetReviewContext(ruleSetId);
+
 
             var reviewType = new ReviewType
             {
@@ -81,7 +90,10 @@ namespace Business
             var ruleEvaluator = ServiceLocator.Instance.GetService<IRuleEvaluator>();
             var modelInstance = Activator.CreateInstance(schemaInfo.ModelType);
 
-            ruleEvaluator.RunPredicate(schemaInfo.ModelType,modelInstance, logic);
+            var reviewContextItems = reviewContextService.CreateContext(reviewContext.ContextItems);
+            reviewContextItems.Add(schemaInfo.ModelType, modelInstance);
+
+            ruleEvaluator.RunPredicate(reviewContextItems, logic);
             DataContext.ReviewTypes.Add(reviewType);
             DataContext.SaveChanges();
             return reviewType;

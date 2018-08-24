@@ -27,6 +27,8 @@ namespace Business
 
         public ReviewResult Run(JsonSchemaInfo schema,  int ruleSetId, string jsonValue)
         {
+            var reviewContextService = ServiceLocator.Instance.GetService<ReviewContextService>();
+            var reviewContext = reviewContextService.GetReviewContext(ruleSetId);
             var reviewTypes = RuleSetService.GetReviewTypes(ruleSetId);
             var schemaResult = JsonValidator.Validate(schema.Schema, jsonValue).Result;
             var reviewResult = new ReviewResult()
@@ -45,7 +47,11 @@ namespace Business
 
                 reviewResult.Rules = reviewTypes.ToList().Select(t =>
                 {
-                    var result = RuleEvaluator.RunPredicate(schema.ModelType, modelObj, t.Logic);
+
+                    var reviewContextItems = reviewContextService.CreateContext(reviewContext.ContextItems);
+                    reviewContextItems.Add(schema.ModelType, modelObj);
+                    
+                    var result = RuleEvaluator.RunPredicate(reviewContextItems, t.Logic);
                     return new ReviewRule()
                     {
                         ReviewTypeId = t.ReviewTypeId,

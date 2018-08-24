@@ -11,6 +11,9 @@ namespace Entities
 
         [ForeignKey("RuleSet")]
         public int RuleSetId { get; set; }
+
+        [ForeignKey("ReviewContext")]
+        public int ReviewContextId { get; set; }
         public string JsonValue { get; set; }
 
         public string BusinessId { get; set; }

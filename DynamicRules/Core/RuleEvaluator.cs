@@ -9,14 +9,20 @@ namespace DynamicRules.Core
     public class RuleEvaluator: IRuleEvaluator
     {
 
-        public bool RunPredicate(Type type, Object value, string codeLogic)
+        public bool RunPredicate(IDictionary<Type, Object> context, string logic)
         {
+            var parameters = new List<ParameterExpression>();
+            var values = new List<Object>();
+            foreach (var keyValue in context)
+            {
+                parameters.Add(Expression.Parameter(keyValue.Key, keyValue.Key.Name));
+                values.Add(keyValue.Value);
+            }
+            
 
-            ParameterExpression parm1 = Expression.Parameter(type, type.Name);
+            var expr = System.Linq.Dynamic.DynamicExpression.ParseLambda(parameters.ToArray(), typeof(bool), logic, values );
 
-            var expr = System.Linq.Dynamic.DynamicExpression.ParseLambda(new[] { parm1 }, typeof(bool), codeLogic);
-
-            return (bool)expr.Compile().DynamicInvoke(value);
+            return (bool)expr.Compile().DynamicInvoke(values);
 
         }
     }

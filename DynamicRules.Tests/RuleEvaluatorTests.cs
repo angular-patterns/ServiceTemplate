@@ -26,7 +26,9 @@ namespace DynamicRules.Tests
                 LastName = "Smith"
             };
             var ruleEvaluator = new RuleEvaluator();
-            var result = ruleEvaluator.RunPredicate(typeof(SampleClass), value, "SampleClass.FirstName ==\"John\"");
+            var context = new Dictionary<Type, Object>();
+            context.Add(typeof(SampleClass), value);
+            var result = ruleEvaluator.RunPredicate(context, "SampleClass.FirstName ==\"John\"");
             Assert.IsTrue(result);
         }
         [TestMethod]
@@ -38,7 +40,9 @@ namespace DynamicRules.Tests
                 LastName = "Smith"
             };
             var ruleEvaluator = new RuleEvaluator();
-            var result = ruleEvaluator.RunPredicate(typeof(SampleClass), value, "SampleClass.FirstName == null");
+            var context = new Dictionary<Type, Object>();
+            context.Add(typeof(SampleClass), value);
+            var result = ruleEvaluator.RunPredicate(context, "SampleClass.FirstName == null");
             Assert.IsFalse(result);
         }
 
@@ -52,7 +56,9 @@ namespace DynamicRules.Tests
                 LastName = "Smith"
             };
             var ruleEvaluator = new RuleEvaluator();
-            ruleEvaluator.RunPredicate(typeof(SampleClass), value, "SampleClass.Blah == null");
+            var context = new Dictionary<Type, Object>();
+            context.Add(typeof(SampleClass), value);
+            ruleEvaluator.RunPredicate(context, "SampleClass.Blah == null");
         }
 
 

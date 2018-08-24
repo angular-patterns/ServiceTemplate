@@ -100,11 +100,120 @@ namespace Schemas
 
                 }
                 );
+
+            Field<ContextType>(
+                name: "contexts", 
+                resolve: ctx => {
+                    var contextService = ServiceLocator.Instance.GetService<ContextService>();
+                    return contextService.GetAll();
+                });
+            Field<ReviewContextType>(
+                name: "reviewContexts",
+                resolve: ctx => {
+                    var contextService = ServiceLocator.Instance.GetService<ReviewContextService>();
+                    return contextService.GetAll();
+                });
+
         }
 
     }
 
+    public class ContextItemType: ObjectGraphType<ContextItem>
+    {
+        public ContextItemType()
+        {
+            Name = "ContextItem";
+            Field("id", d => d.ContextItemId, nullable: true).Description("The id of the character.");
+            Field(d => d.ContextId, nullable: true).Description("The name of the character.");
+            Field(d => d.JsonValue, nullable: true).Description("The name of the character.");
+            Field(d => d.Key, nullable: true).Description("The name of the character.");
+            Field(d => d.ModelId, nullable: true).Description("The name of the character.");
+            Field<ModelType>(
+                name: "model",
+                resolve: ctx =>
+                {
+                    var modelId = ctx.Source.ModelId;
+                    return ServiceLocator.Instance.GetService<ModelService>().GetById(modelId);
+                });
+            Field<ContextType>(
+                name: "context",
+                resolve: ctx =>
+                {
+                    var contextId = ctx.Source.ContextId;
+                    return ServiceLocator.Instance.GetService<ContextService>().GetById(contextId);
+                });
 
+        }
+    }
+
+    public class ContextType: ObjectGraphType<Context>
+    {
+        public ContextType()
+        {
+            Name = "Context";
+            Field("id", d => d.ContextId, nullable: true).Description("The id of the character.");
+            Field(d => d.IsActive , nullable: true).Description("The name of the character.");
+            Field(d => d.CreatedOn, nullable: true).Description("The name of the character.");
+            Field<ListGraphType<ContextItemType>>(
+                name: "items",
+                resolve: ctx =>
+                {
+                    var contextId = ctx.Source.ContextId;
+                    return ServiceLocator.Instance.GetService<ContextService>().GetContextItems(contextId);
+                });
+
+
+        }
+    }
+
+    public class ReviewContextItemType : ObjectGraphType<ReviewContextItem>
+    {
+        public ReviewContextItemType()
+        {
+            Name = "ReviewContextItem";
+            Field("id", d => d.ContextItemId, nullable: true).Description("The id of the character.");
+            Field(d => d.ReviewContextId, nullable: true).Description("The name of the character.");
+            Field(d => d.JsonValue, nullable: true).Description("The name of the character.");
+            Field(d => d.Key, nullable: true).Description("The name of the character.");
+            Field(d => d.ModelId, nullable: true).Description("The name of the character.");
+            Field<ModelType>(
+                name: "model",
+                resolve: ctx =>
+                {
+                    var modelId = ctx.Source.ModelId;
+                    return ServiceLocator.Instance.GetService<ModelService>().GetById(modelId);
+                });
+            Field<ReviewContextType>(
+                name: "reviewContext",
+                resolve: ctx =>
+                {
+                    var reviewContextId = ctx.Source.ReviewContextId;
+                    return ServiceLocator.Instance.GetService<ReviewContextService>().GetById(reviewContextId);
+                });
+
+        }
+    }
+
+
+    public class ReviewContextType : ObjectGraphType<ReviewContext>
+    {
+        public ReviewContextType()
+        {
+            Name = "ReviewContext";
+            Field("id", d => d.ContextId, nullable: true).Description("The id of the character.");
+            Field(d => d.IsActive, nullable: true).Description("The name of the character.");
+            Field(d => d.CreatedOn, nullable: true).Description("The name of the character.");
+            Field<ListGraphType<ReviewContextItemType>>(
+                name: "items",
+                resolve: ctx =>
+                {
+                    var contextId = ctx.Source.ReviewContextId;
+                    return ServiceLocator.Instance.GetService<ReviewContextService>().GetContextItems(contextId);
+                });
+
+
+        }
+    }
 
     public class ModelType : ObjectGraphType<Model>
     {

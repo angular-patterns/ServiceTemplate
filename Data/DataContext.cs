@@ -17,6 +17,15 @@ namespace Data
 
        public DbSet<ReviewRule> ReviewRules { get; set; }
 
+       public DbSet<Context> Contexts { get; set; }
+
+        public DbSet<ContextItem> ContextItems { get; set; }
+
+        public DbSet<ReviewContext> ReviewContexts { get; set; }
+
+        public DbSet<ReviewContextItem> ReviewContextItems { get; set; }
+
+
         public DataContext(DbContextOptions<DataContext> options): base(options)
         {
            
