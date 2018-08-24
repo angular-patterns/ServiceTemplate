@@ -6,6 +6,6 @@ namespace DynamicRules.Interfaces
 {
     public interface IRuleEvaluator
     {
-        bool RunPredicate(IDictionary<Type, Object> context, string codeLogic);
+        bool RunPredicate(IDictionary<string, KeyValuePair<Type, Object>> context, string codeLogic);
     }
 }

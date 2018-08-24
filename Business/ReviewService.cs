@@ -38,6 +38,7 @@ namespace Business
             var model = ServiceLocator.Instance.GetService<ModelService>().GetById(ruleSet.ModelId);
             var schemaInfo = ServiceLocator.Instance.GetService<JsonSchemaService>().GetSchemaInfo(ruleSet.ModelId);
             var reviewRunner = ServiceLocator.Instance.GetService<ReviewRunner>();
+            var reviewContext = ServiceLocator.Instance.GetService<ReviewContextService>().GetReviewContext(ruleSetId);
             var review = GetReview(ruleSetId, forModel.BusinessId, forModel.VersionNumber.GetValueOrDefault(), forModel.RevisionNumber.GetValueOrDefault());
             if (review == null)
             {
@@ -48,6 +49,7 @@ namespace Business
                     CreatedOn = DateTime.Now,
                     VersionNumber = forModel.VersionNumber.GetValueOrDefault(),
                     RevisionNumber = forModel.RevisionNumber.GetValueOrDefault(),
+                    ReviewContextId = reviewContext.ReviewContextId,
                     ReviewRules = new List<ReviewRule>()
                 };
                 DataContext.Reviews.Add(review);

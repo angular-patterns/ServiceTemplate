@@ -43,7 +43,8 @@ namespace Business
                 {
                     ReviewContextId = reviewContext.ReviewContextId,
                     ModelId = t.ModelId,
-                    JsonValue = t.JsonValue
+                    JsonValue = t.JsonValue,
+                    Key = t.Key
                 };
             }).ToList();
 
@@ -57,21 +58,21 @@ namespace Business
         public ReviewContext GetReviewContext(int ruleSetId)
         {
             var ruleSet = DataContext.RuleSets.Find(ruleSetId);
-            var reviewContext = DataContext.ReviewContexts.Where(t => t.ContextId == ruleSet.ContextId).FirstOrDefault();
-
+            var reviewContext = DataContext.ReviewContexts.Where(t => t.ContextId == ruleSet.ContextId && t.IsActive == true).FirstOrDefault();
+            reviewContext.ContextItems = DataContext.ReviewContextItems.Where(t => t.ReviewContextId == reviewContext.ReviewContextId).ToList();
             return reviewContext;
 
         }
 
-        public IDictionary<Type, Object> CreateContext(IList<ReviewContextItem> contextItems)
+        public IDictionary<string, KeyValuePair<Type,Object>> CreateContext(IList<ReviewContextItem> contextItems)
         {
-            var dictionary = new Dictionary<Type, Object>();
+            var dictionary = new Dictionary<string, KeyValuePair<Type, Object>>();
             var jsonSchemaService = ServiceLocator.Instance.GetService<JsonSchemaService>();
             foreach (var item in contextItems)
             {
                 var schemaInfo = jsonSchemaService.GetSchemaInfo(item.ModelId);
                 var obj = JsonConvert.DeserializeObject(item.JsonValue, schemaInfo.ModelType);
-                dictionary.Add(schemaInfo.ModelType, obj);
+                dictionary.Add(item.Key, new KeyValuePair<Type,Object>(schemaInfo.ModelType, obj));
 
             }
             return dictionary;

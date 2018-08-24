@@ -101,13 +101,13 @@ namespace Schemas
                 }
                 );
 
-            Field<ContextType>(
+            Field<ListGraphType<ContextType>>(
                 name: "contexts", 
                 resolve: ctx => {
                     var contextService = ServiceLocator.Instance.GetService<ContextService>();
                     return contextService.GetAll();
                 });
-            Field<ReviewContextType>(
+            Field<ListGraphType<ReviewContextType>>(
                 name: "reviewContexts",
                 resolve: ctx => {
                     var contextService = ServiceLocator.Instance.GetService<ReviewContextService>();
@@ -200,7 +200,8 @@ namespace Schemas
         public ReviewContextType()
         {
             Name = "ReviewContext";
-            Field("id", d => d.ContextId, nullable: true).Description("The id of the character.");
+            Field("id", d => d.ReviewContextId, nullable: true).Description("The id of the character.");
+            Field(d => d.ContextId, nullable: true).Description("The name of the character.");
             Field(d => d.IsActive, nullable: true).Description("The name of the character.");
             Field(d => d.CreatedOn, nullable: true).Description("The name of the character.");
             Field<ListGraphType<ReviewContextItemType>>(
@@ -209,6 +210,13 @@ namespace Schemas
                 {
                     var contextId = ctx.Source.ReviewContextId;
                     return ServiceLocator.Instance.GetService<ReviewContextService>().GetContextItems(contextId);
+                });
+            Field<ContextType>(
+                name: "context",
+                resolve: ctx =>
+                {
+                    var contextId = ctx.Source.ContextId;
+                    return ServiceLocator.Instance.GetService<ContextService>().GetById(contextId);
                 });
 
 

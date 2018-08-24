@@ -49,7 +49,7 @@ namespace Business
                 {
 
                     var reviewContextItems = reviewContextService.CreateContext(reviewContext.ContextItems);
-                    reviewContextItems.Add(schema.ModelType, modelObj);
+                    reviewContextItems.Add(schema.ModelType.Name,  new KeyValuePair<Type,Object>(schema.ModelType, modelObj));
                     
                     var result = RuleEvaluator.RunPredicate(reviewContextItems, t.Logic);
                     return new ReviewRule()

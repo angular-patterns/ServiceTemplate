@@ -91,7 +91,7 @@ namespace Business
             var modelInstance = Activator.CreateInstance(schemaInfo.ModelType);
 
             var reviewContextItems = reviewContextService.CreateContext(reviewContext.ContextItems);
-            reviewContextItems.Add(schemaInfo.ModelType, modelInstance);
+            reviewContextItems.Add(schemaInfo.ModelType.Name, new KeyValuePair<Type, Object>(schemaInfo.ModelType, modelInstance));
 
             ruleEvaluator.RunPredicate(reviewContextItems, logic);
             DataContext.ReviewTypes.Add(reviewType);
