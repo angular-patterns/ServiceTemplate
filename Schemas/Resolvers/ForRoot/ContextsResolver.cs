@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 using Business;
+using Business.Services;
 using GraphQL.Types;
 using Schemas.GraphTypes;
 
@@ -9,12 +10,13 @@ namespace Schemas.Resolvers.ForRoot
 {
     public class ContextsResolver : IFieldResolver
     {
-        public ContextService ContextService { get; }
-        public ContextsResolver(ContextService contextService)
+        public ContextService ContextService
         {
-            ContextService = contextService;
+            get
+            {
+                return ServiceLocator.ContextService;
+            }
         }
-
 
         public IFieldType AddField(string name, ObjectGraphType graphType)
         {

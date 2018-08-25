@@ -2,16 +2,19 @@
 using System.Collections.Generic;
 using System.Text;
 using Business;
+using Business.Services;
 using GraphQL.Types;
 
 namespace Schemas.Resolvers.ForRoot
 {
     public class ReviewContextsResolver : IFieldResolver
     {
-        public ReviewContextService ReviewContextsService { get; }
-        public ReviewContextsResolver(ReviewContextService reviewContextsService)
+        public ReviewContextService ReviewContextsService
         {
-            ReviewContextsService = reviewContextsService;
+            get
+            {
+                return ServiceLocator.ReviewContextService;
+            }
         }
 
 

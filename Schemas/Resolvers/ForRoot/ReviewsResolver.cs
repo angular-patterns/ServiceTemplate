@@ -1,4 +1,5 @@
 ﻿using Business;
+using Business.Services;
 using Entities;
 using GraphQL.Types;
 using Schemas.GraphTypes;
@@ -11,11 +12,12 @@ namespace Schemas.Resolvers.ForRoot
 {
     public class ReviewsResolver : IFieldResolver
     {
-        public ReviewService ReviewService { get; }
-
-        public ReviewsResolver(ReviewService reviewService)
+        public ReviewService ReviewService
         {
-            ReviewService = reviewService;
+            get
+            {
+                return ServiceLocator.ReviewService;
+            }
         }
 
         public QueryArguments GetArguments()

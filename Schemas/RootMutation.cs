@@ -12,6 +12,7 @@ namespace Schemas
 {
     public class RootMutation: ObjectGraphType
     {
+
         public class InputCSharpGraphType: InputObjectGraphType<FromCSharpSource>
         {
             public InputCSharpGraphType()
@@ -61,8 +62,7 @@ namespace Schemas
                 resolve: ctx =>
                 {
                     var contextId = ctx.GetArgument<int>("contextId");
-                    var contextService = ServiceLocator.Instance.GetService<ReviewContextService>();
-                    return contextService.PublishContext(contextId);
+                     return ServiceLocator.ReviewContextService.PublishContext(contextId);
                 });
 
             Field<ContextType>("createContext",
@@ -72,8 +72,7 @@ namespace Schemas
                 resolve: ctx =>
                 {
                     var name = ctx.GetArgument<string>("name");
-                    var contextService = ServiceLocator.Instance.GetService<ContextService>();
-                    return contextService.Create(name);
+                    return ServiceLocator.ContextService.Create(name);
                 });
             Field<ContextItemType>("addContextItem",
                 arguments: new QueryArguments(
@@ -89,8 +88,7 @@ namespace Schemas
                     var json = ctx.GetArgument<string>("json");
                     var modelId = ctx.GetArgument<int>("modelId");
 
-                    var contextService = ServiceLocator.Instance.GetService<ContextService>();
-                    return contextService.AddContextItem(contextId, modelId, key, json);
+                    return ServiceLocator.ContextService.AddContextItem(contextId, modelId, key, json);
 
                     
                 });
@@ -104,7 +102,7 @@ namespace Schemas
                     var csharp = ctx.GetArgument<FromCSharpSource>("fromCSharp");
                     if (csharp != null)
                     {
-                         var model = ServiceLocator.Instance.GetService<ModelService>().AddModelFromCSharpSource(
+                         var model = ServiceLocator.ModelService.AddModelFromCSharpSource(
                              csharp.AccountId, 
                              csharp.CSharpSource, 
                              csharp.TypeName);
@@ -114,7 +112,7 @@ namespace Schemas
                     var jsonSchema = ctx.GetArgument<FromJsonSchema>("fromJsonSchema");
                     if (jsonSchema != null)
                     {
-                        var model = ServiceLocator.Instance.GetService<ModelService>().AddModelFromJsonSchema(
+                        var model = ServiceLocator.ModelService.AddModelFromJsonSchema(
                             jsonSchema.AccountId, 
                             jsonSchema.JsonSchema, 
                             jsonSchema.TypeName, 
@@ -140,7 +138,7 @@ namespace Schemas
                     var modelId = ctx.GetArgument<int>("modelId");
                     var name = ctx.GetArgument<string>("title");
                     var businessId = ctx.GetArgument<string>("businessId");
-                    return ServiceLocator.Instance.GetService<RuleSetService>().CreateNew(contextId, modelId, name, businessId);
+                    return ServiceLocator.RuleSetService.CreateNew(contextId, modelId, name, businessId);
                 });
 
             Field<ReviewRuleTypeType>(
@@ -158,7 +156,7 @@ namespace Schemas
                     var message = ctx.GetArgument<string>("message");
                     var logic = ctx.GetArgument<string>("logic");
               
-                    return ServiceLocator.Instance.GetService<RuleSetService>().AddReviewType(
+                    return ServiceLocator.RuleSetService.AddReviewType(
                         ruleSetId,
                         businessId, 
                         message, 
@@ -176,10 +174,10 @@ namespace Schemas
 
                     var withRuleSet = ctx.GetArgument<WithRuleSet>("withRuleSet");
                     var forModel = ctx.GetArgument<ForModel>("forModel");
-                    var ruleSetId = ServiceLocator.Instance.GetService<RuleSetService>()
+                    var ruleSetId = ServiceLocator.RuleSetService
                         .ResolveRuleSet(withRuleSet.BusinessId, withRuleSet.Id).RuleSetId;
 
-                    return ServiceLocator.Instance.GetService<ReviewService>().Run(ruleSetId, forModel);
+                    return ServiceLocator.ReviewService.Run(ruleSetId, forModel);
                 });
 
 

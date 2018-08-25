@@ -5,7 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace Business
+namespace Business.Services
 {
     public class ContextService
     {

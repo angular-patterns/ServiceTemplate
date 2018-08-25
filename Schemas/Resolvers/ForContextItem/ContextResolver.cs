@@ -1,4 +1,5 @@
 ﻿using Business;
+using Business.Services;
 using Entities;
 using GraphQL.Types;
 using Schemas.GraphTypes;
@@ -10,12 +11,13 @@ namespace Schemas.Resolvers.ForContextItem
 {
     public class ContextResolver : IFieldResolver<ContextItem, Context>
     {
-        public ContextService ContextService { get; }
-        public ContextResolver(ContextService contextService)
+        public ContextService ContextService
         {
-            ContextService = contextService;
+            get
+            {
+                return ServiceLocator.ContextService;
+            }
         }
-
 
         public IFieldType AddField(string name, ObjectGraphType<ContextItem> graphType)
         {

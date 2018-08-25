@@ -1,4 +1,5 @@
 ﻿using Business;
+using Business.Services;
 using Entities;
 using GraphQL.Types;
 using System;
@@ -9,6 +10,13 @@ namespace Schemas.Resolvers.ForReview
 {
     public class ReviewContextResolver : IFieldResolver<Review, ReviewContext>
     {
+        public ReviewContextService ReviewContextService
+        {
+            get
+            {
+                return ServiceLocator.ReviewContextService;
+            }
+        }
         public IFieldType AddField(string name, ObjectGraphType<Review> graphType)
         {
             return graphType.Field<ReviewContextType>(

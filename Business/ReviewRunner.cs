@@ -11,14 +11,12 @@ namespace Business
 {
     public class ReviewRunner 
     {
-        public RuleSetService RuleSetService { get; }
         public IJsonValidator JsonValidator { get; }
         public IJsonSchemaParser JsonSchemaParser { get; }
         public IRuleEvaluator RuleEvaluator { get; }
 
-        public ReviewRunner(RuleSetService ruleSetService, IJsonValidator jsonValidator, IJsonSchemaParser jsonSchemaParser, IRuleEvaluator ruleEvaluator)
+        public ReviewRunner(IJsonValidator jsonValidator, IJsonSchemaParser jsonSchemaParser, IRuleEvaluator ruleEvaluator)
         {
-            RuleSetService = ruleSetService;
             JsonValidator = jsonValidator;
             JsonSchemaParser = jsonSchemaParser;
             RuleEvaluator = ruleEvaluator;
@@ -27,9 +25,8 @@ namespace Business
 
         public ReviewResult Run(JsonSchemaInfo schema,  int ruleSetId, string jsonValue)
         {
-            var reviewContextService = ServiceLocator.Instance.GetService<ReviewContextService>();
-            var reviewContext = reviewContextService.GetReviewContext(ruleSetId);
-            var reviewTypes = RuleSetService.GetReviewTypes(ruleSetId);
+            var reviewContext = ServiceLocator.ReviewContextService.GetReviewContext(ruleSetId);
+            var reviewTypes = ServiceLocator.RuleSetService.GetReviewTypes(ruleSetId);
             var schemaResult = JsonValidator.Validate(schema.Schema, jsonValue).Result;
             var reviewResult = new ReviewResult()
             {
@@ -48,7 +45,7 @@ namespace Business
                 reviewResult.Rules = reviewTypes.ToList().Select(t =>
                 {
 
-                    var reviewContextItems = reviewContextService.CreateContext(reviewContext.ContextItems);
+                    var reviewContextItems = ServiceLocator.ReviewContextService.CreateContext(reviewContext.ContextItems);
                     reviewContextItems.Add(schema.ModelType.Name,  new KeyValuePair<Type,Object>(schema.ModelType, modelObj));
                     
                     var result = RuleEvaluator.RunPredicate(reviewContextItems, t.Logic);

@@ -47,14 +47,14 @@ namespace Schemas
                 resolve: ctx =>
                 {
                     var modelId = ctx.Source.ModelId;
-                    return ServiceLocator.Instance.GetService<ModelService>().GetById(modelId);
+                    return ServiceLocator.ModelService.GetById(modelId);
                 });
             Field<ReviewContextType>(
                 name: "reviewContext",
                 resolve: ctx =>
                 {
                     var reviewContextId = ctx.Source.ReviewContextId;
-                    return ServiceLocator.Instance.GetService<ReviewContextService>().GetById(reviewContextId);
+                    return ServiceLocator.ReviewContextService.GetById(reviewContextId);
                 });
 
         }
@@ -75,14 +75,14 @@ namespace Schemas
                 resolve: ctx =>
                 {
                     var contextId = ctx.Source.ReviewContextId;
-                    return ServiceLocator.Instance.GetService<ReviewContextService>().GetContextItems(contextId);
+                    return ServiceLocator.ReviewContextService.GetContextItems(contextId);
                 });
             Field<ContextType>(
                 name: "context",
                 resolve: ctx =>
                 {
                     var contextId = ctx.Source.ContextId;
-                    return ServiceLocator.Instance.GetService<ContextService>().GetById(contextId);
+                    return ServiceLocator.ContextService.GetById(contextId);
                 });
 
 
@@ -127,13 +127,13 @@ namespace Schemas
                 resolve: ctx =>
                 {
                     
-                    return ServiceLocator.Instance.GetService<ModelService>().GetById(ctx.Source.ModelId);
+                    return ServiceLocator.ModelService.GetById(ctx.Source.ModelId);
                 });
             Field<ListGraphType<ReviewRuleType>>(
                 name: "reviewRuleTypes",
                 resolve: ctx =>
                 {
-                    return ServiceLocator.Instance.GetService<RuleSetService>().GetReviewTypes(ctx.Source.RuleSetId);
+                    return ServiceLocator.RuleSetService.GetReviewTypes(ctx.Source.RuleSetId);
                 });
         }
     }
@@ -152,7 +152,7 @@ namespace Schemas
                 resolve: ctx =>
                 {
 
-                    return ServiceLocator.Instance.GetService<RuleSetService>().GetById(ctx.Source.RuleSetId);
+                    return ServiceLocator.RuleSetService.GetById(ctx.Source.RuleSetId);
                 });
 
         }
@@ -170,7 +170,7 @@ namespace Schemas
                 name: "reviewRuleType", 
                 resolve: ctx =>
                 {
-                    return ServiceLocator.Instance.GetService<ReviewRuleTypeService>().GetById(ctx.Source.ReviewRuleTypeId);
+                    return ServiceLocator.ReviewRuleTypeService.GetById(ctx.Source.ReviewRuleTypeId);
                 });
             Field(d => d.BusinessId, nullable: true);
             Field(d => d.Message, nullable: true);

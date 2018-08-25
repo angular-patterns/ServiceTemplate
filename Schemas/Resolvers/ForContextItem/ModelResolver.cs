@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 using Business;
+using Business.Services;
 using Entities;
 using GraphQL.Types;
 
@@ -9,10 +10,12 @@ namespace Schemas.Resolvers.ForContextItem
 {
     public class ModelResolver : IFieldResolver<ContextItem, Model>
     {
-        public ModelService ModelService { get; }
-        public ModelResolver(ModelService modelService)
+        public ModelService ModelService
         {
-            ModelService = modelService;
+            get
+            {
+                return ServiceLocator.ModelService;
+            }
         }
 
 

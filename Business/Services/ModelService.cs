@@ -7,7 +7,7 @@ using System.Collections.Generic;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Business
+namespace Business.Services
 {
     public class ModelService
     {

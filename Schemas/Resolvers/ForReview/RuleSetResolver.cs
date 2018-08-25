@@ -1,4 +1,5 @@
 ﻿using Business;
+using Business.Services;
 using Entities;
 using GraphQL.Types;
 using System;
@@ -9,6 +10,13 @@ namespace Schemas.Resolvers.ForReview
 {
     public class RuleSetResolver : IFieldResolver<Review, RuleSet>
     {
+        public RuleSetService RuleSetService
+        {
+            get
+            {
+                return ServiceLocator.RuleSetService;
+            }
+        }
         public IFieldType AddField(string name, ObjectGraphType<Review> graphType)
         {
             return graphType.Field<RuleSetType>(
@@ -24,7 +32,7 @@ namespace Schemas.Resolvers.ForReview
 
         public RuleSet Resolve(ResolveFieldContext<Review> context)
         {
-            return ServiceLocator.Instance.GetService<RuleSetService>().GetById(context.Source.RuleSetId);
+            return RuleSetService.GetById(context.Source.RuleSetId);
 
         }
     }

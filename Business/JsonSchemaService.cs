@@ -1,4 +1,5 @@
-﻿using DynamicRules.Interfaces;
+﻿using Business.Services;
+using DynamicRules.Interfaces;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -8,12 +9,11 @@ namespace Business
     public class JsonSchemaService
     {
         public IJsonSchemaParser SchemaParser { get; }
-        public ModelService ModelService { get; }
+        public ModelService ModelService { get { return ServiceLocator.ModelService; } }
 
-        public JsonSchemaService(IJsonSchemaParser schemaParser, ModelService modelService)
+        public JsonSchemaService(IJsonSchemaParser schemaParser)
         {
             SchemaParser = schemaParser;
-            ModelService = modelService;
         }
 
         public JsonSchemaInfo GetSchemaInfo(int modelId)

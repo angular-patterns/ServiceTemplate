@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 using Business;
+using Business.Services;
 using Entities;
 using GraphQL.Types;
 
@@ -9,6 +10,13 @@ namespace Schemas.Resolvers.ForRoot
 {
     public class RuleSetsResolver : IFieldResolver
     {
+        public RuleSetService RuleSetService
+        {
+            get
+            {
+                return ServiceLocator.RuleSetService;
+            }
+        }
         public QueryArguments GetArguments()
         {
             return new QueryArguments(
@@ -24,7 +32,7 @@ namespace Schemas.Resolvers.ForRoot
             {
 
                 var modelId = ctx.GetArgument<int>("modelId");
-                var ruleSets = ServiceLocator.Instance.GetService<RuleSetService>().GetByModelId(modelId);
+                var ruleSets = RuleSetService.GetByModelId(modelId);
                 if (ruleSets != null)
                     list.AddRange(ruleSets);
             }
@@ -32,7 +40,7 @@ namespace Schemas.Resolvers.ForRoot
             if (ctx.HasArgument("id"))
             {
                 var ruleSetId = ctx.GetArgument<int>("id");
-                var ruleSet = ServiceLocator.Instance.GetService<RuleSetService>().GetById(ruleSetId);
+                var ruleSet = RuleSetService.GetById(ruleSetId);
                 if (ruleSet != null)
                     list.Add(ruleSet);
 
@@ -41,7 +49,7 @@ namespace Schemas.Resolvers.ForRoot
             if (list.Count == 0)
             {
 
-                list.AddRange(ServiceLocator.Instance.GetService<RuleSetService>().GetAll());
+                list.AddRange(RuleSetService.GetAll());
             }
             return list;
 
