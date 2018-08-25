@@ -12,8 +12,8 @@ namespace Entities
 
         public int ReviewId { get; set; }
 
-        [ForeignKey("ReviewType")]
-        public int ReviewTypeId { get; set; }
+        [ForeignKey("ReviewRuleType")]
+        public int ReviewRuleTypeId { get; set; }
 
         public string BusinessId { get; set; }
 
@@ -21,7 +21,7 @@ namespace Entities
 
         public bool IsSatisfied { get; set; }
 
-        public virtual ReviewType ReviewType { get; set; }
+        public virtual ReviewRuleType ReviewType { get; set; }
 
     }
 }

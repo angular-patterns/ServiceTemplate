@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Data.Migrations
 {
     [DbContext(typeof(DataContext))]
-    [Migration("20180824063109_v3")]
-    partial class v3
+    [Migration("20180825025028_v1")]
+    partial class v1
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -163,20 +163,20 @@ namespace Data.Migrations
 
                     b.Property<int>("ReviewId");
 
-                    b.Property<int>("ReviewTypeId");
+                    b.Property<int>("ReviewRuleTypeId");
 
                     b.HasKey("ReviewRuleId");
 
                     b.HasIndex("ReviewId");
 
-                    b.HasIndex("ReviewTypeId");
+                    b.HasIndex("ReviewRuleTypeId");
 
                     b.ToTable("ReviewRules");
                 });
 
-            modelBuilder.Entity("Entities.ReviewType", b =>
+            modelBuilder.Entity("Entities.ReviewRuleType", b =>
                 {
-                    b.Property<int>("ReviewTypeId")
+                    b.Property<int>("ReviewRuleTypeId")
                         .ValueGeneratedOnAdd()
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
@@ -188,7 +188,7 @@ namespace Data.Migrations
 
                     b.Property<int>("RuleSetId");
 
-                    b.HasKey("ReviewTypeId");
+                    b.HasKey("ReviewRuleTypeId");
 
                     b.HasIndex("RuleSetId");
 
@@ -249,13 +249,13 @@ namespace Data.Migrations
                         .HasForeignKey("ReviewId")
                         .OnDelete(DeleteBehavior.Cascade);
 
-                    b.HasOne("Entities.ReviewType", "ReviewType")
+                    b.HasOne("Entities.ReviewRuleType", "ReviewType")
                         .WithMany()
-                        .HasForeignKey("ReviewTypeId")
+                        .HasForeignKey("ReviewRuleTypeId")
                         .OnDelete(DeleteBehavior.Cascade);
                 });
 
-            modelBuilder.Entity("Entities.ReviewType", b =>
+            modelBuilder.Entity("Entities.ReviewRuleType", b =>
                 {
                     b.HasOne("Entities.RuleSet")
                         .WithMany("ReviewTypes")

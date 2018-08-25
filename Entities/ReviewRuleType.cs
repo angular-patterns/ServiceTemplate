@@ -5,9 +5,9 @@ using System.Text;
 
 namespace Entities
 {
-    public class ReviewType
+    public class ReviewRuleType
     {
-        public int ReviewTypeId { get; set; }
+        public int ReviewRuleTypeId { get; set; }
 
         [ForeignKey("RuleSet")]
         public int RuleSetId { get; set; }

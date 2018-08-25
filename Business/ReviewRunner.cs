@@ -54,7 +54,7 @@ namespace Business
                     var result = RuleEvaluator.RunPredicate(reviewContextItems, t.Logic);
                     return new ReviewRule()
                     {
-                        ReviewTypeId = t.ReviewTypeId,
+                        ReviewRuleTypeId = t.ReviewRuleTypeId,
                         BusinessId = t.BusinessId,
                         Message = t.Message,
                         IsSatisfied = result

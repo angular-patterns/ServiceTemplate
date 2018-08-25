@@ -23,7 +23,7 @@ namespace Entities
 
         public virtual Model Model { get; set; }
 
-        public virtual IList<ReviewType> ReviewTypes { get; set; }
+        public virtual IList<ReviewRuleType> ReviewTypes { get; set; }
 
         public virtual IList<Review> Reviews { get; set; }
     }

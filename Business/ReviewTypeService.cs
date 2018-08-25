@@ -6,20 +6,20 @@ using System.Text;
 
 namespace Business
 {
-    public class ReviewTypeService
+    public class ReviewRuleTypeService
     {
         public ServiceLocator ServiceLocator { get; }
         public DataContext DataContext { get; }
 
-        public ReviewTypeService(ServiceLocator serviceLocator, DataContext dataContext)
+        public ReviewRuleTypeService(ServiceLocator serviceLocator, DataContext dataContext)
         {
             ServiceLocator = serviceLocator;
             DataContext = dataContext;
         }
 
-        public ReviewType GetById(int id)
+        public ReviewRuleType GetById(int id)
         {
-            return DataContext.ReviewTypes.Find(id);
+            return DataContext.ReviewRuleTypes.Find(id);
         }
     }
 }

@@ -11,7 +11,7 @@ namespace Data
        public DbSet<RuleSet> RuleSets { get; set; }
 
 
-       public DbSet<ReviewType> ReviewTypes { get; set; }
+       public DbSet<ReviewRuleType> ReviewRuleTypes { get; set; }
 
        public DbSet<Review> Reviews { get; set; }
 

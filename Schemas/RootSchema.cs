@@ -13,6 +13,7 @@ namespace Schemas
         {
             Query = query;
             Mutation = mutation;
+            
         }
 
         public async Task<ExecutionResult> ExecuteQuery(GraphQLQuery query, ClaimsPrincipal user)

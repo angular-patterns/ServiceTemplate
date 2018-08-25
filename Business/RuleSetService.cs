@@ -72,7 +72,7 @@ namespace Business
             return DataContext.RuleSets.Find(ruleSetId);
         }
 
-        public ReviewType AddReviewType(int ruleSetId, string businessId, string message, string logic)
+        public ReviewRuleType AddReviewType(int ruleSetId, string businessId, string message, string logic)
         {
             var ruleSet = DataContext.RuleSets.Find(ruleSetId);
             var schemaInfo = ServiceLocator.Instance.GetService<JsonSchemaService>().GetSchemaInfo(ruleSet.ModelId);
@@ -80,7 +80,7 @@ namespace Business
             var reviewContext = reviewContextService.GetReviewContext(ruleSetId);
 
 
-            var reviewType = new ReviewType
+            var reviewType = new ReviewRuleType
             {
                 RuleSetId = ruleSetId,
                 BusinessId = businessId,
@@ -94,14 +94,14 @@ namespace Business
             reviewContextItems.Add(schemaInfo.ModelType.Name, new KeyValuePair<Type, Object>(schemaInfo.ModelType, modelInstance));
 
             ruleEvaluator.RunPredicate(reviewContextItems, logic);
-            DataContext.ReviewTypes.Add(reviewType);
+            DataContext.ReviewRuleTypes.Add(reviewType);
             DataContext.SaveChanges();
             return reviewType;
         }
 
-        public IList<ReviewType> GetReviewTypes(int ruleSetId)
+        public IList<ReviewRuleType> GetReviewTypes(int ruleSetId)
         {
-            return DataContext.ReviewTypes.Where(t => t.RuleSetId == ruleSetId).ToList();
+            return DataContext.ReviewRuleTypes.Where(t => t.RuleSetId == ruleSetId).ToList();
         }
     }
 }

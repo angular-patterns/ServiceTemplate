@@ -3,6 +3,7 @@ using DynamicRules.Interfaces;
 using Entities;
 using GraphQL.Types;
 using Models;
+using Schemas.GraphTypes;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -142,8 +143,8 @@ namespace Schemas
                     return ServiceLocator.Instance.GetService<RuleSetService>().CreateNew(contextId, modelId, name, businessId);
                 });
 
-            Field<ReviewTypeType>(
-                name: "addReviewType",
+            Field<ReviewRuleTypeType>(
+                name: "addReviewRuleType",
                 arguments: new QueryArguments(
                     new QueryArgument<IntGraphType>() { Name = "ruleSetId" },
                     new QueryArgument<StringGraphType>() { Name = "businessId" },
@@ -164,13 +165,13 @@ namespace Schemas
                         logic);
                 });
 
-            Field<ReviewModelType>(
+            Field<GraphTypes.ReviewType>(
                 name: "runReviews",
                 arguments: new QueryArguments(
                     new QueryArgument<InputWithRuleSet>() { Name = "withRuleSet" },
                     new QueryArgument<InputForModel>() { Name = "forModel" }
                  ),
-                resolve: ctx =>
+                resolve: (ResolveFieldContext<object> ctx) =>
                 {
 
                     var withRuleSet = ctx.GetArgument<WithRuleSet>("withRuleSet");
