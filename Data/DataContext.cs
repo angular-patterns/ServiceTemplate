@@ -17,6 +17,10 @@ namespace Data
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.Entity<Application>()
+                .HasIndex(t => new { t.ApplicationDisplay, t.VersionNumber, t.RevisionNumber })
+                .IsUnique();
+
+            modelBuilder.Entity<Application>()
                 .Property(b => b.City)
                 .HasDefaultValue("");
 
@@ -33,6 +37,18 @@ namespace Data
                 .HasDefaultValue("");
 
             modelBuilder.Entity<Application>()
+                .Property(b => b.Street)
+                .HasDefaultValue("");
+
+            modelBuilder.Entity<Application>()
+                .Property(b => b.PostalCode)
+                .HasDefaultValue("");
+
+            modelBuilder.Entity<Application>()
+                .Property(b => b.ProvinceState)
+                .HasDefaultValue("");
+
+            modelBuilder.Entity<Application>()
                 .Property(b => b.CreatedOn)
                 .HasDefaultValueSql("getdate()");
 
@@ -40,6 +56,13 @@ namespace Data
                 .Property(b => b.CreatedBy)
                 .HasDefaultValue("System");
 
+            modelBuilder.Entity<Application>()
+                .Property(b => b.VersionNumber)
+                .HasDefaultValue(1);
+
+            modelBuilder.Entity<Application>()
+                .Property(b => b.RevisionNumber)
+                .HasDefaultValue(1);
 
             modelBuilder.HasSequence<int>("ApplicationDisplayNumbers", schema: "shared")
                 .StartsAt(1000)

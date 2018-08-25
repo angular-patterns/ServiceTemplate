@@ -4,14 +4,16 @@ using Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace Data.Migrations
 {
     [DbContext(typeof(DataContext))]
-    partial class DataContextModelSnapshot : ModelSnapshot
+    [Migration("20180825211943_v2")]
+    partial class v2
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -68,9 +70,7 @@ namespace Data.Migrations
                         .ValueGeneratedOnAdd()
                         .HasDefaultValue("");
 
-                    b.Property<int>("RevisionNumber")
-                        .ValueGeneratedOnAdd()
-                        .HasDefaultValue(1);
+                    b.Property<int>("RevisionNumber");
 
                     b.Property<int?>("Sin");
 
@@ -78,14 +78,9 @@ namespace Data.Migrations
                         .ValueGeneratedOnAdd()
                         .HasDefaultValue("");
 
-                    b.Property<int>("VersionNumber")
-                        .ValueGeneratedOnAdd()
-                        .HasDefaultValue(1);
+                    b.Property<int>("VersionNumber");
 
                     b.HasKey("ApplicationId");
-
-                    b.HasIndex("ApplicationDisplay", "VersionNumber", "RevisionNumber")
-                        .IsUnique();
 
                     b.ToTable("Applications");
                 });
