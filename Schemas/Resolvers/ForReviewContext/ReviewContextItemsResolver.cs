@@ -1,6 +1,7 @@
 ﻿using Business;
 using Entities;
 using GraphQL.Types;
+using Schemas.GraphTypes;
 using System;
 using System.Collections.Generic;
 using System.Linq;

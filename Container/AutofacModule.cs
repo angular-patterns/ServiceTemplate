@@ -22,6 +22,7 @@ using System;
 using System.Linq;
 using Business.Services;
 using Schemas.Resolvers.ForReviewType;
+using Schemas.Resolvers.ForRuleSetType;
 
 namespace Container
 {
@@ -66,6 +67,9 @@ namespace Container
             builder.RegisterType<RuleSetResolver>();
             builder.RegisterType<ReviewContextItemsResolver>();
             builder.RegisterType<Schemas.Resolvers.ForReviewContext.ContextResolver>();
+            builder.RegisterType<Schemas.Resolvers.ForReviewContextItem.ModelResolver>();
+            builder.RegisterType<Schemas.Resolvers.ForReviewContextItem.ReviewContextResolver>();
+            builder.RegisterType<ReviewRuleTypesResolver>();
 
 
 

@@ -5,6 +5,7 @@ using Business;
 using Business.Services;
 using Entities;
 using GraphQL.Types;
+using Schemas.GraphTypes;
 
 namespace Schemas.Resolvers.ForRoot
 {
