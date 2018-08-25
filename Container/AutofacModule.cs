@@ -1,5 +1,5 @@
 ﻿using Autofac;
-
+using Business;
 using Data;
 using Microsoft.EntityFrameworkCore;
 using Schemas;
@@ -18,6 +18,7 @@ namespace Container
         protected override void Load(ContainerBuilder builder)
         {
             builder.RegisterInstance(new DataContext(Options));
+            builder.RegisterType<ServiceLocator>();
             builder.RegisterType<RootSchema>();
             builder.RegisterType<RootQuery>();
             builder.RegisterType<RootMutation>();

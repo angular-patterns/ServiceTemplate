@@ -16,7 +16,7 @@ namespace Schemas.Types
             Field(t => t.City, nullable: true).Description("field");
             Field(t => t.Country, nullable: true).Description("field");
             Field(t => t.FirstName, nullable: true).Description("field");
-            //Field<GenderType>("gender", resolve: ctx => ctx.Source.Gender);
+            Field<GenderType>("gender", resolve: ctx => ctx.Source.Gender);
             Field(t => t.LastName, nullable: true).Description("field");
             Field(t => t.PostalCode, nullable: true).Description("field");
             Field(t => t.ProvinceState, nullable: true).Description("field");
