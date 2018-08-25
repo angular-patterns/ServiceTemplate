@@ -66,10 +66,12 @@ namespace Container
             builder.RegisterType<ReviewRulesResolver>();
             builder.RegisterType<RuleSetResolver>();
             builder.RegisterType<ReviewContextItemsResolver>();
+            builder.RegisterType<ReviewRuleTypesResolver>();
             builder.RegisterType<Schemas.Resolvers.ForReviewContext.ContextResolver>();
             builder.RegisterType<Schemas.Resolvers.ForReviewContextItem.ModelResolver>();
             builder.RegisterType<Schemas.Resolvers.ForReviewContextItem.ReviewContextResolver>();
-            builder.RegisterType<ReviewRuleTypesResolver>();
+            builder.RegisterType<Schemas.Resolvers.ForReviewRuleType.RuleSetResolver>();
+            builder.RegisterType<Schemas.Resolvers.ForReviewRule.ReviewRuleTypeResolver>();
 
 
 

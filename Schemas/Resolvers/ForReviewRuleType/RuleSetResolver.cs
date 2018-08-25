@@ -2,19 +2,19 @@
 using Business.Services;
 using Entities;
 using GraphQL.Types;
+using Schemas.GraphTypes;
 using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Text;
 
-namespace Schemas.Resolvers.ForRuleSetType
+namespace Schemas.Resolvers.ForReviewRuleType
 {
-    public class ReviewRuleTypesResolver : IFieldResolver<RuleSet, Entities.ReviewRuleType[]>
+    public class RuleSetResolver : IFieldResolver<Entities.ReviewRuleType, RuleSet>
     {
         public RuleSetService RuleSetService = ServiceLocator.RuleSetService;
-        public IFieldType AddField(string name, ObjectGraphType<RuleSet> graphType)
+        public IFieldType AddField(string name, ObjectGraphType<Entities.ReviewRuleType> graphType)
         {
-            return graphType.Field<ListGraphType<GraphTypes.ReviewRuleType>>(
+            return graphType.Field<RuleSetType>(
                 name: name,
                 arguments: GetArguments(),
                 resolve: Resolve);
@@ -25,9 +25,9 @@ namespace Schemas.Resolvers.ForRuleSetType
             return new QueryArguments();
         }
 
-        public Entities.ReviewRuleType[] Resolve(ResolveFieldContext<RuleSet> context)
+        public RuleSet Resolve(ResolveFieldContext<Entities.ReviewRuleType> context)
         {
-            return RuleSetService.GetReviewTypes(context.Source.RuleSetId).ToArray();
+            return RuleSetService.GetById(context.Source.RuleSetId);
         }
     }
 }

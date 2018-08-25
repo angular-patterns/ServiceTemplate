@@ -20,7 +20,7 @@ namespace Schemas.Resolvers.ForReview
         }
         public IFieldType AddField(string name, ObjectGraphType<Review> graphType)
         {
-            return graphType.Field<ListGraphType<ReviewRuleType>>(
+            return graphType.Field<ListGraphType<GraphTypes.ReviewRuleType>>(
                 name: name,
                 arguments: GetArguments(),
                 resolve: Resolve);

@@ -14,8 +14,6 @@
 
   <ItemGroup>
     <Folder Include="Resolvers\ForModel\" />
-    <Folder Include="Resolvers\ForReviewRuleTypeType\" />
-    <Folder Include="Resolvers\ForReviewRuleType\" />
   </ItemGroup>
 
 </Project>
