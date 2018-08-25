@@ -17,6 +17,8 @@ namespace Schemas
                 arguments: new QueryArguments(),
                 resolve: ctx => {
                     var application = new Application();
+                    application.VersionNumber = 0;
+                    application.RevisionNumber = 0;
                     ServiceLocator.DataContext.Applications.Add(application);
                     ServiceLocator.DataContext.SaveChanges();
                     return application;

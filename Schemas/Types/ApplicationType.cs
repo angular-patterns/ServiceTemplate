@@ -22,6 +22,7 @@ namespace Schemas.Types
             Field(t => t.ProvinceState, nullable: true).Description("field");
             Field(t => t.Sin, nullable: true).Description("field");
             Field(t => t.Street, nullable: true).Description("field");
+            Field(t => t.ApplicationDisplay, nullable: true).Description("field");
 
         }
     }
