@@ -61,33 +61,6 @@ namespace Schemas
     }
 
 
-    public class ReviewContextType : ObjectGraphType<ReviewContext>
-    {
-        public ReviewContextType()
-        {
-            Name = "ReviewContext";
-            Field("id", d => d.ReviewContextId, nullable: true).Description("The id of the character.");
-            Field(d => d.ContextId, nullable: true).Description("The name of the character.");
-            Field(d => d.IsActive, nullable: true).Description("The name of the character.");
-            Field(d => d.CreatedOn, nullable: true).Description("The name of the character.");
-            Field<ListGraphType<ReviewContextItemType>>(
-                name: "items",
-                resolve: ctx =>
-                {
-                    var contextId = ctx.Source.ReviewContextId;
-                    return ServiceLocator.ReviewContextService.GetContextItems(contextId);
-                });
-            Field<ContextType>(
-                name: "context",
-                resolve: ctx =>
-                {
-                    var contextId = ctx.Source.ContextId;
-                    return ServiceLocator.ContextService.GetById(contextId);
-                });
-
-
-        }
-    }
 
     public class ModelType : ObjectGraphType<Model>
     {
