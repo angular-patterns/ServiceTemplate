@@ -63,6 +63,13 @@ namespace Business
                 return Instance.GetService<RuleSetService>();
             }
         }
+        public static JsonSchemaService JsonSchemaService
+        {
+            get
+            {
+                return Instance.GetService<JsonSchemaService>();
+            }
+        }
         public T GetService<T>()
         {
             return (T)Provider.GetService(typeof(T));
