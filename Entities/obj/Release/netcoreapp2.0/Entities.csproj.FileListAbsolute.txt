@@ -1,0 +1,9 @@
+C:\projects\test2\ServiceTemplate\Entities\bin\Release\netcoreapp2.0\Entities.deps.json
+C:\projects\test2\ServiceTemplate\Entities\bin\Release\netcoreapp2.0\Entities.dll
+C:\projects\test2\ServiceTemplate\Entities\bin\Release\netcoreapp2.0\Entities.pdb
+C:\projects\test2\ServiceTemplate\Entities\obj\Release\netcoreapp2.0\Entities.csprojAssemblyReference.cache
+C:\projects\test2\ServiceTemplate\Entities\obj\Release\netcoreapp2.0\Entities.csproj.CoreCompileInputs.cache
+C:\projects\test2\ServiceTemplate\Entities\obj\Release\netcoreapp2.0\Entities.AssemblyInfoInputs.cache
+C:\projects\test2\ServiceTemplate\Entities\obj\Release\netcoreapp2.0\Entities.AssemblyInfo.cs
+C:\projects\test2\ServiceTemplate\Entities\obj\Release\netcoreapp2.0\Entities.dll
+C:\projects\test2\ServiceTemplate\Entities\obj\Release\netcoreapp2.0\Entities.pdb
