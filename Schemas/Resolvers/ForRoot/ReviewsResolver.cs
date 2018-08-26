@@ -2,7 +2,7 @@
 using Business.Services;
 using Entities;
 using GraphQL.Types;
-using Schemas.GraphTypes;
+using Schemas.Types;
 using Schemas.Resolvers;
 using System;
 using System.Collections.Generic;

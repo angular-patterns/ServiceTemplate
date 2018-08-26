@@ -1,14 +1,16 @@
 ﻿using Business;
+using Business.Services;
 using Entities;
 using GraphQL.Types;
-using Schemas.Resolvers.ForContextItem;
+using Schemas.Resolvers;
+using Schemas.Resolvers.ForReviewContextItem;
 using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace Schemas.GraphTypes
+namespace Schemas.Types
 {
-    public class ContextItemType : ObjectGraphType<ContextItem>
+    public class ReviewContextItemType : ObjectGraphType<ReviewContextItem>
     {
         public ModelResolver ModelResolver
         {
@@ -17,24 +19,25 @@ namespace Schemas.GraphTypes
                 return ServiceLocator.Instance.GetService<ModelResolver>();
             }
         }
-        public ContextResolver ContextResolver
+        public ReviewContextResolver ReviewContextResolver
         {
             get
             {
-                return ServiceLocator.Instance.GetService<ContextResolver>();
+                return ServiceLocator.Instance.GetService<ReviewContextResolver>();
             }
         }
-        public ContextItemType()
+        public ReviewContextItemType()
         {
-            Name = "ContextItem";
+            Name = "ReviewContextItem";
             Field("id", d => d.ContextItemId, nullable: true).Description("The id of the character.");
-            Field(d => d.ContextId, nullable: true).Description("The name of the character.");
+            Field(d => d.ReviewContextId, nullable: true).Description("The name of the character.");
             Field(d => d.JsonValue, nullable: true).Description("The name of the character.");
             Field(d => d.Key, nullable: true).Description("The name of the character.");
             Field(d => d.ModelId, nullable: true).Description("The name of the character.");
             ModelResolver.AddField("model", this);
-            ContextResolver.AddField("context", this); 
+            ReviewContextResolver.AddField("reviewContext", this);
 
         }
     }
+
 }

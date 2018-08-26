@@ -3,7 +3,7 @@ using DynamicRules.Interfaces;
 using Entities;
 using GraphQL.Types;
 using Models;
-using Schemas.GraphTypes;
+using Schemas.Types;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -163,7 +163,7 @@ namespace Schemas
                         logic);
                 });
 
-            Field<GraphTypes.ReviewType>(
+            Field<Types.ReviewType>(
                 name: "runReviews",
                 arguments: new QueryArguments(
                     new QueryArgument<InputWithRuleSet>() { Name = "withRuleSet" },

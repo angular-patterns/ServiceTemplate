@@ -4,7 +4,7 @@ using System.Text;
 using Business;
 using Business.Services;
 using GraphQL.Types;
-using Schemas.GraphTypes;
+using Schemas.Types;
 
 namespace Schemas.Resolvers.ForRoot
 {

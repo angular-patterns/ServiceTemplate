@@ -260,7 +260,11 @@ namespace Test {
         {
             var directory = Directory.GetCurrentDirectory();
             var person = File.ReadAllText("..\\..\\..\\models\\person.cs");
-var createModel = @"
+            var application = File.ReadAllText("..\\..\\..\\models\\application.cs");
+            application = application.Replace("\r\n", "\\n").Replace("\"", "\\\"");
+            Console.WriteLine(application);
+
+            var createModel = @"
 mutation CreateModel($accountId: Int!, $cSharpSource: String!, $typeName: String!) {
   createModel(fromCSharp: {accountId: $accountId, cSharpSource: $cSharpSource, typeName: $typeName}) {
     id

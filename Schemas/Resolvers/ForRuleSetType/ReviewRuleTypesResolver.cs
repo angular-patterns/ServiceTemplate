@@ -14,7 +14,7 @@ namespace Schemas.Resolvers.ForRuleSetType
         public RuleSetService RuleSetService = ServiceLocator.RuleSetService;
         public IFieldType AddField(string name, ObjectGraphType<RuleSet> graphType)
         {
-            return graphType.Field<ListGraphType<GraphTypes.ReviewRuleType>>(
+            return graphType.Field<ListGraphType<Types.ReviewRuleType>>(
                 name: name,
                 arguments: GetArguments(),
                 resolve: Resolve);

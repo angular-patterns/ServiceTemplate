@@ -7,7 +7,7 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace Schemas.GraphTypes
+namespace Schemas.Types
 {
     public class ReviewContextType : ObjectGraphType<ReviewContext>
     {
