@@ -92,7 +92,8 @@ namespace Web
 
             app.UseGraphQLPlayground(new GraphQLPlaygroundOptions
             {
-                Path = "/application/ui/playground"
+                Path = "/ui/playground",
+                GraphQLEndPoint = "/application/graphql"
             });
             app.UseMvc();
             app.UseCors("AllowSpecificOrigin");
