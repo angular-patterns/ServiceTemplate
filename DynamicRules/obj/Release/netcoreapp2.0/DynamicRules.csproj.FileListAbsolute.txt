@@ -1,0 +1,9 @@
+C:\projects\test2\ServiceTemplate\DynamicRules\bin\Release\netcoreapp2.0\DynamicRules.deps.json
+C:\projects\test2\ServiceTemplate\DynamicRules\bin\Release\netcoreapp2.0\DynamicRules.dll
+C:\projects\test2\ServiceTemplate\DynamicRules\bin\Release\netcoreapp2.0\DynamicRules.pdb
+C:\projects\test2\ServiceTemplate\DynamicRules\obj\Release\netcoreapp2.0\DynamicRules.csprojAssemblyReference.cache
+C:\projects\test2\ServiceTemplate\DynamicRules\obj\Release\netcoreapp2.0\DynamicRules.csproj.CoreCompileInputs.cache
+C:\projects\test2\ServiceTemplate\DynamicRules\obj\Release\netcoreapp2.0\DynamicRules.AssemblyInfoInputs.cache
+C:\projects\test2\ServiceTemplate\DynamicRules\obj\Release\netcoreapp2.0\DynamicRules.AssemblyInfo.cs
+C:\projects\test2\ServiceTemplate\DynamicRules\obj\Release\netcoreapp2.0\DynamicRules.dll
+C:\projects\test2\ServiceTemplate\DynamicRules\obj\Release\netcoreapp2.0\DynamicRules.pdb

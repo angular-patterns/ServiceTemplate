@@ -190,7 +190,7 @@ namespace Data.Migrations
 
                     b.HasIndex("RuleSetId");
 
-                    b.ToTable("ReviewTypes");
+                    b.ToTable("ReviewRuleTypes");
                 });
 
             modelBuilder.Entity("Entities.RuleSet", b =>
