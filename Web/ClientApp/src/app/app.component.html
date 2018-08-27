@@ -1,17 +1,11 @@
 <h1>{{ title }}</h1>
-
-<router-outlet></router-outlet>
-
-
-
-<div class="container">
-    <div class="row">
-        <div class="col-sm-3">
-            <app-add-account></app-add-account>            
-        </div>
-        <div class="col-sm-9">
-            <app-account-list></app-account-list>
-        </div>
-      </div>
-      
-</div>
+<app-master-page>
+    <ng-container ngProjectAs="header">
+    </ng-container>
+    <ng-container ngProjectAs="body">
+        <router-outlet></router-outlet>      
+    </ng-container>
+    <ng-container ngProjectAs="footer">
+        &nbsp;
+    </ng-container>
+</app-master-page>
