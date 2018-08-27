@@ -39,6 +39,10 @@ namespace Data
             .HasForeignKey(t=>t.RuleSetId)
             .OnDelete(DeleteBehavior.Restrict); // set ON DELETE CASCADE
 
+            modelBuilder.Entity<ReviewRuleType>()
+                .HasIndex(t => new { t.RuleSetId, t.BusinessId })
+                .IsUnique();
+
         }
 
         public void Seed()
