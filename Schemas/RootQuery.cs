@@ -1,7 +1,7 @@
 ﻿using Business;
 using GraphQL.Types;
 using Schemas.Resolvers.ForRoot;
-
+using Schemas.Types;
 
 namespace Schemas
 {
@@ -21,6 +21,15 @@ namespace Schemas
             reviewsResolver.AddField("reviews", this);
             contextsResolver.AddField("contexts", this);
             reviewContextsResolver.AddField("reviewContexts", this);
+
+            Field<CompilerResultType>(
+                name: "compile",
+                arguments: new QueryArguments(new QueryArgument<StringGraphType>() { Name = "source" }),
+                resolve: ctx =>
+                {
+                    var source = ctx.GetArgument<string>("source");
+                    return ServiceLocator.ModelService.Compile(source);
+                });
         }
 
     }

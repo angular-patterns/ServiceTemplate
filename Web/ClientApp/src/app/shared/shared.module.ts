@@ -12,10 +12,12 @@ import { FooterComponent } from './footer/footer.component';
   declarations: [
     MasterPageComponent, 
     NavbarComponent, 
-    HeaderComponent, FooterComponent
+    HeaderComponent, 
+    FooterComponent
   ],
   exports: [
-    MasterPageComponent
+    MasterPageComponent,
+    NavbarComponent
   ]
 
 })

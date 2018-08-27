@@ -102,10 +102,26 @@ namespace Schemas
                     var csharp = ctx.GetArgument<FromCSharpSource>("fromCSharp");
                     if (csharp != null)
                     {
-                         var model = ServiceLocator.ModelService.AddModelFromCSharpSource(
-                             csharp.AccountId, 
-                             csharp.CSharpSource, 
-                             csharp.TypeName);
+                        var model = ServiceLocator.ModelService.AddModelFromCSharpSource(
+                            csharp.AccountId,
+                            csharp.CSharpSource,
+                            csharp.TypeName);
+                        if (model.Status == System.Threading.Tasks.TaskStatus.Faulted)
+                        {
+                            foreach(var exception in model.Exception.InnerExceptions)
+                            {
+                                var error = new GraphQL.ExecutionError(exception.Message, exception);
+                                error.Data.Add("StackTrace", exception.StackTrace);
+                                if (exception is CompilerException)
+                                {
+                                    var e = (CompilerException)exception;
+                                    error.Data.Add("Errors", e.Errors);
+                                }
+                                ctx.Errors.Add(error);
+                            }
+                            return null;
+                            
+                        }
                         return model;
                     }
 
@@ -113,15 +129,16 @@ namespace Schemas
                     if (jsonSchema != null)
                     {
                         var model = ServiceLocator.ModelService.AddModelFromJsonSchema(
-                            jsonSchema.AccountId, 
-                            jsonSchema.JsonSchema, 
-                            jsonSchema.TypeName, 
+                            jsonSchema.AccountId,
+                            jsonSchema.JsonSchema,
+                            jsonSchema.TypeName,
                             jsonSchema.Namespace);
                         return model;
 
                     }
                     return null;
-                    
+
+
                 });
 
             Field<RuleSetType>(
@@ -138,7 +155,15 @@ namespace Schemas
                     var modelId = ctx.GetArgument<int>("modelId");
                     var name = ctx.GetArgument<string>("title");
                     var businessId = ctx.GetArgument<string>("businessId");
-                    return ServiceLocator.RuleSetService.CreateNew(contextId, modelId, name, businessId);
+                    try
+                    {
+                        return ServiceLocator.RuleSetService.CreateNew(contextId, modelId, name, businessId);
+                    }
+                    catch (Exception e)
+                    {
+                        return null;
+                    }
+                    
                 });
 
             Field<ReviewRuleTypeType>(

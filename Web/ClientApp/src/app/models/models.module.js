@@ -7,19 +7,24 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 var core_1 = require("@angular/core");
-var router_1 = require("@angular/router");
-var routes = [
-    { path: 'models', loadChildren: './models/models.module#ModelsModule' }
-];
-var AppRoutingModule = /** @class */ (function () {
-    function AppRoutingModule() {
+var common_1 = require("@angular/common");
+var forms_1 = require("@angular/forms");
+var models_routing_module_1 = require("./models-routing.module");
+var add_model_component_1 = require("./add-model/add-model.component");
+var ModelsModule = /** @class */ (function () {
+    function ModelsModule() {
     }
-    AppRoutingModule = __decorate([
+    ModelsModule = __decorate([
         core_1.NgModule({
-            imports: [router_1.RouterModule.forRoot(routes)],
-            exports: [router_1.RouterModule]
+            imports: [
+                common_1.CommonModule,
+                forms_1.FormsModule,
+                forms_1.ReactiveFormsModule,
+                models_routing_module_1.ModelsRoutingModule
+            ],
+            declarations: [add_model_component_1.AddModelComponent]
         })
-    ], AppRoutingModule);
-    return AppRoutingModule;
+    ], ModelsModule);
+    return ModelsModule;
 }());
-exports.AppRoutingModule = AppRoutingModule;
+exports.ModelsModule = ModelsModule;

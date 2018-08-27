@@ -53,6 +53,13 @@ namespace Business.Services
 
         }
 
+        public CompilerResult Compile(string source)
+        {
+            var compiler = ServiceLocator.Instance.GetService<ICSharpCompiler>();
+            
+            return compiler.Compile(source);
+        }
+
         public Model GetById(int  modelId)
         {
             return ModelQuery.GetById(modelId);

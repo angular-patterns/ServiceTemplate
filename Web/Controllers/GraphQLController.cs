@@ -32,16 +32,8 @@ namespace Web.Controllers
             {
                 foreach (var error in result.Errors)
                 {
-                      
+
                 }
-                
-                var errors = new
-                {
-                    errors = result.Errors,
-                    innerErrors = result.Errors.Where(t=>t.InnerException != null).Select(t => t.InnerException).ToList()
-                    
-                };
-                return Ok(errors);
             }
 
             

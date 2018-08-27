@@ -28,11 +28,6 @@ namespace Schemas
                 {
                     _.Inputs = new Inputs(query.Variables);
                 }
-
-
-
-
-
             }).ConfigureAwait(false);
 
             return result;

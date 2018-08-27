@@ -11,7 +11,7 @@ var platform_browser_1 = require("@angular/platform-browser");
 var app_component_1 = require("./app.component");
 var app_routing_module_1 = require("./app-routing.module");
 var core_module_1 = require("./core/core.module");
-var accounts_module_1 = require("./accounts/accounts.module");
+var shared_module_1 = require("./shared/shared.module");
 var AppModule = /** @class */ (function () {
     function AppModule() {
     }
@@ -21,7 +21,7 @@ var AppModule = /** @class */ (function () {
                 platform_browser_1.BrowserModule,
                 app_routing_module_1.AppRoutingModule,
                 core_module_1.CoreModule,
-                accounts_module_1.AccountsModule,
+                shared_module_1.SharedModule
             ],
             declarations: [app_component_1.AppComponent],
             bootstrap: [app_component_1.AppComponent],
