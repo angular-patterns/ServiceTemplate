@@ -5,6 +5,7 @@ import { FormsModule, ReactiveFormsModule} from '@angular/forms';
 import { ModelsRoutingModule } from './models-routing.module';
 import { AddModelComponent } from './add-model/add-model.component';
 import { ModelsListComponent } from './models-list/models-list.component';
+import { ModelDetailComponent } from './model-detail/model-detail.component';
 
 @NgModule({
   imports: [
@@ -13,6 +14,6 @@ import { ModelsListComponent } from './models-list/models-list.component';
     ReactiveFormsModule,
     ModelsRoutingModule
   ],
-  declarations: [AddModelComponent, ModelsListComponent]
+  declarations: [AddModelComponent, ModelsListComponent, ModelDetailComponent]
 })
 export class ModelsModule { }

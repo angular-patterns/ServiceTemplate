@@ -60,6 +60,18 @@ query GetModels {
       cSharpSource
     }
   }`;
+
+const GET_MODEL = gql`
+query GetModel($id:Int!) {
+    models(id:$id) {
+      id
+      accountId
+      namespace
+      typeName
+      jsonSchema
+      cSharpSource
+    }
+  }`;
   
 @Injectable()
 export class ModelService {
@@ -93,5 +105,12 @@ export class ModelService {
         return this.apollo.query({
             query: GET_MODELS
         }).map(t=>t.data as any).map(t=>t.models);
+    }
+
+    getModel(id: number) {
+        return this.apollo.query({
+            query: GET_MODEL,
+            variables: { id: id }
+        }).map(t=>t.data as any).map(t=>t.models[0]);
     }
 }
