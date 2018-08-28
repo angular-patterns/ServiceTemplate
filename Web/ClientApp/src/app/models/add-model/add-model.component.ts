@@ -10,7 +10,7 @@ import { CompileValidator } from '../../core/compile.validator';
 })
 export class AddModelComponent implements OnInit {
   formGroup: FormGroup;
-  //errors: any[];
+  hideRules: boolean;
   get errors() {
     if (this.formGroup.get('source').hasError('compile')) {
       return this.formGroup.get('source').errors.errors;
@@ -18,7 +18,7 @@ export class AddModelComponent implements OnInit {
     return [];
   }
   constructor(private modelService: ModelService) { 
-    //this.errors = [];
+    this.hideRules = true;
     this.formGroup = new FormGroup({
       'accountId': new FormControl('', Validators.required),
       'typename': new FormControl('', Validators.required),
@@ -27,6 +27,10 @@ export class AddModelComponent implements OnInit {
   }
 
   ngOnInit() {
+  }
+
+  toggleRules() {
+    this.hideRules = !this.hideRules;
   }
 
   onAddModel(value: any) {
