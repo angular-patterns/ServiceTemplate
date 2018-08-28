@@ -1,5 +1,5 @@
-﻿using Entities;
-using NJsonSchema.Validation;
+﻿using DynamicRules.Common.Validation;
+using Entities;
 using System;
 using System.Collections.Generic;
 using System.Text;

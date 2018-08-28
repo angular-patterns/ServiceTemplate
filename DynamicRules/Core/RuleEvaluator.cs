@@ -1,4 +1,4 @@
-﻿using DynamicRules.Interfaces;
+﻿using DynamicRules.Common;
 using System;
 using System.Collections.Generic;
 using System.Linq.Expressions;

@@ -1,5 +1,4 @@
 ﻿using Data;
-using DynamicRules.Interfaces;
 using Entities;
 using Models;
 using Newtonsoft.Json;
@@ -30,7 +29,7 @@ namespace Business.Services
                 .Where(t => t.RevisionNumber == revisionNumber).FirstOrDefault();
         }
 
-        public Review Run(int ruleSetId, ForModel forModel)
+        public Review Run(int ruleSetId, BusinessModel forModel)
         {
             forModel.VersionNumber = forModel.VersionNumber ?? 1;
             forModel.RevisionNumber = forModel.RevisionNumber ?? 1;

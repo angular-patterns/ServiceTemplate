@@ -1,5 +1,6 @@
 ﻿using Business.Services;
-using DynamicRules.Interfaces;
+using DynamicRules.Common;
+using DynamicRules.Common.Parser;
 using System;
 using System.Collections.Generic;
 using System.Text;

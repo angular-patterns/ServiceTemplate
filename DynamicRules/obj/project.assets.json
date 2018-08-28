@@ -1960,6 +1960,16 @@
         "runtime": {
           "lib/netstandard1.3/System.Xml.XPath.XDocument.dll": {}
         }
+      },
+      "DynamicRules.Common/1.0.0": {
+        "type": "project",
+        "framework": ".NETCoreApp,Version=v2.0",
+        "compile": {
+          "bin/placeholder/DynamicRules.Common.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/DynamicRules.Common.dll": {}
+        }
       }
     }
   },
@@ -6221,10 +6231,16 @@
         "system.xml.xpath.xdocument.4.3.0.nupkg.sha512",
         "system.xml.xpath.xdocument.nuspec"
       ]
+    },
+    "DynamicRules.Common/1.0.0": {
+      "type": "project",
+      "path": "../DynamicRules.Common/DynamicRules.Common.csproj",
+      "msbuildProject": "../DynamicRules.Common/DynamicRules.Common.csproj"
     }
   },
   "projectFileDependencyGroups": {
     ".NETCoreApp,Version=v2.0": [
+      "DynamicRules.Common >= 1.0.0",
       "Microsoft.Linq.Dynamic >= 1.0.3",
       "Microsoft.NETCore.App >= 2.0.0",
       "NJsonSchema.CodeGeneration.CSharp >= 9.10.69",
@@ -6261,7 +6277,11 @@
       },
       "frameworks": {
         "netcoreapp2.0": {
-          "projectReferences": {}
+          "projectReferences": {
+            "C:\\projects\\test2\\ServiceTemplate\\DynamicRules.Common\\DynamicRules.Common.csproj": {
+              "projectPath": "C:\\projects\\test2\\ServiceTemplate\\DynamicRules.Common\\DynamicRules.Common.csproj"
+            }
+          }
         }
       },
       "warningProperties": {

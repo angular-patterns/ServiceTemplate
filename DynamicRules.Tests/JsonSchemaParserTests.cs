@@ -1,5 +1,6 @@
-﻿using DynamicRules.Core;
-using DynamicRules.Interfaces;
+﻿using DynamicRules.Common;
+using DynamicRules.Common.Compilation;
+using DynamicRules.Core;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using NSubstitute;
 using System;

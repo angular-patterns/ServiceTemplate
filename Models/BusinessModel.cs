@@ -4,7 +4,7 @@ using System.Text;
 
 namespace Models
 {
-    public class ForModel
+    public class BusinessModel
     {
         public string Json { get; set; }
         public string BusinessId { get; set; }

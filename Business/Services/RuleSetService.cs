@@ -1,7 +1,7 @@
 ﻿using Business.Mutations.RuleSets;
 using Business.Queries.RuleSets;
 using Data;
-using DynamicRules.Interfaces;
+using DynamicRules.Common;
 using Entities;
 using Microsoft.EntityFrameworkCore;
 using Newtonsoft.Json;

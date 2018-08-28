@@ -1,11 +1,11 @@
-﻿using Newtonsoft.Json;
+﻿
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
 using System.Text;
 
-namespace DynamicRules.Interfaces
+namespace DynamicRules.Common.Compilation
 {
     public class CompilerResult
     {

@@ -2434,6 +2434,7 @@
         "type": "project",
         "framework": ".NETCoreApp,Version=v2.0",
         "dependencies": {
+          "DynamicRules.Common": "1.0.0",
           "Microsoft.Linq.Dynamic": "1.0.3",
           "NJsonSchema.CodeGeneration.CSharp": "9.10.69",
           "Newtonsoft.Json": "11.0.2",
@@ -2444,6 +2445,16 @@
         },
         "runtime": {
           "bin/placeholder/DynamicRules.dll": {}
+        }
+      },
+      "DynamicRules.Common/1.0.0": {
+        "type": "project",
+        "framework": ".NETCoreApp,Version=v2.0",
+        "compile": {
+          "bin/placeholder/DynamicRules.Common.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/DynamicRules.Common.dll": {}
         }
       },
       "Entities/1.0.0": {
@@ -7580,6 +7591,11 @@
       "type": "project",
       "path": "../DynamicRules/DynamicRules.csproj",
       "msbuildProject": "../DynamicRules/DynamicRules.csproj"
+    },
+    "DynamicRules.Common/1.0.0": {
+      "type": "project",
+      "path": "../DynamicRules.Common/DynamicRules.Common.csproj",
+      "msbuildProject": "../DynamicRules.Common/DynamicRules.Common.csproj"
     },
     "Entities/1.0.0": {
       "type": "project",

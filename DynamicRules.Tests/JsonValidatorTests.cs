@@ -1,6 +1,7 @@
-﻿using DynamicRules.Core;
+﻿using DynamicRules.Common.Validation;
+using DynamicRules.Core;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using NJsonSchema.Validation;
+
 using System;
 using System.Collections.Generic;
 using System.Text;

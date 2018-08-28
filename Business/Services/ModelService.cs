@@ -1,6 +1,7 @@
 ﻿using Business.Mutations.Models;
 using Business.Queries;
-using DynamicRules.Interfaces;
+using DynamicRules.Common;
+using DynamicRules.Common.Compilation;
 using Entities;
 using System;
 using System.Collections.Generic;
@@ -59,6 +60,19 @@ namespace Business.Services
             
             return compiler.Compile(source);
         }
+
+        public bool Validate(string source, string typename)
+        {
+            var compiler = ServiceLocator.Instance.GetService<ICSharpCompiler>();
+            var result = compiler.Compile(source);
+            if (result.Success)
+            {
+                //return result.Assembly.GetType()
+            }
+            return false;
+
+        }
+
 
         public Model GetById(int  modelId)
         {

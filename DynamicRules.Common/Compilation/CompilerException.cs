@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace DynamicRules.Interfaces
+namespace DynamicRules.Common.Compilation
 {
     public class CompilerException: Exception 
     {

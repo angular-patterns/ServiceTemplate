@@ -2449,6 +2449,7 @@
         "type": "project",
         "framework": ".NETCoreApp,Version=v2.0",
         "dependencies": {
+          "DynamicRules.Common": "1.0.0",
           "Microsoft.Linq.Dynamic": "1.0.3",
           "NJsonSchema.CodeGeneration.CSharp": "9.10.69",
           "Newtonsoft.Json": "11.0.2",
@@ -2459,6 +2460,16 @@
         },
         "runtime": {
           "bin/placeholder/DynamicRules.dll": {}
+        }
+      },
+      "DynamicRules.Common/1.0.0": {
+        "type": "project",
+        "framework": ".NETCoreApp,Version=v2.0",
+        "compile": {
+          "bin/placeholder/DynamicRules.Common.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/DynamicRules.Common.dll": {}
         }
       },
       "Entities/1.0.0": {
@@ -2482,6 +2493,16 @@
         },
         "runtime": {
           "bin/placeholder/Models.dll": {}
+        }
+      },
+      "Schemas.Models/1.0.0": {
+        "type": "project",
+        "framework": ".NETCoreApp,Version=v2.0",
+        "compile": {
+          "bin/placeholder/Schemas.Models.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/Schemas.Models.dll": {}
         }
       }
     }
@@ -7601,6 +7622,11 @@
       "path": "../DynamicRules/DynamicRules.csproj",
       "msbuildProject": "../DynamicRules/DynamicRules.csproj"
     },
+    "DynamicRules.Common/1.0.0": {
+      "type": "project",
+      "path": "../DynamicRules.Common/DynamicRules.Common.csproj",
+      "msbuildProject": "../DynamicRules.Common/DynamicRules.Common.csproj"
+    },
     "Entities/1.0.0": {
       "type": "project",
       "path": "../Entities/Entities.csproj",
@@ -7610,13 +7636,19 @@
       "type": "project",
       "path": "../Models/Models.csproj",
       "msbuildProject": "../Models/Models.csproj"
+    },
+    "Schemas.Models/1.0.0": {
+      "type": "project",
+      "path": "../Schemas.Models/Schemas.Models.csproj",
+      "msbuildProject": "../Schemas.Models/Schemas.Models.csproj"
     }
   },
   "projectFileDependencyGroups": {
     ".NETCoreApp,Version=v2.0": [
       "Business >= 1.0.0",
       "GraphQL >= 2.0.0",
-      "Microsoft.NETCore.App >= 2.0.0"
+      "Microsoft.NETCore.App >= 2.0.0",
+      "Schemas.Models >= 1.0.0"
     ]
   },
   "packageFolders": {
@@ -7651,6 +7683,9 @@
           "projectReferences": {
             "C:\\projects\\test2\\ServiceTemplate\\Business\\Business.csproj": {
               "projectPath": "C:\\projects\\test2\\ServiceTemplate\\Business\\Business.csproj"
+            },
+            "C:\\projects\\test2\\ServiceTemplate\\Schemas.Models\\Schemas.Models.csproj": {
+              "projectPath": "C:\\projects\\test2\\ServiceTemplate\\Schemas.Models\\Schemas.Models.csproj"
             }
           }
         }

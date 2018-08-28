@@ -1,6 +1,7 @@
-﻿using System.Threading.Tasks;
+﻿using DynamicRules.Common.Parser;
+using System.Threading.Tasks;
 
-namespace DynamicRules.Interfaces
+namespace DynamicRules.Common
 {
     public interface IJsonSchemaParser
     {

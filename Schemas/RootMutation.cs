@@ -1,8 +1,8 @@
 ﻿using Business;
-using DynamicRules.Interfaces;
-using Entities;
+using DynamicRules.Common.Compilation;
 using GraphQL.Types;
 using Models;
+using Schemas.Models;
 using Schemas.Types;
 using System;
 using System.Collections.Generic;
@@ -202,7 +202,12 @@ namespace Schemas
                     var ruleSetId = ServiceLocator.RuleSetService
                         .ResolveRuleSet(withRuleSet.BusinessId, withRuleSet.Id).RuleSetId;
 
-                    return ServiceLocator.ReviewService.Run(ruleSetId, forModel);
+                    return ServiceLocator.ReviewService.Run(ruleSetId, new BusinessModel {
+                        Json = forModel.Json, 
+                        BusinessId = forModel.BusinessId,
+                        VersionNumber = forModel.VersionNumber, 
+                        RevisionNumber = forModel.RevisionNumber
+                    });
                 });
 
 

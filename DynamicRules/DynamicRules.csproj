@@ -15,4 +15,8 @@
     <Folder Include="Core\" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\DynamicRules.Common\DynamicRules.Common.csproj" />
+  </ItemGroup>
+
 </Project>

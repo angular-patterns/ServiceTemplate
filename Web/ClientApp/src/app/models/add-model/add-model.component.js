@@ -16,7 +16,7 @@ var compile_validator_1 = require("../../core/compile.validator");
 var AddModelComponent = /** @class */ (function () {
     function AddModelComponent(modelService) {
         this.modelService = modelService;
-        //this.errors = [];
+        this.hideRules = true;
         this.formGroup = new forms_1.FormGroup({
             'accountId': new forms_1.FormControl('', forms_1.Validators.required),
             'typename': new forms_1.FormControl('', forms_1.Validators.required),
@@ -24,7 +24,6 @@ var AddModelComponent = /** @class */ (function () {
         });
     }
     Object.defineProperty(AddModelComponent.prototype, "errors", {
-        //errors: any[];
         get: function () {
             if (this.formGroup.get('source').hasError('compile')) {
                 return this.formGroup.get('source').errors.errors;
@@ -36,18 +35,13 @@ var AddModelComponent = /** @class */ (function () {
     });
     AddModelComponent.prototype.ngOnInit = function () {
     };
-    // onBlur() {
-    //   var source = this.formGroup.get('source').value;
-    //   this.modelService.compileSource(source).subscribe(t=> {
-    //     if (!t.success) {
-    //       this.errors = t.errors;
-    //     }
-    //   });
-    // }
+    AddModelComponent.prototype.toggleRules = function () {
+        this.hideRules = !this.hideRules;
+    };
     AddModelComponent.prototype.onAddModel = function (value) {
         if (this.formGroup.valid) {
             this.modelService.createModelFromCSharp(value.source, value.typename, value.accountId).subscribe(function (t) {
-                alert(t.data.id);
+                alert(t.id);
             });
         }
     };

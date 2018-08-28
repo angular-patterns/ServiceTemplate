@@ -8,9 +8,9 @@ using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using System.IO;
 using System.Reflection;
-using System.Text;
-using DynamicRules.Interfaces;
 using System.Linq;
+using DynamicRules.Common;
+using DynamicRules.Common.Compilation;
 
 namespace DynamicRules.Core
 {

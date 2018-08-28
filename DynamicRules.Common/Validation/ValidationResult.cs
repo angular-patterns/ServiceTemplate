@@ -1,17 +1,11 @@
-﻿using DynamicRules.Core;
-using NJsonSchema.Validation;
+﻿
+
 using System;
 using System.Collections.Generic;
 using System.Text;
-using System.Threading.Tasks;
 
-namespace DynamicRules.Interfaces
+namespace DynamicRules.Common.Validation
 {
-    public interface IJsonValidator
-    {
-        Task<ValidationResult> Validate(string schema, string jsonData);
-    }
-
     public class ValidationResult
     {
         public bool Success { get; set; }

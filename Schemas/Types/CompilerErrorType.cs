@@ -1,4 +1,4 @@
-﻿using DynamicRules.Interfaces;
+﻿using DynamicRules.Common.Compilation;
 using GraphQL.Types;
 using System;
 using System.Collections.Generic;

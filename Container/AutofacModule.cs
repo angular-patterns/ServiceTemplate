@@ -6,23 +6,16 @@ using Business.Queries;
 using Business.Queries.RuleSets;
 using Data;
 using DynamicRules.Core;
-using DynamicRules.Interfaces;
-using Entities;
-using GraphQL;
-using GraphQL.Types;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.Configuration;
 using Schemas;
-using Schemas.Resolvers;
 using Schemas.Resolvers.ForContext;
 using Schemas.Resolvers.ForContextItem;
 using Schemas.Resolvers.ForReview;
 using Schemas.Resolvers.ForRoot;
-using System;
-using System.Linq;
 using Business.Services;
 using Schemas.Resolvers.ForReviewType;
 using Schemas.Resolvers.ForRuleSetType;
+using DynamicRules.Common;
 
 namespace Container
 {

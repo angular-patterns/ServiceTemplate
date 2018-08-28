@@ -1,10 +1,7 @@
-﻿using NJsonSchema;
-using System;
-using System.Collections.Generic;
+﻿using System;
 using System.Reflection;
-using System.Text;
 
-namespace DynamicRules.Interfaces
+namespace DynamicRules.Common.Parser
 {
     public class JsonSchemaInfo
     {

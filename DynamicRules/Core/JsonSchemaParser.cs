@@ -1,8 +1,10 @@
-﻿using System;
+﻿using DynamicRules.Common;
+using DynamicRules.Common.Compilation;
+using DynamicRules.Common.Parser;
+using System;
 using System.Collections.Generic;
 using System.Text;
 using System.Threading.Tasks;
-using DynamicRules.Interfaces;
 
 namespace DynamicRules.Core
 {

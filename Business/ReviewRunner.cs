@@ -2,8 +2,9 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using DynamicRules.Common;
+using DynamicRules.Common.Parser;
 using DynamicRules.Core;
-using DynamicRules.Interfaces;
 using Entities;
 using Newtonsoft.Json;
 

@@ -26,7 +26,7 @@ var ModelService = /** @class */ (function () {
         return this.apollo.mutate({
             mutation: CREATE_MODEL,
             variables: { source: source, typename: typename, accountId: accountId }
-        });
+        }).map(function (t) { return t.data; }).map(function (t) { return t.createModel; });
     };
     ModelService.prototype.compileSource = function (source) {
         return this.apollo.query({
