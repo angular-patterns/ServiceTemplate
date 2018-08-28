@@ -3,8 +3,10 @@ using Business.Queries;
 using DynamicRules.Common;
 using DynamicRules.Common.Compilation;
 using Entities;
+using Models;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -61,15 +63,26 @@ namespace Business.Services
             return compiler.Compile(source);
         }
 
-        public bool Validate(string source, string typename)
+        public ModelValidationResult ValidateModel(string source, string typename)
         {
             var compiler = ServiceLocator.Instance.GetService<ICSharpCompiler>();
             var result = compiler.Compile(source);
-            if (result.Success)
+            var validationResult = new ModelValidationResult()
             {
-                //return result.Assembly.GetType()
+                Success = false,
+                TypeFound = false, 
+                CompileSucceeded = result.Success,
+                CompileErrors = result.Errors
+            };
+
+            if (result.Success && !String.IsNullOrEmpty(typename))
+            {
+                validationResult.ModelType = result.Assembly.GetType(typename);
+                validationResult.TypeFound = validationResult.ModelType != null;
             }
-            return false;
+
+            validationResult.Success = result.Success && validationResult.TypeFound;
+            return validationResult;
 
         }
 

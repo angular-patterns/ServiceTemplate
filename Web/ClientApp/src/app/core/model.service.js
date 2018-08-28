@@ -17,7 +17,7 @@ var graphql_tag_1 = require("graphql-tag");
 var apollo_angular_1 = require("apollo-angular");
 var core_1 = require("@angular/core");
 var CREATE_MODEL = graphql_tag_1.default(templateObject_1 || (templateObject_1 = __makeTemplateObject(["\nmutation CreateModelFromCSharp($source: String!, $typename: String!, $accountId: Int!) {\n    createModel(fromCSharp: {cSharpSource: $source, typeName: $typename, accountId: $accountId}) {\n        id\n    }\n}"], ["\nmutation CreateModelFromCSharp($source: String!, $typename: String!, $accountId: Int!) {\n    createModel(fromCSharp: {cSharpSource: $source, typeName: $typename, accountId: $accountId}) {\n        id\n    }\n}"])));
-var COMPILE_SOURCE = graphql_tag_1.default(templateObject_2 || (templateObject_2 = __makeTemplateObject(["\nquery Compile($source: String!) {\n    compile(source: $source) {\n      success\n      errors {\n        code\n        message\n        severity\n        stackTrace\n        location {\n          end\n          fragment\n          isInSource\n          start\n        }\n      }\n    }\n  }"], ["\nquery Compile($source: String!) {\n    compile(source: $source) {\n      success\n      errors {\n        code\n        message\n        severity\n        stackTrace\n        location {\n          end\n          fragment\n          isInSource\n          start\n        }\n      }\n    }\n  }"])));
+var VALIDATE_MODEL = graphql_tag_1.default(templateObject_2 || (templateObject_2 = __makeTemplateObject(["\nquery ValidateModel($source: String!, $typename: String!) {\n    validateModel(source: $source, typename: $typename) {\n      success\n      typeFound\n      compileSucceeded\n      compileErrors {\n        code\n        message\n        severity\n        stackTrace\n        location {\n          end\n          fragment\n          isInSource\n          start\n        }\n      }\n    }\n  }"], ["\nquery ValidateModel($source: String!, $typename: String!) {\n    validateModel(source: $source, typename: $typename) {\n      success\n      typeFound\n      compileSucceeded\n      compileErrors {\n        code\n        message\n        severity\n        stackTrace\n        location {\n          end\n          fragment\n          isInSource\n          start\n        }\n      }\n    }\n  }"])));
 var ModelService = /** @class */ (function () {
     function ModelService(apollo) {
         this.apollo = apollo;
@@ -28,11 +28,11 @@ var ModelService = /** @class */ (function () {
             variables: { source: source, typename: typename, accountId: accountId }
         }).map(function (t) { return t.data; }).map(function (t) { return t.createModel; });
     };
-    ModelService.prototype.compileSource = function (source) {
+    ModelService.prototype.validateModel = function (source, typename) {
         return this.apollo.query({
-            query: COMPILE_SOURCE,
-            variables: { source: source }
-        }).map(function (t) { return t.data; }).map(function (t) { return t.compile; });
+            query: VALIDATE_MODEL,
+            variables: { source: source, typename: typename }
+        }).map(function (t) { return t.data; }).map(function (t) { return t.validateModel; });
     };
     ModelService = __decorate([
         core_1.Injectable(),

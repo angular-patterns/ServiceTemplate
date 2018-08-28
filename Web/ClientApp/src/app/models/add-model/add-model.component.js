@@ -12,15 +12,17 @@ Object.defineProperty(exports, "__esModule", { value: true });
 var core_1 = require("@angular/core");
 var forms_1 = require("@angular/forms");
 var model_service_1 = require("../../core/model.service");
-var compile_validator_1 = require("../../core/compile.validator");
+var model_validator_1 = require("../../core/model.validator");
+var rxjs_1 = require("rxjs");
 var AddModelComponent = /** @class */ (function () {
     function AddModelComponent(modelService) {
         this.modelService = modelService;
+        var validator = model_validator_1.ModelValidator.create(this.modelService);
         this.hideRules = true;
         this.formGroup = new forms_1.FormGroup({
             'accountId': new forms_1.FormControl('', forms_1.Validators.required),
-            'typename': new forms_1.FormControl('', forms_1.Validators.required),
-            'source': new forms_1.FormControl('', forms_1.Validators.required, compile_validator_1.CompileValidator.create(this.modelService))
+            'typename': new forms_1.FormControl('', forms_1.Validators.required, validator),
+            'source': new forms_1.FormControl('', forms_1.Validators.required, validator)
         });
     }
     Object.defineProperty(AddModelComponent.prototype, "errors", {
@@ -35,6 +37,11 @@ var AddModelComponent = /** @class */ (function () {
     });
     AddModelComponent.prototype.ngOnInit = function () {
     };
+    AddModelComponent.prototype.ngAfterViewInit = function () {
+        rxjs_1.merge(rxjs_1.fromEvent(this.source.nativeElement, 'keypress'), rxjs_1.fromEvent(this.typename.nativeElement, 'keypress')).subscribe(function (t) {
+            //alert('hey');
+        });
+    };
     AddModelComponent.prototype.toggleRules = function () {
         this.hideRules = !this.hideRules;
     };
@@ -45,6 +52,14 @@ var AddModelComponent = /** @class */ (function () {
             });
         }
     };
+    __decorate([
+        core_1.ViewChild('source'),
+        __metadata("design:type", Object)
+    ], AddModelComponent.prototype, "source", void 0);
+    __decorate([
+        core_1.ViewChild('typename'),
+        __metadata("design:type", Object)
+    ], AddModelComponent.prototype, "typename", void 0);
     AddModelComponent = __decorate([
         core_1.Component({
             selector: 'app-add-model',

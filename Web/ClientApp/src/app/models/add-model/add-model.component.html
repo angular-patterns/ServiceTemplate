@@ -4,48 +4,51 @@
   </div>
   <div class="card-body">
     <h5 class="card-title">Adding a New Model</h5>
-    <form [formGroup]="formGroup">
+    <form [formGroup]="formGroup" (ngSubmit)="onAddModel(formGroup.value)">
       <div class="form-group">
         <label>Account ID</label>
-        <input type="number" class="form-control" formControlName="accountId" />
+        <input type="number" class="form-control" formControlName="accountId" required />
+        <span class="badge badge-danger" *ngIf="formGroup.get('accountId').hasError('required')">Required</span>
       </div>
       <div class="form-group">
         <label>Typename</label>
-        <input type="text" class="form-control" formControlName="typename" />
+        <input #typename type="text" class="form-control" formControlName="typename" required />
+        <span class="badge badge-danger" *ngIf="formGroup.get('typename').hasError('required')">Required</span>
+        <span class="badge badge-danger" *ngIf="formGroup.get('typename').hasError('typeNotFound')">Type Not Found</span>
+        <span class="badge badge-info" *ngIf="formGroup.get('typename').pending">Compiling...</span>
+
       </div>
       <div class="form-group">
-        <label>CSharp Source 
-          <span (click)="toggleRules()" class="badge badge-danger" *ngIf="formGroup.get('source').hasError('compile')">{{ errors.length }} Errors</span>
+        <label>CSharp Source
+          <span (click)="toggleRules()" class="badge badge-danger" *ngIf="formGroup.get('source').hasError('compile')">{{ errors?.length }} Errors</span>
           <span class="badge badge-info" *ngIf="formGroup.get('source').pending">Compiling...</span>
-          <span class="badge badge-success" *ngIf="formGroup.get('source').valid">Success!</span>  
+          <span class="badge badge-success" *ngIf="formGroup.get('source').valid">Success!</span>
         </label>
         <table [hidden]="hideRules" class="table" *ngIf="formGroup.get('source').hasError('compile')">
-            <thead>
-              <tr>
-                <th>Code</th>
-                <th>Message</th>
-                <th>Location</th>
-                <th>Severity</th>
-              </tr>
-            </thead>
-            <tbody>
-                <tr *ngFor="let error of errors">
-                    <td>{{error.code }}</td>
-                    <td>{{error.message }}</td>
-                    <td>@{{error.location.start }}:{{error.location.end }} {{error.location.fragment}}</td>
-                    <td>{{error.severity }}</td>
-                  </tr>
-          
-            </tbody>
-          </table>
-      
-        <textarea rows="10" class="form-control" formControlName="source">
-        </textarea>
+          <thead>
+            <tr>
+              <th>Code</th>
+              <th>Message</th>
+              <th>Location</th>
+              <th>Severity</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let error of errors">
+              <td>{{error.code }}</td>
+              <td>{{error.message }}</td>
+              <td>@{{error.location.start }}:{{error.location.end }} {{error.location.fragment}}</td>
+              <td>{{error.severity }}</td>
+            </tr>
+
+          </tbody>
+        </table>
+
+        <textarea #source rows="10" class="form-control" formControlName="source"></textarea>
+
       </div>
-      <button  [disabled]="formGroup.get('source').pending || formGroup.invalid" (click)="onAddModel(formGroup.value)" class="btn btn-primary">Add</button>
+
+      <button type="submit" [disabled]="formGroup.get('source').pending || formGroup.get('source').invalid" class="btn btn-primary">Add</button>
     </form>
   </div>
 </div>
-<!-- <pre>
-  {{ formGroup.get('source').errors | json}}
-</pre> -->

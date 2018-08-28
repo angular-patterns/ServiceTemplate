@@ -25,6 +25,28 @@ query Compile($source: String!) {
         }
       }
     }
+  }
+  
+`
+const VALIDATE_MODEL = gql`
+query ValidateModel($source: String!, $typename: String!) {
+    validateModel(source: $source, typename: $typename) {
+      success
+      typeFound
+      compileSucceeded
+      compileErrors {
+        code
+        message
+        severity
+        stackTrace
+        location {
+          end
+          fragment
+          isInSource
+          start
+        }
+      }
+    }
   }`;
 
 @Injectable()
@@ -44,7 +66,14 @@ export class ModelService {
         return this.apollo.query({
             query: COMPILE_SOURCE,
             variables: { source: source }
-        }).map(t=>t.data as any).map(t=>t.compile);
+        }).map(t=>t.data as any).map(t=>t.compile);        
+    }
+
+    validateModel(source: string, typename: string) {
+        return this.apollo.query({
+            query: VALIDATE_MODEL,
+            variables: { source: source, typename: typename }
+        }).map(t=>t.data as any).map(t=>t.validateModel);
 
     }
 }

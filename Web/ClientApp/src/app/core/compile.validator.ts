@@ -6,11 +6,17 @@ import 'rxjs/add/operator/map';
 export class CompileValidator
 {
     public static create(modelService: ModelService): AsyncValidatorFn {
+
         return (control: AbstractControl) => {
             var source = control.value;
+
             return modelService.compileSource(source).map(t=> {
+                console.log(t);
                 if (!t.success)
-                    return { 'compile': !t.success, 'errors': t.errors };
+                    return { 
+                        'compile': !t.success, 
+                        'errors': t.errors 
+                    };
 
                 return null;
             })
