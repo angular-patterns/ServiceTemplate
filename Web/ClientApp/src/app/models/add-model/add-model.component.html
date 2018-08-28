@@ -26,7 +26,7 @@
           <span class="badge badge-info" *ngIf="formGroup.get('source').pending">Compiling...</span>
           <span class="badge badge-success" *ngIf="formGroup.get('source').valid">Success!</span>
         </label>
-        <table [hidden]="hideRules" class="table" *ngIf="formGroup.get('source').hasError('compile')">
+        <table [hidden]="hideRules" class="table table-sm" *ngIf="formGroup.get('source').hasError('compile')">
           <thead>
             <tr>
               <th>Code</th>
