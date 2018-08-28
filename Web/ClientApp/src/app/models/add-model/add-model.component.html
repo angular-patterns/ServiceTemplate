@@ -6,17 +6,19 @@
     <h5 class="card-title">Adding a New Model</h5>
     <form [formGroup]="formGroup" (ngSubmit)="onAddModel(formGroup.value)">
       <div class="form-group">
-        <label>Account ID</label>
+        <label>Account ID
+            <span class="badge badge-danger" *ngIf="formGroup.get('accountId').hasError('required')">Required</span>
+        </label>
         <input type="number" class="form-control" formControlName="accountId" required />
-        <span class="badge badge-danger" *ngIf="formGroup.get('accountId').hasError('required')">Required</span>
       </div>
       <div class="form-group">
-        <label>Typename</label>
+        <label>Typename
+            <span class="badge badge-danger" *ngIf="formGroup.get('typename').hasError('required')">Required</span>
+            <span class="badge badge-danger" *ngIf="formGroup.get('typename').hasError('typeNotFound')">Type Not Found</span>
+            <span class="badge badge-info" *ngIf="formGroup.get('typename').pending">Compiling...</span>    
+            <span class="badge badge-success" *ngIf="formGroup.get('typename').valid">Success!</span>
+          </label>
         <input #typename type="text" class="form-control" formControlName="typename" required />
-        <span class="badge badge-danger" *ngIf="formGroup.get('typename').hasError('required')">Required</span>
-        <span class="badge badge-danger" *ngIf="formGroup.get('typename').hasError('typeNotFound')">Type Not Found</span>
-        <span class="badge badge-info" *ngIf="formGroup.get('typename').pending">Compiling...</span>
-
       </div>
       <div class="form-group">
         <label>CSharp Source
@@ -47,8 +49,12 @@
         <textarea #source rows="10" class="form-control" formControlName="source"></textarea>
 
       </div>
-
-      <button type="submit" [disabled]="formGroup.get('source').pending || formGroup.get('source').invalid" class="btn btn-primary">Add</button>
+      <div class="btn-group mr-2">
+        <button type="button" class="btn btn-primary btn-sm" routerLink="../">Back</button>
+      </div>
+      <div class="btn-group">
+        <button type="submit" [disabled]="formGroup.get('source').pending || formGroup.invalid" class="btn btn-primary btn-sm">Add</button>
+      </div>
     </form>
   </div>
 </div>

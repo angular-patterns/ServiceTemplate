@@ -4,6 +4,7 @@ import { ModelService } from '../../core/model.service';
 import { ModelValidator } from '../../core/model.validator';
 import { Observable, fromEvent, merge } from 'rxjs';
 import { CompileValidator } from '../../core/compile.validator';
+import { Router, ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-add-model',
@@ -26,11 +27,11 @@ export class AddModelComponent implements OnInit, AfterViewInit {
     }
     return [];
   }
-  constructor(private modelService: ModelService) { 
+  constructor(private modelService: ModelService, private router: Router, private route: ActivatedRoute) { 
 
     this.accountCtrl = new FormControl('');
-    this.sourceCtrl = new FormControl('', { validators: Validators.required, asyncValidators: CompileValidator.create(this.modelService) });
-    this.typenameCtrl = new FormControl('', { updateOn:'submit', asyncValidators: ModelValidator.create(this.modelService, this.sourceCtrl)} ),
+    this.sourceCtrl = new FormControl('', { validators: Validators.required, asyncValidators: CompileValidator.create(this.modelService, this.onCompileResult.bind(this)) });
+    this.typenameCtrl = new FormControl('', { asyncValidators: ModelValidator.create(this.modelService, this.sourceCtrl)} ),
     this.hideRules = true;
     this.formGroup = new FormGroup({
       'accountId': this.accountCtrl,
@@ -38,6 +39,11 @@ export class AddModelComponent implements OnInit, AfterViewInit {
       'source': this.sourceCtrl
     });
     
+  }
+
+  onCompileResult(result: boolean) {
+    if (result)
+      this.typenameCtrl.setValue(this.typenameCtrl.value);
   }
 
   ngOnInit() {
@@ -57,12 +63,12 @@ export class AddModelComponent implements OnInit, AfterViewInit {
   }
 
   onAddModel(value: any) {
-    alert('hey');
     if (this.formGroup.valid) {
       this.modelService.createModelFromCSharp(
         value.source, value.typename, value.accountId
       ).subscribe(t=> {
-        alert(t.id);
+        
+        this.router.navigate(['../'], { relativeTo: this.route});
       });
     }
   }

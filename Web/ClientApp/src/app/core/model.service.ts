@@ -49,6 +49,18 @@ query ValidateModel($source: String!, $typename: String!) {
     }
   }`;
 
+const GET_MODELS = gql`
+query GetModels {
+    models {
+      id
+      accountId
+      namespace
+      typeName
+      jsonSchema
+      cSharpSource
+    }
+  }`;
+  
 @Injectable()
 export class ModelService {
     constructor(private apollo: Apollo) {
@@ -75,5 +87,11 @@ export class ModelService {
             variables: { source: source, typename: typename }
         }).map(t=>t.data as any).map(t=>t.validateModel);
 
+    }
+
+    getModels() {
+        return this.apollo.query({
+            query: GET_MODELS
+        }).map(t=>t.data as any).map(t=>t.models);
     }
 }

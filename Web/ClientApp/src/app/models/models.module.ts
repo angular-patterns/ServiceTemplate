@@ -4,6 +4,7 @@ import { FormsModule, ReactiveFormsModule} from '@angular/forms';
 
 import { ModelsRoutingModule } from './models-routing.module';
 import { AddModelComponent } from './add-model/add-model.component';
+import { ModelsListComponent } from './models-list/models-list.component';
 
 @NgModule({
   imports: [
@@ -12,6 +13,6 @@ import { AddModelComponent } from './add-model/add-model.component';
     ReactiveFormsModule,
     ModelsRoutingModule
   ],
-  declarations: [AddModelComponent]
+  declarations: [AddModelComponent, ModelsListComponent]
 })
 export class ModelsModule { }

@@ -1,0 +1,17 @@
+<table class="table">
+  <thead>
+    <th>ID</th>
+    <th>Account ID</th>
+    <th>Namespace</th>
+    <th>Typename</th>
+  </thead>
+  <tbody>
+    <tr *ngFor="let model of models">
+      <td>{{model.id}}</td>
+      <td>{{model.accountId}}</td>
+      <td>{{model.namespace}}</td>
+      <td>{{model.typeName}}</td>
+    </tr>
+  </tbody>
+</table>
+<button class="btn btn-sm btn-primary" routerLink="/models/add">Add New Model</button>
