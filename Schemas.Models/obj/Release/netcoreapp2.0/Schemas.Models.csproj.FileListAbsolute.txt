@@ -1,0 +1,9 @@
+C:\projects\test2\ServiceTemplate\Schemas.Models\bin\Release\netcoreapp2.0\Schemas.Models.deps.json
+C:\projects\test2\ServiceTemplate\Schemas.Models\bin\Release\netcoreapp2.0\Schemas.Models.dll
+C:\projects\test2\ServiceTemplate\Schemas.Models\bin\Release\netcoreapp2.0\Schemas.Models.pdb
+C:\projects\test2\ServiceTemplate\Schemas.Models\obj\Release\netcoreapp2.0\Schemas.Models.csprojAssemblyReference.cache
+C:\projects\test2\ServiceTemplate\Schemas.Models\obj\Release\netcoreapp2.0\Schemas.Models.csproj.CoreCompileInputs.cache
+C:\projects\test2\ServiceTemplate\Schemas.Models\obj\Release\netcoreapp2.0\Schemas.Models.AssemblyInfoInputs.cache
+C:\projects\test2\ServiceTemplate\Schemas.Models\obj\Release\netcoreapp2.0\Schemas.Models.AssemblyInfo.cs
+C:\projects\test2\ServiceTemplate\Schemas.Models\obj\Release\netcoreapp2.0\Schemas.Models.dll
+C:\projects\test2\ServiceTemplate\Schemas.Models\obj\Release\netcoreapp2.0\Schemas.Models.pdb

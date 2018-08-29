@@ -7,3 +7,6 @@ C:\projects\test2\ServiceTemplate\Models\obj\Release\netcoreapp2.0\Models.Assemb
 C:\projects\test2\ServiceTemplate\Models\obj\Release\netcoreapp2.0\Models.AssemblyInfo.cs
 C:\projects\test2\ServiceTemplate\Models\obj\Release\netcoreapp2.0\Models.dll
 C:\projects\test2\ServiceTemplate\Models\obj\Release\netcoreapp2.0\Models.pdb
+C:\projects\test2\ServiceTemplate\Models\bin\Release\netcoreapp2.0\DynamicRules.Common.dll
+C:\projects\test2\ServiceTemplate\Models\bin\Release\netcoreapp2.0\DynamicRules.Common.pdb
+C:\projects\test2\ServiceTemplate\Models\obj\Release\netcoreapp2.0\Models.csproj.CopyComplete

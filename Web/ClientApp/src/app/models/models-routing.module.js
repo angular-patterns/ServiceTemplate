@@ -9,8 +9,12 @@ Object.defineProperty(exports, "__esModule", { value: true });
 var core_1 = require("@angular/core");
 var router_1 = require("@angular/router");
 var add_model_component_1 = require("./add-model/add-model.component");
+var models_list_component_1 = require("./models-list/models-list.component");
+var model_detail_component_1 = require("./model-detail/model-detail.component");
 var routes = [
-    { path: 'add', component: add_model_component_1.AddModelComponent }
+    { path: '', component: models_list_component_1.ModelsListComponent, pathMatch: 'full' },
+    { path: 'add', component: add_model_component_1.AddModelComponent },
+    { path: ':id', component: model_detail_component_1.ModelDetailComponent }
 ];
 var ModelsRoutingModule = /** @class */ (function () {
     function ModelsRoutingModule() {

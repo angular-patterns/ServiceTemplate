@@ -14,15 +14,21 @@ var forms_1 = require("@angular/forms");
 var model_service_1 = require("../../core/model.service");
 var model_validator_1 = require("../../core/model.validator");
 var rxjs_1 = require("rxjs");
+var compile_validator_1 = require("../../core/compile.validator");
+var router_1 = require("@angular/router");
 var AddModelComponent = /** @class */ (function () {
-    function AddModelComponent(modelService) {
+    function AddModelComponent(modelService, router, route) {
         this.modelService = modelService;
-        var validator = model_validator_1.ModelValidator.create(this.modelService);
-        this.hideRules = true;
+        this.router = router;
+        this.route = route;
+        this.accountCtrl = new forms_1.FormControl('');
+        this.sourceCtrl = new forms_1.FormControl('', { validators: forms_1.Validators.required, asyncValidators: compile_validator_1.CompileValidator.create(this.modelService, this.onCompileResult.bind(this)) });
+        this.typenameCtrl = new forms_1.FormControl('', { asyncValidators: model_validator_1.ModelValidator.create(this.modelService, this.sourceCtrl) }),
+            this.hideRules = true;
         this.formGroup = new forms_1.FormGroup({
-            'accountId': new forms_1.FormControl('', forms_1.Validators.required),
-            'typename': new forms_1.FormControl('', forms_1.Validators.required, validator),
-            'source': new forms_1.FormControl('', forms_1.Validators.required, validator)
+            'accountId': this.accountCtrl,
+            'typename': this.typenameCtrl,
+            'source': this.sourceCtrl
         });
     }
     Object.defineProperty(AddModelComponent.prototype, "errors", {
@@ -35,6 +41,10 @@ var AddModelComponent = /** @class */ (function () {
         enumerable: true,
         configurable: true
     });
+    AddModelComponent.prototype.onCompileResult = function (result) {
+        if (result)
+            this.typenameCtrl.setValue(this.typenameCtrl.value);
+    };
     AddModelComponent.prototype.ngOnInit = function () {
     };
     AddModelComponent.prototype.ngAfterViewInit = function () {
@@ -46,9 +56,10 @@ var AddModelComponent = /** @class */ (function () {
         this.hideRules = !this.hideRules;
     };
     AddModelComponent.prototype.onAddModel = function (value) {
+        var _this = this;
         if (this.formGroup.valid) {
             this.modelService.createModelFromCSharp(value.source, value.typename, value.accountId).subscribe(function (t) {
-                alert(t.id);
+                _this.router.navigate(['../'], { relativeTo: _this.route });
             });
         }
     };
@@ -66,7 +77,7 @@ var AddModelComponent = /** @class */ (function () {
             templateUrl: './add-model.component.html',
             styleUrls: ['./add-model.component.css']
         }),
-        __metadata("design:paramtypes", [model_service_1.ModelService])
+        __metadata("design:paramtypes", [model_service_1.ModelService, router_1.Router, router_1.ActivatedRoute])
     ], AddModelComponent);
     return AddModelComponent;
 }());

@@ -7,6 +7,7 @@ using DynamicRules.Common.Parser;
 using DynamicRules.Core;
 using Entities;
 using Newtonsoft.Json;
+using Newtonsoft.Json.Serialization;
 
 namespace Business
 {
@@ -39,8 +40,7 @@ namespace Business
             {
                 var modelObj = JsonConvert.DeserializeObject(jsonValue, schema.ModelType, new JsonSerializerSettings()
                 {
-                    DefaultValueHandling = DefaultValueHandling.IgnoreAndPopulate,
-                    NullValueHandling = NullValueHandling.Include
+                    ContractResolver = new CamelCasePropertyNamesContractResolver()
                 });
 
                 reviewResult.Rules = reviewTypes.ToList().Select(t =>

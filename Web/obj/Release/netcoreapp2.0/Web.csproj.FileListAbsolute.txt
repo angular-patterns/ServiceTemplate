@@ -24,3 +24,7 @@ C:\projects\test2\ServiceTemplate\Web\obj\Release\netcoreapp2.0\Web.AssemblyInfo
 C:\projects\test2\ServiceTemplate\Web\obj\Release\netcoreapp2.0\Web.csproj.CopyComplete
 C:\projects\test2\ServiceTemplate\Web\obj\Release\netcoreapp2.0\Web.dll
 C:\projects\test2\ServiceTemplate\Web\obj\Release\netcoreapp2.0\Web.pdb
+C:\projects\test2\ServiceTemplate\Web\bin\Release\netcoreapp2.0\DynamicRules.Common.dll
+C:\projects\test2\ServiceTemplate\Web\bin\Release\netcoreapp2.0\Schemas.Models.dll
+C:\projects\test2\ServiceTemplate\Web\bin\Release\netcoreapp2.0\DynamicRules.Common.pdb
+C:\projects\test2\ServiceTemplate\Web\bin\Release\netcoreapp2.0\Schemas.Models.pdb

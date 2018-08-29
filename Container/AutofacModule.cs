@@ -16,6 +16,8 @@ using Business.Services;
 using Schemas.Resolvers.ForReviewType;
 using Schemas.Resolvers.ForRuleSetType;
 using DynamicRules.Common;
+using Autofac.Core;
+using System.Collections.Generic;
 
 namespace Container
 {
@@ -30,7 +32,9 @@ namespace Container
         }
         protected override void Load(ContainerBuilder builder)
         {
-            builder.RegisterInstance(new DataContext(Options));
+            builder.RegisterType<DataContext>()
+                .OnPreparing(t => t.Parameters = new List<Parameter> { new NamedParameter("options", Options) })
+                .InstancePerDependency();
             builder.RegisterType<RootSchema>();
             builder.RegisterType<RootQuery>();
             builder.RegisterType<RootMutation>();

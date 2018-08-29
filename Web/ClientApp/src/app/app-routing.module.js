@@ -9,6 +9,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 var core_1 = require("@angular/core");
 var router_1 = require("@angular/router");
 var routes = [
+    { path: '', redirectTo: 'models', pathMatch: 'full' },
     { path: 'models', loadChildren: './models/models.module#ModelsModule' }
 ];
 var AppRoutingModule = /** @class */ (function () {
