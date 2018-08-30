@@ -20,8 +20,6 @@ namespace Entities
 
         public string Title { get; set;  }
 
-        [Column(TypeName = "nvarchar(24)")]
-        [DefaultValue(RuleSetStatus.Draft)]
         public RuleSetStatus Status { get; set; }
 
         public DateTime CreatedOn { get; set; }

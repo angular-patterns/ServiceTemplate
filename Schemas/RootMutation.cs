@@ -155,15 +155,8 @@ namespace Schemas
                     var modelId = ctx.GetArgument<int>("modelId");
                     var name = ctx.GetArgument<string>("title");
                     var businessId = ctx.GetArgument<string>("businessId");
-                    try
-                    {
-                        return ServiceLocator.RuleSetService.CreateNew(contextId, modelId, name, businessId);
-                    }
-                    catch (Exception e)
-                    {
-                        return null;
-                    }
-                    
+                    return ServiceLocator.RuleSetService.CreateNew(contextId, modelId, name, businessId);
+
                 });
 
             Field<ReviewRuleTypeType>(
@@ -188,7 +181,7 @@ namespace Schemas
                         logic);
                 });
 
-            Field<Types.ReviewType>(
+            Field<ReviewType>(
                 name: "runReviews",
                 arguments: new QueryArguments(
                     new QueryArgument<InputWithRuleSet>() { Name = "withRuleSet" },
@@ -210,7 +203,17 @@ namespace Schemas
                     });
                 });
 
-
+            Field<RuleSetType>(
+                "publishRuleSet", 
+                arguments: new QueryArguments(
+                    new QueryArgument<IntGraphType>() { Name = "ruleSetId" }
+                ),
+                resolve: ctx=>
+                {
+                    var ruleSetId = ctx.GetArgument<int>("ruleSetId");
+                    return ServiceLocator.RuleSetService.PublishRuleSet(ruleSetId);
+                });
+                
 
 
         }

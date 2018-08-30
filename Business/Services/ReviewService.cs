@@ -34,6 +34,9 @@ namespace Business.Services
             forModel.VersionNumber = forModel.VersionNumber ?? 1;
             forModel.RevisionNumber = forModel.RevisionNumber ?? 1;
             var ruleSet = ServiceLocator.Instance.GetService<RuleSetService>().GetById(ruleSetId);
+            if (ruleSet.Status == RuleSetStatus.Draft)
+                throw new ApplicationException("Cannot run reviews for a rule set at Draft status");
+
             var model = ServiceLocator.Instance.GetService<ModelService>().GetById(ruleSet.ModelId);
             var schemaInfo = ServiceLocator.Instance.GetService<JsonSchemaService>().GetSchemaInfo(ruleSet.ModelId);
             var reviewRunner = ServiceLocator.Instance.GetService<ReviewRunner>();

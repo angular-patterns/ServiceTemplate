@@ -55,6 +55,15 @@ namespace Business.Services
 
         }
 
+        public ReviewContext CreateReviewContext(int contextId)
+        {
+            var context = ServiceLocator.ContextService.GetById(contextId);
+            var reviewContext = new ReviewContext();
+            reviewContext.ContextItems = DataContext.ContextItems.Where(t => t.ContextId == contextId).Select(t=> new ReviewContextItem() { JsonValue = t.JsonValue, Key = t.Key, ModelId = t.ModelId }).ToList();
+
+            return reviewContext;
+        }
+
         public ReviewContext GetReviewContext(int ruleSetId)
         {
             var ruleSet = DataContext.RuleSets.Find(ruleSetId);
@@ -91,6 +100,11 @@ namespace Business.Services
         public IList<ReviewContext> GetAll()
         {
             return DataContext.ReviewContexts.ToList();
+        }
+
+        public ReviewContext GetByContextId(int contextId)
+        {
+            return DataContext.ReviewContexts.FirstOrDefault(t => t.ContextId == contextId && t.IsActive);
         }
     }
 }

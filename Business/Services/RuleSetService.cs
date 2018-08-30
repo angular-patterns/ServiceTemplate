@@ -78,7 +78,7 @@ namespace Business.Services
             var ruleSet = DataContext.RuleSets.Find(ruleSetId);
             var schemaInfo = ServiceLocator.Instance.GetService<JsonSchemaService>().GetSchemaInfo(ruleSet.ModelId);
             var reviewContextService = ServiceLocator.Instance.GetService<ReviewContextService>();
-            var reviewContext = reviewContextService.GetReviewContext(ruleSetId);
+            var reviewContext = reviewContextService.CreateReviewContext(ruleSet.ContextId);
 
 
             var reviewType = new ReviewRuleType
@@ -103,6 +103,18 @@ namespace Business.Services
         public IList<ReviewRuleType> GetReviewTypes(int ruleSetId)
         {
             return DataContext.ReviewRuleTypes.Where(t => t.RuleSetId == ruleSetId).ToList();
+        }
+
+        public RuleSet PublishRuleSet(int ruleSetId)
+        {
+            var ruleSet = ServiceLocator.RuleSetService.GetById(ruleSetId);
+            var reviewContext = ServiceLocator.ReviewContextService.GetByContextId(ruleSet.ContextId);
+            if (reviewContext == null)
+                reviewContext = ServiceLocator.ReviewContextService.PublishContext(ruleSet.ContextId);
+
+            ruleSet.Status = RuleSetStatus.Published;
+
+            return ruleSet;
         }
     }
 }

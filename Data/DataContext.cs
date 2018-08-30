@@ -1,5 +1,6 @@
 ﻿using Entities;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using System;
 
 namespace Data
@@ -33,6 +34,8 @@ namespace Data
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+            //var converter = new EnumToStringConverter<RuleSetStatus>();
+
             modelBuilder.Entity<Review>()
             .HasOne(t=>t.RuleSet)
             .WithMany(t=>t.Reviews)
@@ -43,10 +46,12 @@ namespace Data
                 .HasIndex(t => new { t.RuleSetId, t.BusinessId })
                 .IsUnique();
 
-            modelBuilder
-                .Entity<RuleSet>()
-                .Property(e => e.Status)
-                .HasConversion<string>();
+            //modelBuilder
+            //    .Entity<RuleSet>()
+            //    .Property(e => e.Status)
+            //    .HasConversion(
+            //        v => v.ToString(),
+            //        v => (RuleSetStatus)Enum.Parse(typeof(RuleSetStatus), v));
 
         }
 

@@ -209,9 +209,7 @@ namespace Data.Migrations
 
                     b.Property<int>("ModelId");
 
-                    b.Property<string>("Status")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(24)");
+                    b.Property<int>("Status");
 
                     b.Property<string>("Title");
 
