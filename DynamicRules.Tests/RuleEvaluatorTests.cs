@@ -3,6 +3,7 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
 using System.Collections.Generic;
 using System.Linq.Dynamic;
+using System.Linq.Dynamic.Core.Exceptions;
 using System.Text;
 
 namespace DynamicRules.Tests

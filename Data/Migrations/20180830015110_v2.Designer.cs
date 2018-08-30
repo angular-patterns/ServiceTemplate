@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Data.Migrations
 {
     [DbContext(typeof(DataContext))]
-    [Migration("20180825025028_v1")]
-    partial class v1
+    [Migration("20180830015110_v2")]
+    partial class v2
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -190,9 +190,11 @@ namespace Data.Migrations
 
                     b.HasKey("ReviewRuleTypeId");
 
-                    b.HasIndex("RuleSetId");
+                    b.HasIndex("RuleSetId", "BusinessId")
+                        .IsUnique()
+                        .HasFilter("[BusinessId] IS NOT NULL");
 
-                    b.ToTable("ReviewTypes");
+                    b.ToTable("ReviewRuleTypes");
                 });
 
             modelBuilder.Entity("Entities.RuleSet", b =>
@@ -208,6 +210,8 @@ namespace Data.Migrations
                     b.Property<DateTime>("CreatedOn");
 
                     b.Property<int>("ModelId");
+
+                    b.Property<int>("Status");
 
                     b.Property<string>("Title");
 

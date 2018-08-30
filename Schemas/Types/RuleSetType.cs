@@ -17,6 +17,7 @@ namespace Schemas.Types
             Field(d => d.ModelId, nullable: true);
             Field(d => d.Title, nullable: true);
             Field(d => d.BusinessId, nullable: true);
+            Field<EnumerationGraphType<RuleSetStatus>>("status", resolve: ctx=>ctx.Source.Status);
             Field(d => d.CreatedOn, nullable: true);
             Field<ModelType>("model",
                 resolve: ctx =>

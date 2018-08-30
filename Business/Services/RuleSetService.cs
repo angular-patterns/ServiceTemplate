@@ -50,6 +50,7 @@ namespace Business.Services
                 BusinessId = businessId,
                 Title = name,
                 ContextId = contextId,
+                Status = RuleSetStatus.Draft,
                 CreatedOn = DateTime.Now
             });
 

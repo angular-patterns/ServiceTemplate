@@ -10,7 +10,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Data.Migrations
 {
     [DbContext(typeof(DataContext))]
-    [Migration("20180826230725_v3")]
+    [Migration("20180830021740_v3")]
     partial class v3
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -190,7 +190,9 @@ namespace Data.Migrations
 
                     b.HasKey("ReviewRuleTypeId");
 
-                    b.HasIndex("RuleSetId");
+                    b.HasIndex("RuleSetId", "BusinessId")
+                        .IsUnique()
+                        .HasFilter("[BusinessId] IS NOT NULL");
 
                     b.ToTable("ReviewRuleTypes");
                 });
@@ -208,6 +210,10 @@ namespace Data.Migrations
                     b.Property<DateTime>("CreatedOn");
 
                     b.Property<int>("ModelId");
+
+                    b.Property<string>("Status")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(24)");
 
                     b.Property<string>("Title");
 

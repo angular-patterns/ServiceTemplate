@@ -43,6 +43,11 @@ namespace Data
                 .HasIndex(t => new { t.RuleSetId, t.BusinessId })
                 .IsUnique();
 
+            modelBuilder
+                .Entity<RuleSet>()
+                .Property(e => e.Status)
+                .HasConversion<string>();
+
         }
 
         public void Seed()

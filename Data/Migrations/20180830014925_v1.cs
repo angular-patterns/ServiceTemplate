@@ -88,6 +88,7 @@ namespace Data.Migrations
                     ContextId = table.Column<int>(nullable: false),
                     BusinessId = table.Column<string>(nullable: true),
                     Title = table.Column<string>(nullable: true),
+                    Status = table.Column<int>(nullable: false),
                     CreatedOn = table.Column<DateTime>(nullable: false)
                 },
                 constraints: table =>
@@ -125,6 +126,28 @@ namespace Data.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "ReviewRuleTypes",
+                columns: table => new
+                {
+                    ReviewRuleTypeId = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
+                    RuleSetId = table.Column<int>(nullable: false),
+                    Logic = table.Column<string>(nullable: true),
+                    BusinessId = table.Column<string>(nullable: true),
+                    Message = table.Column<string>(nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_ReviewRuleTypes", x => x.ReviewRuleTypeId);
+                    table.ForeignKey(
+                        name: "FK_ReviewRuleTypes_RuleSets_RuleSetId",
+                        column: x => x.RuleSetId,
+                        principalTable: "RuleSets",
+                        principalColumn: "RuleSetId",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "Reviews",
                 columns: table => new
                 {
@@ -150,28 +173,6 @@ namespace Data.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "ReviewTypes",
-                columns: table => new
-                {
-                    ReviewRuleTypeId = table.Column<int>(nullable: false)
-                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
-                    RuleSetId = table.Column<int>(nullable: false),
-                    Logic = table.Column<string>(nullable: true),
-                    BusinessId = table.Column<string>(nullable: true),
-                    Message = table.Column<string>(nullable: true)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_ReviewTypes", x => x.ReviewRuleTypeId);
-                    table.ForeignKey(
-                        name: "FK_ReviewTypes_RuleSets_RuleSetId",
-                        column: x => x.RuleSetId,
-                        principalTable: "RuleSets",
-                        principalColumn: "RuleSetId",
-                        onDelete: ReferentialAction.Cascade);
-                });
-
-            migrationBuilder.CreateTable(
                 name: "ReviewRules",
                 columns: table => new
                 {
@@ -193,9 +194,9 @@ namespace Data.Migrations
                         principalColumn: "ReviewId",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_ReviewRules_ReviewTypes_ReviewRuleTypeId",
+                        name: "FK_ReviewRules_ReviewRuleTypes_ReviewRuleTypeId",
                         column: x => x.ReviewRuleTypeId,
-                        principalTable: "ReviewTypes",
+                        principalTable: "ReviewRuleTypes",
                         principalColumn: "ReviewRuleTypeId",
                         onDelete: ReferentialAction.Cascade);
                 });
@@ -221,13 +222,15 @@ namespace Data.Migrations
                 column: "ReviewRuleTypeId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Reviews_RuleSetId",
-                table: "Reviews",
-                column: "RuleSetId");
+                name: "IX_ReviewRuleTypes_RuleSetId_BusinessId",
+                table: "ReviewRuleTypes",
+                columns: new[] { "RuleSetId", "BusinessId" },
+                unique: true,
+                filter: "[BusinessId] IS NOT NULL");
 
             migrationBuilder.CreateIndex(
-                name: "IX_ReviewTypes_RuleSetId",
-                table: "ReviewTypes",
+                name: "IX_Reviews_RuleSetId",
+                table: "Reviews",
                 column: "RuleSetId");
 
             migrationBuilder.CreateIndex(
@@ -257,7 +260,7 @@ namespace Data.Migrations
                 name: "Reviews");
 
             migrationBuilder.DropTable(
-                name: "ReviewTypes");
+                name: "ReviewRuleTypes");
 
             migrationBuilder.DropTable(
                 name: "RuleSets");
