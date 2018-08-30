@@ -67,7 +67,6 @@ export class AddModelComponent implements OnInit, AfterViewInit {
       this.modelService.createModelFromCSharp(
         value.source, value.typename, value.accountId
       ).subscribe(t=> {
-        
         this.router.navigate(['../'], { relativeTo: this.route});
       });
     }

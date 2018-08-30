@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ModelService } from '../../core/model.service';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-models-list',
@@ -8,9 +9,10 @@ import { ModelService } from '../../core/model.service';
 })
 export class ModelsListComponent implements OnInit {
   models: any[];
-  constructor(private modelService: ModelService) {
-    modelService.getModels().subscribe(t=> {
-      this.models = t;
+  constructor(private route: ActivatedRoute) {
+    route.data.subscribe(t=> {
+      
+      this.models = t.list;
     });
    }
 

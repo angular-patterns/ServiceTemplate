@@ -103,7 +103,8 @@ export class ModelService {
 
     getModels() {
         return this.apollo.query({
-            query: GET_MODELS
+            query: GET_MODELS,
+            fetchPolicy: 'network-only'
         }).map(t=>t.data as any).map(t=>t.models);
     }
 
