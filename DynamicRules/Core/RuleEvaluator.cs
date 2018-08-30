@@ -20,7 +20,7 @@ namespace DynamicRules.Core
             }
             
 
-            var expr = System.Linq.Dynamic.DynamicExpression.ParseLambda(parameters.ToArray(), typeof(bool), logic );
+            var expr = System.Linq.Dynamic.Core.DynamicExpressionParser.ParseLambda(parameters.ToArray(), typeof(bool), logic );
 
             return (bool)expr.Compile().DynamicInvoke(values.ToArray());
 
