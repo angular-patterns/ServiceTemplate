@@ -15,7 +15,7 @@
         <label>Typename
             <span class="badge badge-danger" *ngIf="formGroup.get('typename').hasError('required')">Required</span>
             <span class="badge badge-danger" *ngIf="formGroup.get('typename').hasError('typeNotFound')">Type Not Found</span>
-            <span class="badge badge-info" *ngIf="formGroup.get('typename').pending">Compiling...</span>    
+            <span class="badge badge-info" *ngIf="formGroup.get('typename').pending">Validating...</span>    
             <span class="badge badge-success" *ngIf="formGroup.get('typename').valid">Success!</span>
           </label>
         <input #typename type="text" class="form-control" formControlName="typename" required />
@@ -23,7 +23,7 @@
       <div class="form-group">
         <label>CSharp Source
           <span (click)="toggleRules()" class="badge badge-danger" *ngIf="formGroup.get('source').hasError('compile')">{{ errors?.length }} Errors</span>
-          <span class="badge badge-info" *ngIf="formGroup.get('source').pending">Compiling...</span>
+          <span class="badge badge-info" *ngIf="formGroup.get('source').pending">Validating...</span>
           <span class="badge badge-success" *ngIf="formGroup.get('source').valid">Success!</span>
         </label>
         <table [hidden]="hideRules" class="table table-sm" *ngIf="formGroup.get('source').hasError('compile')">
