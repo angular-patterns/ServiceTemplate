@@ -13,6 +13,7 @@ var models_routing_module_1 = require("./models-routing.module");
 var add_model_component_1 = require("./add-model/add-model.component");
 var models_list_component_1 = require("./models-list/models-list.component");
 var model_detail_component_1 = require("./model-detail/model-detail.component");
+var models_resolver_1 = require("./services/models.resolver");
 var ModelsModule = /** @class */ (function () {
     function ModelsModule() {
     }
@@ -24,7 +25,14 @@ var ModelsModule = /** @class */ (function () {
                 forms_1.ReactiveFormsModule,
                 models_routing_module_1.ModelsRoutingModule
             ],
-            declarations: [add_model_component_1.AddModelComponent, models_list_component_1.ModelsListComponent, model_detail_component_1.ModelDetailComponent]
+            declarations: [
+                add_model_component_1.AddModelComponent,
+                models_list_component_1.ModelsListComponent,
+                model_detail_component_1.ModelDetailComponent
+            ],
+            providers: [
+                models_resolver_1.ModelsResolver
+            ]
         })
     ], ModelsModule);
     return ModelsModule;

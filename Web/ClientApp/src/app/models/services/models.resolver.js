@@ -10,25 +10,18 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 var core_1 = require("@angular/core");
-var router_1 = require("@angular/router");
-var ModelsListComponent = /** @class */ (function () {
-    function ModelsListComponent(route) {
-        var _this = this;
-        this.route = route;
-        route.data.subscribe(function (t) {
-            _this.models = t.list;
-        });
+var model_service_1 = require("../../core/model.service");
+var ModelsResolver = /** @class */ (function () {
+    function ModelsResolver(modelService) {
+        this.modelService = modelService;
     }
-    ModelsListComponent.prototype.ngOnInit = function () {
+    ModelsResolver.prototype.resolve = function (route) {
+        return this.modelService.getModels();
     };
-    ModelsListComponent = __decorate([
-        core_1.Component({
-            selector: 'app-models-list',
-            templateUrl: './models-list.component.html',
-            styleUrls: ['./models-list.component.css']
-        }),
-        __metadata("design:paramtypes", [router_1.ActivatedRoute])
-    ], ModelsListComponent);
-    return ModelsListComponent;
+    ModelsResolver = __decorate([
+        core_1.Injectable(),
+        __metadata("design:paramtypes", [model_service_1.ModelService])
+    ], ModelsResolver);
+    return ModelsResolver;
 }());
-exports.ModelsListComponent = ModelsListComponent;
+exports.ModelsResolver = ModelsResolver;

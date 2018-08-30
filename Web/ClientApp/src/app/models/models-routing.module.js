@@ -11,8 +11,9 @@ var router_1 = require("@angular/router");
 var add_model_component_1 = require("./add-model/add-model.component");
 var models_list_component_1 = require("./models-list/models-list.component");
 var model_detail_component_1 = require("./model-detail/model-detail.component");
+var models_resolver_1 = require("./services/models.resolver");
 var routes = [
-    { path: '', component: models_list_component_1.ModelsListComponent, pathMatch: 'full' },
+    { path: '', component: models_list_component_1.ModelsListComponent, pathMatch: 'full', resolve: { list: models_resolver_1.ModelsResolver } },
     { path: 'add', component: add_model_component_1.AddModelComponent },
     { path: ':id', component: model_detail_component_1.ModelDetailComponent }
 ];

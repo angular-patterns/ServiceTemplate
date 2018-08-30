@@ -45,7 +45,8 @@ var ModelService = /** @class */ (function () {
     };
     ModelService.prototype.getModels = function () {
         return this.apollo.query({
-            query: GET_MODELS
+            query: GET_MODELS,
+            fetchPolicy: 'network-only'
         }).map(function (t) { return t.data; }).map(function (t) { return t.models; });
     };
     ModelService.prototype.getModel = function (id) {
