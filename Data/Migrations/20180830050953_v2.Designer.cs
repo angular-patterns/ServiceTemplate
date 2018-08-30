@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Data.Migrations
 {
     [DbContext(typeof(DataContext))]
-    [Migration("20180830041436_v4")]
-    partial class v4
+    [Migration("20180830050953_v2")]
+    partial class v2
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -211,7 +211,8 @@ namespace Data.Migrations
 
                     b.Property<int>("ModelId");
 
-                    b.Property<int>("Status");
+                    b.Property<string>("Status")
+                        .IsRequired();
 
                     b.Property<string>("Title");
 

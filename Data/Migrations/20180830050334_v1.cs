@@ -4,7 +4,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace Data.Migrations
 {
-    public partial class v4 : Migration
+    public partial class v1 : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -88,7 +88,7 @@ namespace Data.Migrations
                     ContextId = table.Column<int>(nullable: false),
                     BusinessId = table.Column<string>(nullable: true),
                     Title = table.Column<string>(nullable: true),
-                    Status = table.Column<int>(nullable: false),
+                    Status = table.Column<string>(nullable: false),
                     CreatedOn = table.Column<DateTime>(nullable: false)
                 },
                 constraints: table =>

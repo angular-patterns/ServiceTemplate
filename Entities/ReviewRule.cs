@@ -8,8 +8,8 @@ namespace Entities
     public class ReviewRule
     {
         public int ReviewRuleId { get; set; }
-        [ForeignKey("Review")]
 
+        [ForeignKey("Review")]
         public int ReviewId { get; set; }
 
         [ForeignKey("ReviewRuleType")]

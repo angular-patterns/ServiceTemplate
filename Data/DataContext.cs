@@ -34,7 +34,6 @@ namespace Data
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            //var converter = new EnumToStringConverter<RuleSetStatus>();
 
             modelBuilder.Entity<Review>()
             .HasOne(t=>t.RuleSet)
@@ -46,12 +45,10 @@ namespace Data
                 .HasIndex(t => new { t.RuleSetId, t.BusinessId })
                 .IsUnique();
 
-            //modelBuilder
-            //    .Entity<RuleSet>()
-            //    .Property(e => e.Status)
-            //    .HasConversion(
-            //        v => v.ToString(),
-            //        v => (RuleSetStatus)Enum.Parse(typeof(RuleSetStatus), v));
+            modelBuilder
+                .Entity<RuleSet>()
+                .Property(e => e.Status)
+                .HasConversion(new EnumToStringConverter<RuleSetStatus>());
 
         }
 

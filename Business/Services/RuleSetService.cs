@@ -108,11 +108,18 @@ namespace Business.Services
         public RuleSet PublishRuleSet(int ruleSetId)
         {
             var ruleSet = ServiceLocator.RuleSetService.GetById(ruleSetId);
-            var reviewContext = ServiceLocator.ReviewContextService.GetByContextId(ruleSet.ContextId);
-            if (reviewContext == null)
-                reviewContext = ServiceLocator.ReviewContextService.PublishContext(ruleSet.ContextId);
+            if (ruleSet.Status == RuleSetStatus.Draft)
+            {
+                var reviewContext = ServiceLocator.ReviewContextService.GetByContextId(ruleSet.ContextId);
+                if (reviewContext == null)
+                    reviewContext = ServiceLocator.ReviewContextService.PublishContext(ruleSet.ContextId);
 
-            ruleSet.Status = RuleSetStatus.Published;
+                ruleSet.Status = RuleSetStatus.Published;
+                DataContext.Entry(ruleSet).State = EntityState.Modified;
+
+                DataContext.SaveChanges();
+            }
+
 
             return ruleSet;
         }
