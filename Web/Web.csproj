@@ -28,8 +28,4 @@
     <ProjectReference Include="..\Container\Container.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="ClientApp\" />
-  </ItemGroup>
-
 </Project>

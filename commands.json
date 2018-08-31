@@ -1,0 +1,9 @@
+{
+  "commands": {
+    "deploy": {
+      "fileName": "cmd.exe",
+      "workingDirectory": ".\\Web\\ClientApp",
+      "arguments": "/c Web\\ClientApp\\deploy.bat"
+    }
+  }
+}

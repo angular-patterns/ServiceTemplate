@@ -21,9 +21,14 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DynamicRules", "DynamicRule
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DynamicRules.Tests", "DynamicRules.Tests\DynamicRules.Tests.csproj", "{04F32A3F-6B12-41A2-8E64-B71BBDE07472}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Schemas.Models", "Schemas.Models\Schemas.Models.csproj", "{27757CC0-601F-4D39-922E-88E172DDFA5B}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Schemas.Models", "Schemas.Models\Schemas.Models.csproj", "{27757CC0-601F-4D39-922E-88E172DDFA5B}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DynamicRules.Common", "DynamicRules.Common\DynamicRules.Common.csproj", "{AB064C6C-2F78-44FE-AF68-F301DDC08DB0}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DynamicRules.Common", "DynamicRules.Common\DynamicRules.Common.csproj", "{AB064C6C-2F78-44FE-AF68-F301DDC08DB0}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{15BC1776-DBF1-4380-9F22-C700E5E3FB98}"
+	ProjectSection(SolutionItems) = preProject
+		commands.json = commands.json
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
