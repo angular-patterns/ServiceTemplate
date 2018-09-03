@@ -4,7 +4,6 @@ import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
 import { CoreModule } from './core/core.module';
 import { SharedModule } from './shared/shared.module';
-import { RulesetsComponent } from './rulesets/rulesets.component';
 
 @NgModule({
   imports:      [ 
@@ -13,7 +12,7 @@ import { RulesetsComponent } from './rulesets/rulesets.component';
     CoreModule,
     SharedModule
   ],
-  declarations: [ AppComponent, RulesetsComponent ],
+  declarations: [ AppComponent ],
   bootstrap:    [ AppComponent ],
   exports: [AppComponent]
 })

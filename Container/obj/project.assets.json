@@ -7225,23 +7225,23 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\mike\\.nuget\\packages\\": {},
+    "C:\\Users\\Pixelbits\\.nuget\\packages\\": {},
     "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\projects\\test2\\ServiceTemplate\\Container\\Container.csproj",
+      "projectUniqueName": "C:\\projects\\servicetemplate\\Container\\Container.csproj",
       "projectName": "Container",
-      "projectPath": "C:\\projects\\test2\\ServiceTemplate\\Container\\Container.csproj",
-      "packagesPath": "C:\\Users\\mike\\.nuget\\packages\\",
-      "outputPath": "C:\\projects\\test2\\ServiceTemplate\\Container\\obj\\",
+      "projectPath": "C:\\projects\\servicetemplate\\Container\\Container.csproj",
+      "packagesPath": "C:\\Users\\Pixelbits\\.nuget\\packages\\",
+      "outputPath": "C:\\projects\\servicetemplate\\Container\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
       ],
       "configFilePaths": [
-        "C:\\Users\\mike\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\Pixelbits\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
@@ -7254,14 +7254,14 @@
       "frameworks": {
         "netcoreapp2.0": {
           "projectReferences": {
-            "C:\\projects\\test2\\ServiceTemplate\\Business\\Business.csproj": {
-              "projectPath": "C:\\projects\\test2\\ServiceTemplate\\Business\\Business.csproj"
+            "C:\\projects\\servicetemplate\\Business\\Business.csproj": {
+              "projectPath": "C:\\projects\\servicetemplate\\Business\\Business.csproj"
             },
-            "C:\\projects\\test2\\ServiceTemplate\\DynamicRules\\DynamicRules.csproj": {
-              "projectPath": "C:\\projects\\test2\\ServiceTemplate\\DynamicRules\\DynamicRules.csproj"
+            "C:\\projects\\servicetemplate\\DynamicRules\\DynamicRules.csproj": {
+              "projectPath": "C:\\projects\\servicetemplate\\DynamicRules\\DynamicRules.csproj"
             },
-            "C:\\projects\\test2\\ServiceTemplate\\Schemas\\Schemas.csproj": {
-              "projectPath": "C:\\projects\\test2\\ServiceTemplate\\Schemas\\Schemas.csproj"
+            "C:\\projects\\servicetemplate\\Schemas\\Schemas.csproj": {
+              "projectPath": "C:\\projects\\servicetemplate\\Schemas\\Schemas.csproj"
             }
           }
         }

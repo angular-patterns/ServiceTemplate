@@ -680,23 +680,23 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\mike\\.nuget\\packages\\": {},
+    "C:\\Users\\Pixelbits\\.nuget\\packages\\": {},
     "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\projects\\test2\\ServiceTemplate\\Models\\Models.csproj",
+      "projectUniqueName": "C:\\projects\\servicetemplate\\Models\\Models.csproj",
       "projectName": "Models",
-      "projectPath": "C:\\projects\\test2\\ServiceTemplate\\Models\\Models.csproj",
-      "packagesPath": "C:\\Users\\mike\\.nuget\\packages\\",
-      "outputPath": "C:\\projects\\test2\\ServiceTemplate\\Models\\obj\\",
+      "projectPath": "C:\\projects\\servicetemplate\\Models\\Models.csproj",
+      "packagesPath": "C:\\Users\\Pixelbits\\.nuget\\packages\\",
+      "outputPath": "C:\\projects\\servicetemplate\\Models\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
       ],
       "configFilePaths": [
-        "C:\\Users\\mike\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\Pixelbits\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
@@ -709,8 +709,8 @@
       "frameworks": {
         "netcoreapp2.0": {
           "projectReferences": {
-            "C:\\projects\\test2\\ServiceTemplate\\DynamicRules.Common\\DynamicRules.Common.csproj": {
-              "projectPath": "C:\\projects\\test2\\ServiceTemplate\\DynamicRules.Common\\DynamicRules.Common.csproj"
+            "C:\\projects\\servicetemplate\\DynamicRules.Common\\DynamicRules.Common.csproj": {
+              "projectPath": "C:\\projects\\servicetemplate\\DynamicRules.Common\\DynamicRules.Common.csproj"
             }
           }
         }

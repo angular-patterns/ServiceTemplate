@@ -13905,23 +13905,23 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\mike\\.nuget\\packages\\": {},
+    "C:\\Users\\Pixelbits\\.nuget\\packages\\": {},
     "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\projects\\test2\\ServiceTemplate\\Web\\Web.csproj",
+      "projectUniqueName": "C:\\projects\\servicetemplate\\Web\\Web.csproj",
       "projectName": "Web",
-      "projectPath": "C:\\projects\\test2\\ServiceTemplate\\Web\\Web.csproj",
-      "packagesPath": "C:\\Users\\mike\\.nuget\\packages\\",
-      "outputPath": "C:\\projects\\test2\\ServiceTemplate\\Web\\obj\\",
+      "projectPath": "C:\\projects\\servicetemplate\\Web\\Web.csproj",
+      "packagesPath": "C:\\Users\\Pixelbits\\.nuget\\packages\\",
+      "outputPath": "C:\\projects\\servicetemplate\\Web\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
       ],
       "configFilePaths": [
-        "C:\\Users\\mike\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\Pixelbits\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
@@ -13934,8 +13934,8 @@
       "frameworks": {
         "netcoreapp2.0": {
           "projectReferences": {
-            "C:\\projects\\test2\\ServiceTemplate\\Container\\Container.csproj": {
-              "projectPath": "C:\\projects\\test2\\ServiceTemplate\\Container\\Container.csproj"
+            "C:\\projects\\servicetemplate\\Container\\Container.csproj": {
+              "projectPath": "C:\\projects\\servicetemplate\\Container\\Container.csproj"
             }
           }
         }
