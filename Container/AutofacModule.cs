@@ -25,6 +25,7 @@ namespace Container
             builder.RegisterType<RootMutation>();
 
             builder.RegisterType<ReviewViewService>();
+            builder.RegisterType<ServiceLocator>();
         }
     }
 

@@ -5,6 +5,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using Business.Services;
 using Data;
 using Entities;
 
@@ -23,14 +24,57 @@ namespace Schemas
             Field(t => t.SubCategory).Description("The sub-category");
         }
     }
+
+    public class SortDescriptorType : ObjectGraphType<SortDescriptor>
+    {
+        public SortDescriptorType()
+        {
+            Field(t => t.Field);
+            Field(t => t.Dir );
+        }
+    }
+    public class InputSortDescriptorType : InputObjectGraphType<SortDescriptorType>
+    {
+       
+    }
+    public class PagedDataResultType : ObjectGraphType<PagedDataResult<ReviewView>>
+    {
+        public PagedDataResultType()
+        {
+            Field<ListGraphType<ReviewViewType>>("data", resolve: ctx => ctx.Source.Data);
+            Field(t => t.Total);
+        }
+    }
     public class RootQuery : ObjectGraphType
     {
-        public RootQuery(DataContext context)
+        public RootQuery(ServiceLocator serviceLocator)
         {
-            Field<ListGraphType<ReviewViewType>>("reviews",
+            Field<PagedDataResultType>("reviews",
                 description:" The reviews",
-                arguments: new QueryArguments(),
-                resolve: ctx => context.ReviewViews.ToList());
+                arguments: new QueryArguments(
+                    new QueryArgument<IntGraphType>() { Name= "skip"},
+                    new QueryArgument<IntGraphType>() { Name = "take" },
+                    new QueryArgument<ListGraphType<InputSortDescriptorType>>() { Name = "sort" }
+                ),
+                resolve: ctx =>
+                {
+                    if (ctx.HasArgument("skip"))
+                    {
+                        var skip = ctx.GetArgument<int>("skip");
+                        var take = ctx.GetArgument<int>("take");
+                        var sort = ctx.GetArgument<SortDescriptor[]>("sort");
+
+                        return ServiceLocator.Get<ReviewViewService>().GetReviews(skip, take, sort);
+                    }
+
+                    var data = ServiceLocator.Get<ReviewViewService>().GetAllReviews();
+
+                    return new PagedDataResult<ReviewView>()
+                    {
+                        Data = data.ToArray(),
+                        Total = data.Count
+                    };
+                });
         }
 
     }

@@ -21,11 +21,23 @@ var ReviewService = /** @class */ (function () {
     function ReviewService(apollo) {
         this.apollo = apollo;
     }
-    ReviewService.prototype.getReviews = function () {
+    ReviewService.prototype.getReviews = function (skip, take, sort) {
+        var _this = this;
+        alert(JSON.stringify(sort));
+        this.loading = true;
         return this.apollo.query({
-            query: graphql_tag_1.default(templateObject_1 || (templateObject_1 = __makeTemplateObject(["\n            query GetReviews {\n                reviews {\n                  recordCount\n                  total\n                  percentage\n                  businessId\n                  message\n                  category\n                  subCategory\n                }\n              }"], ["\n            query GetReviews {\n                reviews {\n                  recordCount\n                  total\n                  percentage\n                  businessId\n                  message\n                  category\n                  subCategory\n                }\n              }"])))
+            query: graphql_tag_1.default(templateObject_1 || (templateObject_1 = __makeTemplateObject(["\n            query GetReviews($skip: Int!, $take: Int!, $sort: [InputSortDescriptorType]) {\n                reviews(skip: $skip, take: $take, sort: $sort) {\n                  data {\n                    recordCount\n                    total\n                    percentage\n                    businessId\n                    message\n                    category\n                    subCategory\n                  }\n                  total\n                }\n              }\n              \n              "], ["\n            query GetReviews($skip: Int!, $take: Int!, $sort: [InputSortDescriptorType]) {\n                reviews(skip: $skip, take: $take, sort: $sort) {\n                  data {\n                    recordCount\n                    total\n                    percentage\n                    businessId\n                    message\n                    category\n                    subCategory\n                  }\n                  total\n                }\n              }\n              \n              "]))),
+            variables: {
+                skip: skip,
+                take: take,
+                sort: sort
+            },
+            fetchPolicy: 'network-only'
         })
-            .pipe(operators_1.map(function (t) { return t.data; }));
+            .pipe(operators_1.map(function (t) { return t.data; }), operators_1.map(function (t) { return t.reviews; }), operators_1.map(function (t) { return ({
+            data: t.data,
+            total: t.total
+        }); }), operators_1.tap(function () { return _this.loading = false; }));
     };
     ReviewService = __decorate([
         core_1.Injectable(),

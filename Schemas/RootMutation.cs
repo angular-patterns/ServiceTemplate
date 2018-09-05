@@ -10,6 +10,7 @@ namespace Schemas
     {
         public RootMutation()
         {
+            Field<StringGraphType>("createSomething", resolve: null);
         }
     }
 }
