@@ -15,6 +15,7 @@ var account_service_1 = require("./account.service");
 var apollo_angular_1 = require("apollo-angular");
 var apollo_angular_link_http_1 = require("apollo-angular-link-http");
 var apollo_cache_inmemory_1 = require("apollo-cache-inmemory");
+var review_service_1 = require("./review.service");
 var CoreModule = /** @class */ (function () {
     function CoreModule(apollo, httpLink) {
         apollo.create({
@@ -35,7 +36,8 @@ var CoreModule = /** @class */ (function () {
             bootstrap: [],
             exports: [],
             providers: [
-                account_service_1.AccountService
+                account_service_1.AccountService,
+                review_service_1.ReviewService
             ]
         }),
         __metadata("design:paramtypes", [apollo_angular_1.Apollo, apollo_angular_link_http_1.HttpLink])

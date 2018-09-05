@@ -10,16 +10,35 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 var core_1 = require("@angular/core");
+var products_1 = require("./products");
+var kendo_data_query_1 = require("@progress/kendo-data-query");
+var review_service_1 = require("./core/review.service");
 var AppComponent = /** @class */ (function () {
-    function AppComponent() {
+    function AppComponent(reviewService) {
+        this.reviewService = reviewService;
+        this.groups = [{ field: '' }];
     }
+    AppComponent.prototype.ngOnInit = function () {
+        this.loadReviews();
+    };
+    AppComponent.prototype.groupChange = function (groups) {
+        this.groups = groups;
+        this.loadReviews();
+    };
+    AppComponent.prototype.loadReviews = function () {
+        var _this = this;
+        this.reviewService.getReviews().subscribe(function (t) {
+            _this.reviews = t.reviews;
+            _this.gridView = kendo_data_query_1.process(products_1.sampleProducts, { group: _this.groups });
+        });
+    };
     AppComponent = __decorate([
         core_1.Component({
             selector: 'app-root',
             templateUrl: './app.component.html',
             styleUrls: ['./app.component.css']
         }),
-        __metadata("design:paramtypes", [])
+        __metadata("design:paramtypes", [review_service_1.ReviewService])
     ], AppComponent);
     return AppComponent;
 }());

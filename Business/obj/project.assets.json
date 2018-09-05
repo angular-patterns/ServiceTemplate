@@ -4331,23 +4331,23 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\mike\\.nuget\\packages\\": {},
+    "C:\\Users\\michael.kang\\.nuget\\packages\\": {},
     "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\projects\\test2\\ServiceTemplate\\Business\\Business.csproj",
+      "projectUniqueName": "E:\\projects\\servicetemplate\\Business\\Business.csproj",
       "projectName": "Business",
-      "projectPath": "C:\\projects\\test2\\ServiceTemplate\\Business\\Business.csproj",
-      "packagesPath": "C:\\Users\\mike\\.nuget\\packages\\",
-      "outputPath": "C:\\projects\\test2\\ServiceTemplate\\Business\\obj\\",
+      "projectPath": "E:\\projects\\servicetemplate\\Business\\Business.csproj",
+      "packagesPath": "C:\\Users\\michael.kang\\.nuget\\packages\\",
+      "outputPath": "E:\\projects\\servicetemplate\\Business\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
       ],
       "configFilePaths": [
-        "C:\\Users\\mike\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\michael.kang\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
@@ -4360,11 +4360,11 @@
       "frameworks": {
         "netcoreapp2.0": {
           "projectReferences": {
-            "C:\\projects\\test2\\ServiceTemplate\\Data\\Data.csproj": {
-              "projectPath": "C:\\projects\\test2\\ServiceTemplate\\Data\\Data.csproj"
+            "E:\\projects\\servicetemplate\\Data\\Data.csproj": {
+              "projectPath": "E:\\projects\\servicetemplate\\Data\\Data.csproj"
             },
-            "C:\\projects\\test2\\ServiceTemplate\\Models\\Models.csproj": {
-              "projectPath": "C:\\projects\\test2\\ServiceTemplate\\Models\\Models.csproj"
+            "E:\\projects\\servicetemplate\\Models\\Models.csproj": {
+              "projectPath": "E:\\projects\\servicetemplate\\Models\\Models.csproj"
             }
           }
         }

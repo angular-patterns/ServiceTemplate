@@ -664,23 +664,23 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\mike\\.nuget\\packages\\": {},
+    "C:\\Users\\michael.kang\\.nuget\\packages\\": {},
     "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\projects\\test2\\ServiceTemplate\\Models\\Models.csproj",
+      "projectUniqueName": "E:\\projects\\servicetemplate\\Models\\Models.csproj",
       "projectName": "Models",
-      "projectPath": "C:\\projects\\test2\\ServiceTemplate\\Models\\Models.csproj",
-      "packagesPath": "C:\\Users\\mike\\.nuget\\packages\\",
-      "outputPath": "C:\\projects\\test2\\ServiceTemplate\\Models\\obj\\",
+      "projectPath": "E:\\projects\\servicetemplate\\Models\\Models.csproj",
+      "packagesPath": "C:\\Users\\michael.kang\\.nuget\\packages\\",
+      "outputPath": "E:\\projects\\servicetemplate\\Models\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
       ],
       "configFilePaths": [
-        "C:\\Users\\mike\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\michael.kang\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [

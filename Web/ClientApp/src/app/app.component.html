@@ -2,16 +2,23 @@
 
 <router-outlet></router-outlet>
 
+<kendo-grid
+          [groupable]="true"
+          [data]="gridView"
+          [pageSize]="pageSize"
+          [skip]="skip"
+          [pageable]="true"
+          [height]="400"
+          [group]="groups"
+          (groupChange)="groupChange($event)"
+          (pageChange)="pageChange($event)"
 
-
-<div class="container">
-    <div class="row">
-        <div class="col-sm-3">
-            <app-add-account></app-add-account>            
-        </div>
-        <div class="col-sm-9">
-            <app-account-list></app-account-list>
-        </div>
-      </div>
-      
-</div>
+        >
+        <kendo-grid-column field="recordCount" title="Record Count" [width]="80"></kendo-grid-column>
+        <kendo-grid-column field="total" title="Total" [width]="50"></kendo-grid-column>
+        <kendo-grid-column field="percentage" title="Percentage" [width]="50"></kendo-grid-column>
+        <kendo-grid-column field="businessId" title="Business ID" [width]="50"></kendo-grid-column>
+        <kendo-grid-column field="message" title="Message" [width]="100"></kendo-grid-column>
+        <kendo-grid-column field="category" title="Category" [width]="50"></kendo-grid-column>
+        <kendo-grid-column field="subCategory" title="SubCategory" [width]="50"></kendo-grid-column>
+      </kendo-grid>

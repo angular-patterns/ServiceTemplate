@@ -1,5 +1,7 @@
-﻿using Autofac;
-
+﻿using System.Collections.Generic;
+using Autofac;
+using Autofac.Core;
+using Business.Services;
 using Data;
 using Microsoft.EntityFrameworkCore;
 using Schemas;
@@ -17,10 +19,12 @@ namespace Container
         }
         protected override void Load(ContainerBuilder builder)
         {
-            builder.RegisterInstance(new DataContext(Options));
+            builder.RegisterType<DataContext>().OnPreparing(t => { t.Parameters = new List<Parameter>() { new NamedParameter("options", Options) }; }).InstancePerDependency();
             builder.RegisterType<RootSchema>();
             builder.RegisterType<RootQuery>();
             builder.RegisterType<RootMutation>();
+
+            builder.RegisterType<ReviewViewService>();
         }
     }
 
