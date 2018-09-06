@@ -2,6 +2,7 @@
 
 <router-outlet></router-outlet>
 
+<div class="col-md-8">
 <kendo-grid
           [data]="reviewService | async"
           [loading]="reviewService.loading"
@@ -22,4 +23,5 @@
         <kendo-grid-column field="category" title="Category" [width]="50"></kendo-grid-column>
         <kendo-grid-column field="subCategory" title="SubCategory" [width]="50"></kendo-grid-column>
       </kendo-grid>
-{{ reviewService.loading }}
+
+    </div>

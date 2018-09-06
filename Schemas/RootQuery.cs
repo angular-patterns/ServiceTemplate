@@ -30,8 +30,8 @@ namespace Schemas
     {
         public InputSortDescriptorType()
         {
-            Field(t => t.Field);
-            Field(t => t.Dir);
+            Field(t => t.Field, nullable: true);
+            Field(t => t.Dir, nullable: true);
         }
        
     }

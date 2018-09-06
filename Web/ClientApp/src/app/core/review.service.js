@@ -1,4 +1,14 @@
 "use strict";
+var __extends = (this && this.__extends) || (function () {
+    var extendStatics = Object.setPrototypeOf ||
+        ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
+        function (d, b) { for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p]; };
+    return function (d, b) {
+        extendStatics(d, b);
+        function __() { this.constructor = d; }
+        d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+    };
+})();
 var __makeTemplateObject = (this && this.__makeTemplateObject) || function (cooked, raw) {
     if (Object.defineProperty) { Object.defineProperty(cooked, "raw", { value: raw }); } else { cooked.raw = raw; }
     return cooked;
@@ -17,16 +27,24 @@ var core_1 = require("@angular/core");
 var apollo_angular_1 = require("apollo-angular");
 var graphql_tag_1 = require("graphql-tag");
 var operators_1 = require("rxjs/operators");
-var ReviewService = /** @class */ (function () {
+var BehaviorSubject_1 = require("rxjs/BehaviorSubject");
+var ReviewService = /** @class */ (function (_super) {
+    __extends(ReviewService, _super);
     function ReviewService(apollo) {
-        this.apollo = apollo;
+        var _this = _super.call(this, null) || this;
+        _this.apollo = apollo;
+        return _this;
     }
+    ReviewService.prototype.reviews = function (skip, take, sort) {
+        var _this = this;
+        this.getReviews(skip, take, sort)
+            .subscribe(function (x) { return _super.prototype.next.call(_this, x); });
+    };
     ReviewService.prototype.getReviews = function (skip, take, sort) {
         var _this = this;
-        alert(JSON.stringify(sort));
         this.loading = true;
         return this.apollo.query({
-            query: graphql_tag_1.default(templateObject_1 || (templateObject_1 = __makeTemplateObject(["\n            query GetReviews($skip: Int!, $take: Int!, $sort: InputSortDescriptorType) {\n                reviews(skip: $skip, take: $take, sort: $sort) {\n                  data {\n                    recordCount\n                    total\n                    percentage\n                    businessId\n                    message\n                    category\n                    subCategory\n                  }\n                  total\n                }\n              }\n              \n              "], ["\n            query GetReviews($skip: Int!, $take: Int!, $sort: InputSortDescriptorType) {\n                reviews(skip: $skip, take: $take, sort: $sort) {\n                  data {\n                    recordCount\n                    total\n                    percentage\n                    businessId\n                    message\n                    category\n                    subCategory\n                  }\n                  total\n                }\n              }\n              \n              "]))),
+            query: graphql_tag_1.default(templateObject_1 || (templateObject_1 = __makeTemplateObject(["\n            query GetReviews($skip: Int!, $take: Int!, $sort: [InputSortDescriptorType]) {\n                reviews(skip: $skip, take: $take, sort: $sort) {\n                  data {\n                    recordCount\n                    total\n                    percentage\n                    businessId\n                    message\n                    category\n                    subCategory\n                  }\n                  total\n                }\n              }"], ["\n            query GetReviews($skip: Int!, $take: Int!, $sort: [InputSortDescriptorType]) {\n                reviews(skip: $skip, take: $take, sort: $sort) {\n                  data {\n                    recordCount\n                    total\n                    percentage\n                    businessId\n                    message\n                    category\n                    subCategory\n                  }\n                  total\n                }\n              }"]))),
             variables: {
                 skip: skip,
                 take: take,
@@ -44,6 +62,6 @@ var ReviewService = /** @class */ (function () {
         __metadata("design:paramtypes", [apollo_angular_1.Apollo])
     ], ReviewService);
     return ReviewService;
-}());
+}(BehaviorSubject_1.BehaviorSubject));
 exports.ReviewService = ReviewService;
 var templateObject_1;

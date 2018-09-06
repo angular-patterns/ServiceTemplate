@@ -24,11 +24,11 @@ var AppComponent = /** @class */ (function () {
         this.loadItems();
     };
     AppComponent.prototype.loadItems = function () {
-        this.results = this.reviewService.getReviews(this.state.skip, this.state.take, this.state.sort);
+        this.reviewService.reviews(this.state.skip, this.state.take, this.state.sort);
     };
     AppComponent.prototype.dataStateChange = function (state) {
         this.state = state;
-        this.results = this.reviewService.getReviews(this.state.skip, this.state.take, this.state.sort);
+        this.reviewService.reviews(this.state.skip, this.state.take, this.state.sort);
     };
     AppComponent = __decorate([
         core_1.Component({
