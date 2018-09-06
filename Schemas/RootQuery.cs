@@ -25,16 +25,14 @@ namespace Schemas
         }
     }
 
-    public class SortDescriptorType : ObjectGraphType<SortDescriptor>
+
+    public class InputSortDescriptorType : InputObjectGraphType<SortDescriptor>
     {
-        public SortDescriptorType()
+        public InputSortDescriptorType()
         {
             Field(t => t.Field);
-            Field(t => t.Dir );
+            Field(t => t.Dir);
         }
-    }
-    public class InputSortDescriptorType : InputObjectGraphType<SortDescriptorType>
-    {
        
     }
     public class PagedDataResultType : ObjectGraphType<PagedDataResult<ReviewView>>

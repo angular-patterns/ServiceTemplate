@@ -3,7 +3,7 @@
 <router-outlet></router-outlet>
 
 <kendo-grid
-          [data]="results | async"
+          [data]="reviewService | async"
           [loading]="reviewService.loading"
           [pageSize]="state.take"
           [skip]="state.skip"

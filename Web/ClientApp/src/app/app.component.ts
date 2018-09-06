@@ -13,7 +13,7 @@ import { Observable } from 'rxjs';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent implements OnInit {
-  results: Observable<GridDataResult>;
+  view: Observable<GridDataResult>;
   public state: State = {
     skip: 0,
     take: 5,
@@ -30,11 +30,11 @@ export class AppComponent implements OnInit {
 
 
   private loadItems(): void {
-    this.results = this.reviewService.getReviews(this.state.skip, this.state.take, this.state.sort);
+    this.reviewService.reviews(this.state.skip, this.state.take, this.state.sort);
   }
 
   public dataStateChange(state: DataStateChangeEvent): void {
     this.state = state;
-    this.results = this.reviewService.getReviews(this.state.skip, this.state.take, this.state.sort);
+    this.reviewService.reviews(this.state.skip, this.state.take, this.state.sort);
   }
 }

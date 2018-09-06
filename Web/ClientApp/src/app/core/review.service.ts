@@ -5,16 +5,21 @@ import { Apollo } from 'apollo-angular';
 import gql from 'graphql-tag';
 import { map, tap } from 'rxjs/operators';
 import { GridDataResult } from '@progress/kendo-angular-grid';
-
+import { BehaviorSubject } from 'rxjs/BehaviorSubject';
 
 @Injectable()
-export class ReviewService {
+export class ReviewService extends BehaviorSubject<GridDataResult> {
     public loading: boolean;
     constructor ( private apollo: Apollo) {
+        super(null);
 
     }
+    reviews(skip: number, take: number, sort: any[]): void {
+        this.getReviews(skip, take, sort)
+            .subscribe(x => super.next(x));
+    }
     getReviews(skip: number, take: number, sort: any[]): Observable<any> {
-        alert(JSON.stringify(sort));
+
         this.loading = true;
         return this.apollo.query({
             query: gql`
@@ -31,9 +36,7 @@ export class ReviewService {
                   }
                   total
                 }
-              }
-              
-              `,
+              }`,
             variables: {
                 skip: skip,
                 take: take,

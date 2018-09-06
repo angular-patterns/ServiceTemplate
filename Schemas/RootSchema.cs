@@ -25,7 +25,7 @@ namespace Schemas
                 _.UserContext = user;
                 if (query.Variables != null)
                 {
-                    _.Inputs = new Inputs(query.Variables);
+                    _.Inputs = query.GetInputs(query.Variables);
                 }
 
 
