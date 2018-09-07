@@ -19,7 +19,9 @@ namespace Container
         }
         protected override void Load(ContainerBuilder builder)
         {
-            builder.RegisterType<DataContext>().OnPreparing(t => { t.Parameters = new List<Parameter>() { new NamedParameter("options", Options) }; }).InstancePerDependency();
+            builder.RegisterType<DataContext>()
+                .OnPreparing(t => { t.Parameters = new List<Parameter>() { new NamedParameter("options", Options) }; })
+                .InstancePerDependency();
             builder.RegisterType<RootSchema>();
             builder.RegisterType<RootQuery>();
             builder.RegisterType<RootMutation>();

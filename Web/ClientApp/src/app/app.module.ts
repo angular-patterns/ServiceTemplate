@@ -7,6 +7,7 @@ import { AccountsModule } from './accounts/accounts.module';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { GridModule } from '@progress/kendo-angular-grid';
 import { ReviewService } from './core/review.service';
+import { ReviewDetailsComponent } from './review-details/review-details.component';
 
 @NgModule({
   imports:      [ 
@@ -17,7 +18,7 @@ import { ReviewService } from './core/review.service';
     BrowserAnimationsModule, 
     GridModule
   ],
-  declarations: [ AppComponent ],
+  declarations: [ AppComponent, ReviewDetailsComponent ],
   bootstrap:    [ AppComponent ],
   exports: [AppComponent],
   providers: [

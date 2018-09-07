@@ -8,46 +8,44 @@ import { GridDataResult } from '@progress/kendo-angular-grid';
 import { BehaviorSubject } from 'rxjs/BehaviorSubject';
 
 @Injectable()
-export class ReviewService extends BehaviorSubject<GridDataResult> {
+export class ApplicationService extends BehaviorSubject<GridDataResult> {
     public loading: boolean;
     constructor ( private apollo: Apollo) {
         super(null);
 
     }
-    reviews(state: any): void {
-        this.fetch(state)
+    applications(reviewbusinessId: string, skip: number, take: number, sort: any[]): void { 
+        this.getApplications(reviewbusinessId, skip, take, sort)
             .subscribe(x => super.next(x));
     }
 
-    fetch(state: any): Observable<GridDataResult> {
-
+    getApplications(reviewBusinessId: string, skip: number, take: number, sort: any[]):Observable<any> {
         this.loading = true;
         return this.apollo.query({
             query: gql`
-            query GetReviews($skip: Int!, $take: Int!, $sort: [InputSortDescriptorType]) {
-                reviews(skip: $skip, take: $take, sort: $sort) {
+            query GetApplications($reviewBusinessId:String!, $skip: Int!, $take: Int!, $sort: [InputSortDescriptorType]) {
+                applications(reviewBusinessId: $reviewBusinessId, skip: $skip, take: $take, sort: $sort) {
                   data {
-                    recordCount
-                    total
-                    percentage
-                    businessId
-                    message
-                    category
-                    subCategory
+                    applicationDisplay
+                    applicationStatus
+                    sin
+                    firstName
+                    lastName
                   }
                   total
                 }
               }`,
             variables: {
-                skip: state.skip,
-                take: state.take,
-                sort: state.sort
+                reviewBusinessId: reviewBusinessId,
+                skip: skip,
+                take: take,
+                sort: sort
             },
             fetchPolicy: 'network-only'
         })
         .pipe(
             map(t => t.data as any),
-            map(t => t.reviews),
+            map(t => t.applications),
             map((t: any) => (<GridDataResult>{
                 data: t.data,
                 total: t.total
@@ -55,4 +53,5 @@ export class ReviewService extends BehaviorSubject<GridDataResult> {
             tap(() => this.loading = false)
         );
     }
+
 }

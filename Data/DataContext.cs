@@ -9,6 +9,8 @@ namespace Data
     {
         public DbQuery<ReviewView> ReviewViews { get; set; }
 
+        public DbQuery<ApplicationData> ApplicationDatas { get; set; }
+
         public DataContext(DbContextOptions<DataContext> options): base(options)
         {
            

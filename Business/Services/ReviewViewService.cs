@@ -1,10 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.SqlClient;
 using System.Linq;
 using System.Text;
 using Data;
 using Entities;
 using GraphQL;
+using Microsoft.EntityFrameworkCore;
 using Models;
 
 namespace Business.Services
@@ -49,5 +51,37 @@ namespace Business.Services
                 Total = list.Count()
             };
         }
+
+        public PagedDataResult<ApplicationData> GetApplicationsByReview(string reviewBusinessId, int skip, int take, SortDescriptor[] sortFields)
+        {
+            var param = new SqlParameter("@ReviewBusinessId", reviewBusinessId);
+            var list = Context.ApplicationDatas.FromSql("GetApplicationsByReview @ReviewBusinessId", param);
+
+            IOrderedQueryable<ApplicationData> orderedQueryable = null;
+            foreach (var sort in sortFields)
+            {
+                if (orderedQueryable == null)
+                    orderedQueryable = sort.Dir == "asc"
+                        ? list.OrderBy(t => t.GetPropertyValue(sort.Field))
+                        : list.OrderByDescending(t => t.GetPropertyValue(sort.Field));
+                else
+                {
+                    orderedQueryable = sort.Dir == "asc"
+                        ? orderedQueryable.ThenBy(t => t.GetPropertyValue(sort.Field))
+                        : orderedQueryable.ThenByDescending(t => t.GetPropertyValue(sort.Field));
+                }
+            }
+
+            var subList = orderedQueryable != null
+                ? orderedQueryable.Skip(skip).Take(take).ToList()
+                : list.Skip(skip).Take(take).ToList();
+
+            return new PagedDataResult<ApplicationData>()
+            {
+                Data = subList.ToArray(),
+                Total = list.Count()
+            };
+        }
+        
     }
 }

@@ -14,6 +14,7 @@ var core_module_1 = require("./core/core.module");
 var accounts_module_1 = require("./accounts/accounts.module");
 var animations_1 = require("@angular/platform-browser/animations");
 var kendo_angular_grid_1 = require("@progress/kendo-angular-grid");
+var review_details_component_1 = require("./review-details/review-details.component");
 var AppModule = /** @class */ (function () {
     function AppModule() {
     }
@@ -27,7 +28,7 @@ var AppModule = /** @class */ (function () {
                 animations_1.BrowserAnimationsModule,
                 kendo_angular_grid_1.GridModule
             ],
-            declarations: [app_component_1.AppComponent],
+            declarations: [app_component_1.AppComponent, review_details_component_1.ReviewDetailsComponent],
             bootstrap: [app_component_1.AppComponent],
             exports: [app_component_1.AppComponent],
             providers: []

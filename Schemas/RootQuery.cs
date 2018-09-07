@@ -25,6 +25,19 @@ namespace Schemas
         }
     }
 
+    public class ApplicationDataType : ObjectGraphType<ApplicationData>
+    {
+        public ApplicationDataType()
+        {
+            Field(t => t.ApplicationDisplay).Description("The business ID");
+            Field(t => t.ApplicationStatus).Description("The category");
+            Field(t => t.FirstName).Description("The total");
+            Field(t => t.LastName).Description("The message");
+            Field(t => t.Sin).Description("The percentage");
+        }
+    }
+
+
 
     public class InputSortDescriptorType : InputObjectGraphType<SortDescriptor>
     {
@@ -35,24 +48,35 @@ namespace Schemas
         }
        
     }
-    public class PagedDataResultType : ObjectGraphType<PagedDataResult<ReviewView>>
+    public class ByReviewPagedDataResultType : ObjectGraphType<PagedDataResult<ReviewView>>
     {
-        public PagedDataResultType()
+        public ByReviewPagedDataResultType()
         {
             Field<ListGraphType<ReviewViewType>>("data", resolve: ctx => ctx.Source.Data);
             Field(t => t.Total);
         }
     }
+
+    public class ApplicationsPagedDataResultType : ObjectGraphType<PagedDataResult<ApplicationData>>
+    {
+        public ApplicationsPagedDataResultType()
+        {
+            Field<ListGraphType<ApplicationDataType>>("data", resolve: ctx => ctx.Source.Data);
+            Field(t => t.Total);
+        }
+    }
+
+
     public class RootQuery : ObjectGraphType
     {
         public RootQuery(ServiceLocator serviceLocator)
         {
-            Field<PagedDataResultType>("reviews",
-                description:" The reviews",
+            Field<ByReviewPagedDataResultType>("reviews",
+                description: " The reviews",
                 arguments: new QueryArguments(
-                    new QueryArgument<IntGraphType>() { Name= "skip"},
-                    new QueryArgument<IntGraphType>() { Name = "take" },
-                    new QueryArgument<ListGraphType<InputSortDescriptorType>>() { Name = "sort" }
+                    new QueryArgument<IntGraphType>() {Name = "skip"},
+                    new QueryArgument<IntGraphType>() {Name = "take"},
+                    new QueryArgument<ListGraphType<InputSortDescriptorType>>() {Name = "sort"}
                 ),
                 resolve: ctx =>
                 {
@@ -73,8 +97,36 @@ namespace Schemas
                         Total = data.Count
                     };
                 });
-        }
 
+            Field<ApplicationsPagedDataResultType>("applications",
+                description: "The applications",
+                arguments: new QueryArguments(
+                    new QueryArgument<StringGraphType>() {Name = "reviewBusinessId"},
+                    new QueryArgument<IntGraphType>() {Name = "skip"},
+                    new QueryArgument<IntGraphType>() {Name = "take"},
+                    new QueryArgument<ListGraphType<InputSortDescriptorType>>() {Name = "sort"}
+                ),
+                resolve: ctx =>
+                {
+                    if (ctx.HasArgument("reviewBusinessId"))
+                    {
+                        var reviewBusinessId = ctx.GetArgument<string>("reviewBusinessId");
+                        var skip = ctx.GetArgument<int>("skip");
+                        var take = ctx.GetArgument<int>("take");
+                        var sort = ctx.GetArgument<SortDescriptor[]>("sort");
+
+                        return ServiceLocator.Get<ReviewViewService>()
+                            .GetApplicationsByReview(reviewBusinessId, skip, take, sort);
+                    }
+
+                    return new PagedDataResult<ApplicationData>()
+                    {
+                        Data = new ApplicationData[] { },
+                        Total = 0
+                    };
+                });
+
+        }
     }
 
 

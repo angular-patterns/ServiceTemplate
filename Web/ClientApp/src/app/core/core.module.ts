@@ -5,6 +5,7 @@ import {ApolloModule, Apollo} from 'apollo-angular';
 import {HttpLinkModule, HttpLink} from 'apollo-angular-link-http';
 import {InMemoryCache} from 'apollo-cache-inmemory';
 import { ReviewService } from './review.service';
+import { ApplicationService } from './application.service';
 
 @NgModule({
   imports:      [ 
@@ -20,7 +21,8 @@ import { ReviewService } from './review.service';
   ],
   providers: [
     AccountService,
-    ReviewService
+    ReviewService,
+    ApplicationService
   ]
 })
 export class CoreModule {

@@ -31,6 +31,27 @@ group by x.Total, rt.BusinessID, rt.Message,  rdi2.DisplayValue, rdi3.DisplayVal
 order by count(*) desc
 
 
+CREATE PROCEDURE [dbo].[GetApplicationsByReview] (
+    @ReviewBusinessId [varchar](100)
+)
+AS
+BEGIN
+    SELECT a.ApplicationDisplay, rdi.DisplayValue as ApplicationStatus, lv.SIN, lv.FirstName, lv.LastName
+    FROM Application a
+	INNER JOIN ApplicationVersion av on av.ApplicationID = a.ApplicationID
+	INNER JOIN Learner.LearnerVersion lv on lv.LearnerVersionID = av.LearnerVersionID
+	INNER JOIN ReferenceDataItem rdi on rdi.ReferenceDataItemID = av.ApplicationVersionStatusID
+	WHERE Exists (
+		SELECT 1 
+		FROM ReviewItem ri
+		INNER JOIN ReviewType rt on rt.ReviewTypeID = ri.ReviewTypeID
+		WHERE ri.ApplicationVersionID = av.ApplicationVersionID
+		AND rt.BusinessID = @ReviewBusinessId
+	)
+	
+END
+
+
      */
     public class ReviewView
     {
