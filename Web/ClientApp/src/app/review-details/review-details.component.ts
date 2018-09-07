@@ -24,20 +24,17 @@ export class ReviewDetailsComponent implements OnInit {
   };
 
   constructor(private applicationService: ApplicationService) {
-
+    this.view = applicationService;
   }
 
   public ngOnInit(): void {
-    this.loadItems();
+    this.applicationService.applications(this.item.businessId, this.state);
   }
 
 
-  private loadItems(): void {
-    this.applicationService.applications(this.item.businessId, this.state.skip, this.state.take, this.state.sort);
-  }
 
   public dataStateChange(state: DataStateChangeEvent): void {
     this.state = state;
-    this.applicationService.applications(this.item.businessId, this.state.skip, this.state.take, this.state.sort);
+    this.applicationService.applications(this.item.businessId, this.state);
   }
 }

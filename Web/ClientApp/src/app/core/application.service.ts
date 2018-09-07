@@ -14,12 +14,12 @@ export class ApplicationService extends BehaviorSubject<GridDataResult> {
         super(null);
 
     }
-    applications(reviewbusinessId: string, skip: number, take: number, sort: any[]): void { 
-        this.getApplications(reviewbusinessId, skip, take, sort)
+    applications(reviewbusinessId: string, state: any): void { 
+        this.fetch(reviewbusinessId, state)
             .subscribe(x => super.next(x));
     }
 
-    getApplications(reviewBusinessId: string, skip: number, take: number, sort: any[]):Observable<any> {
+    fetch(reviewBusinessId: string, state: any):Observable<any> {
         this.loading = true;
         return this.apollo.query({
             query: gql`
@@ -37,9 +37,9 @@ export class ApplicationService extends BehaviorSubject<GridDataResult> {
               }`,
             variables: {
                 reviewBusinessId: reviewBusinessId,
-                skip: skip,
-                take: take,
-                sort: sort
+                skip: state.skip,
+                take: state.take,
+                sort: state.sort
             },
             fetchPolicy: 'network-only'
         })
