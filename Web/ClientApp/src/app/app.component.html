@@ -9,11 +9,15 @@
           [pageSize]="state.take"
           [skip]="state.skip"
           [sort]="state.sort"
-          [sortable]="true"
-  [pageable]="true"
-  [filter]="state.filter"
-  [filterable]="true"
+          [sortable]="{
+            allowUnsort: true,
+            mode:  'multiple' 
+          }"
+          [pageable]="true"
+          [filter]="state.filter"
+          [filterable]="true"
           [scrollable]="'none'"
+        
           (dataStateChange)="dataStateChange($event)"
 
         >
