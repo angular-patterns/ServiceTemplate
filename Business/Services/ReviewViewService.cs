@@ -26,7 +26,6 @@ namespace Business.Services
 
         public PagedDataResult<ReviewView> GetReviews(QueryState state)
         {
-            
             return this.Context.ReviewViews
                 .Apply(state)
                 .ToPagedResult(this.Context.ReviewViews.Count());

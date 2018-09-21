@@ -1,6 +1,7 @@
 ﻿using Binbin.Linq;
 using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq.Expressions;
 using System.Text;
 
@@ -47,7 +48,7 @@ namespace Models
                     predicate = predicate.FilterBy(logic, CreatePredicate<T>(filter.Field, Expressions.FromBinaryExpression(Expression.GreaterThan, filter.Value)));
                     break;
                 case FilterOperator.IsGreaterThanOrEqualto:
-                    predicate = predicate.FilterBy(logic, CreatePredicate<T>(filter.Field, Expressions.FromBinaryExpression(Expression.GreaterThanOrEqual, filter.Value)));
+                    predicate = predicate.FilterBy(logic, CreatePredicate<T>(filter.Field, Expressions.FromDateExpression(Expression.GreaterThanOrEqual, filter.Value)));
                     break;
                 case FilterOperator.IsLessThan:
                     predicate = predicate.FilterBy(logic, CreatePredicate<T>(filter.Field, Expressions.FromBinaryExpression(Expression.LessThan, filter.Value)));
@@ -55,8 +56,21 @@ namespace Models
                 case FilterOperator.IsLessThanOrEqualTo:
                     predicate = predicate.FilterBy(logic, CreatePredicate<T>(filter.Field, Expressions.FromBinaryExpression(Expression.LessThanOrEqual, filter.Value)));
                     break;
+                case FilterOperator.IsAfter:
+                    predicate = predicate.FilterBy(logic, CreatePredicate<T>(filter.Field, Expressions.FromDateExpression(Expression.GreaterThan, filter.Value)));
+                    break;
+                case FilterOperator.IsAfterOrEqualTo:
+                    predicate = predicate.FilterBy(logic, CreatePredicate<T>(filter.Field, Expressions.FromDateExpression(Expression.GreaterThanOrEqual, filter.Value)));
+                    break;
+                case FilterOperator.IsBefore:
+                    predicate = predicate.FilterBy(logic, CreatePredicate<T>(filter.Field, Expressions.FromDateExpression(Expression.LessThan, filter.Value)));
+                    break;
+                case FilterOperator.IsBeforeOrEqualTo:
+                    predicate = predicate.FilterBy(logic, CreatePredicate<T>(filter.Field, Expressions.FromDateExpression(Expression.LessThanOrEqual, filter.Value)));
+                    break;
 
             }
+
             return predicate;
         }
 

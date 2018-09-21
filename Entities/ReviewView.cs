@@ -7,19 +7,19 @@ namespace Entities
     /*
      * 
      * 
-create view ReviewView as
+create view ReviewViews as
 select  
-	count(*) as RecordCount, x.Total, round(count(*)*100/convert(float, x.Total),2,1) as Percentage, x.BusinessID, x.Message, x.Category as Category, x.SubCategory as SubCategory
+	count(*) as RecordCount, x.Total, round(count(*)*100/convert(float, x.Total),2,1) as Percentage, x.BusinessID, x.Message, x.Category as Category, x.SubCategory as SubCategory, x.CreatedOn as CreatedOn
 from (
 	select 
 		1 as Total,
 		'00040' as BusinessID,
 		'Message' as Message,
 		'Category' as Category,
-		'Sub Category' as SubCategory
-
+		'Sub Category' as SubCategory,
+		 CONVERT(DATETIME, '2012-08-17', 111) as CreatedOn
 ) x
-group by x.Total, x.BusinessID, x.Message, x.Category, x.SubCategory
+group by x.Total, x.BusinessID, x.Message, x.Category, x.SubCategory, x.CreatedOn
 
 
 drop view ReviewView
@@ -84,5 +84,7 @@ END
         public string Category { get; set; }
 
         public string SubCategory { get; set; }
+
+        public DateTime CreatedOn { get; set; }
     }
 }

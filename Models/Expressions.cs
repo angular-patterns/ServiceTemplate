@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Linq.Expressions;
 using System.Text;
@@ -49,6 +50,7 @@ namespace Models
             };
         }
 
+
         public static Func<ParameterExpression, string, Expression> FromBinaryExpression(Func<Expression, Expression, BinaryExpression> binaryExpr, object value)
         {
             return (target, field) =>
@@ -60,9 +62,10 @@ namespace Models
                     field = field.Substring(1);
                 }
 
-
+               
                 var memberAccess = CreateMemberAccess(target, field);
                 var actualValue = Expression.Constant(value, memberAccess.Type);
+
 
                 Expression expr = binaryExpr(memberAccess, actualValue);
                 if (not)
@@ -72,6 +75,31 @@ namespace Models
             };
         }
 
+        public static Func<ParameterExpression, string, Expression> FromDateExpression(Func<Expression, Expression, BinaryExpression> binaryExpr, object value)
+        {
+            return (target, field) =>
+            {
+                bool not = false;
+                if (field.StartsWith('!'))
+                {
+                    not = true;
+                    field = field.Substring(1);
+                }
+
+                var dateValue = DateTime.ParseExact(value.ToString(), "yyyy-MM-dd", CultureInfo.InvariantCulture);
+                var memberAccess = CreateMemberAccess(target, field);
+                var actualValue = Expression.Constant(dateValue, memberAccess.Type);
+                var memberAccessDate = Expression.Property(memberAccess, "Date");
+                var actualValueDate = Expression.Property(actualValue, "Date");
+
+
+                Expression expr = binaryExpr(memberAccessDate, actualValueDate);
+                if (not)
+                    expr = Expression.Not(expr);
+
+                return expr;
+            };
+        }
 
         static Expression CreateMemberAccess(Expression target, string selector)
         {

@@ -60,6 +60,7 @@ namespace Schemas
             Field(t => t.Percentage).Description("The percentage");
             Field(t => t.RecordCount).Description("The record count");
             Field(t => t.SubCategory).Description("The sub-category");
+            Field(t => t.CreatedOn);
         }
     }
 
