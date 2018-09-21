@@ -3947,23 +3947,23 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\mike\\.nuget\\packages\\": {},
+    "C:\\Users\\michael.kang\\.nuget\\packages\\": {},
     "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\projects\\ServiceTemplate\\Entities\\Entities.csproj",
+      "projectUniqueName": "E:\\projects\\test\\servicetemplate\\Entities\\Entities.csproj",
       "projectName": "Entities",
-      "projectPath": "C:\\projects\\ServiceTemplate\\Entities\\Entities.csproj",
-      "packagesPath": "C:\\Users\\mike\\.nuget\\packages\\",
-      "outputPath": "C:\\projects\\ServiceTemplate\\Entities\\obj\\",
+      "projectPath": "E:\\projects\\test\\servicetemplate\\Entities\\Entities.csproj",
+      "packagesPath": "C:\\Users\\michael.kang\\.nuget\\packages\\",
+      "outputPath": "E:\\projects\\test\\servicetemplate\\Entities\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
       ],
       "configFilePaths": [
-        "C:\\Users\\mike\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\michael.kang\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
