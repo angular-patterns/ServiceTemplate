@@ -28,9 +28,7 @@ namespace Business.Services
         {
             
             return this.Context.ReviewViews
-                //.ApplySorting(state)
-                .ApplyFilter(state)
-                //.ApplyPaging(state)
+                .Apply(state)
                 .ToPagedResult(this.Context.ReviewViews.Count());
         }
 
@@ -39,9 +37,7 @@ namespace Business.Services
             var param = new SqlParameter("@ReviewBusinessId", reviewBusinessId);
             var queryable = Context.ApplicationDatas.FromSql("GetApplicationsByReview @ReviewBusinessId", param);
             return queryable
-                .ApplySorting(state)
-                .ApplyFilter(state)
-                .ApplyPaging(state)
+                .Apply(state)
                 .ToPagedResult(queryable.Count());
         }
         
