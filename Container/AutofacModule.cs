@@ -1,12 +1,15 @@
-﻿using Autofac;
+﻿using System.Collections.Generic;
+using Autofac;
+using Autofac.Core;
+using Business.Services;
 using Data;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.Configuration;
-using System;
+using Schemas;
 
 namespace Container
 {
-    public class AutofacModule: Module
+
+    public class AutofacModule : Module
     {
         public DbContextOptions<DataContext> Options { get; }
 
@@ -16,8 +19,28 @@ namespace Container
         }
         protected override void Load(ContainerBuilder builder)
         {
-            builder.RegisterInstance(new DataContext(Options));
+            builder.RegisterType<DataContext>()
+                .OnPreparing(t => { t.Parameters = new List<Parameter>() { new NamedParameter("options", Options) }; })
+                .InstancePerDependency();
+            builder.RegisterType<RootSchema>();
+            builder.RegisterType<RootQuery>();
+            builder.RegisterType<RootMutation>();
 
+            builder.RegisterType<ReviewViewService>();
+            builder.RegisterType<ServiceLocator>();
         }
     }
+
+
+
+
+
 }
+
+
+
+
+
+
+
+

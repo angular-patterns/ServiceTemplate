@@ -1,0 +1,24 @@
+
+
+<div class="col-md-8">
+  <kendo-grid
+            [data]="view | async"
+            [loading]="view.loading"
+            [pageSize]="state.take"
+            [skip]="state.skip"
+            [sort]="state.sort"
+            [sortable]="true"
+            [pageable]="true"
+            [scrollable]="'none'"
+            (dataStateChange)="dataStateChange($event)"
+  
+          >
+          <kendo-grid-column field="applicationDisplay" title="Application Display" [width]="80"></kendo-grid-column>
+          <kendo-grid-column field="applicationStatus" title="Application Status" [width]="50"></kendo-grid-column>
+          <kendo-grid-column field="sin" title="SIN" [width]="50"></kendo-grid-column>
+          <kendo-grid-column field="firstName" title="First Name" [width]="50"></kendo-grid-column>
+          <kendo-grid-column field="lastName" title="Last Name" [width]="100"></kendo-grid-column>
+        </kendo-grid>
+  
+      </div>
+  

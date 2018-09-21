@@ -1,13 +1,15 @@
-﻿using Entities;
+﻿
 using Microsoft.EntityFrameworkCore;
 using System;
+using Entities;
 
 namespace Data
 {
     public class DataContext: DbContext
     {
-       public DbSet<Account> Accounts { get; set; }
-       public DbSet<UserProfile> UserProfiles { get; set; }
+        public DbQuery<ReviewView> ReviewViews { get; set; }
+
+        public DbQuery<ApplicationData> ApplicationDatas { get; set; }
 
         public DataContext(DbContextOptions<DataContext> options): base(options)
         {

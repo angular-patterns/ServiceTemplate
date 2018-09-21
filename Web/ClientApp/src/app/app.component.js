@@ -10,17 +10,39 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 var core_1 = require("@angular/core");
+var review_service_1 = require("./core/review.service");
 var AppComponent = /** @class */ (function () {
-    function AppComponent() {
-        this.title = 'Hello World!';
+    function AppComponent(reviewService) {
+        this.reviewService = reviewService;
+        this.state = {
+            skip: 0,
+            take: 5,
+            sort: [],
+            // Initial filter descriptor
+            filter: {
+                logic: 'and',
+                filters: []
+            }
+        };
+        this.view = reviewService;
+        this.reviewService.reviews(this.state);
     }
+    AppComponent.prototype.ngOnInit = function () {
+    };
+    AppComponent.prototype.dataStateChange = function (state) {
+        this.state = state;
+        this.reviewService.reviews(this.state);
+    };
     AppComponent = __decorate([
         core_1.Component({
             selector: 'app-root',
             templateUrl: './app.component.html',
-            styleUrls: ['./app.component.css']
+            styleUrls: ['./app.component.css'],
+            providers: [
+                review_service_1.ReviewService
+            ]
         }),
-        __metadata("design:paramtypes", [])
+        __metadata("design:paramtypes", [review_service_1.ReviewService])
     ], AppComponent);
     return AppComponent;
 }());

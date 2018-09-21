@@ -6,10 +6,12 @@
 
   <ItemGroup>
     <PackageReference Include="Autofac.Extensions.DependencyInjection" Version="4.3.0" />
+    <PackageReference Include="GraphQL" Version="2.0.0" />
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Data\Data.csproj" />
+    <ProjectReference Include="..\Business\Business.csproj" />
+    <ProjectReference Include="..\Schemas\Schemas.csproj" />
   </ItemGroup>
 
 </Project>
