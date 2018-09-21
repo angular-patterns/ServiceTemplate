@@ -662,15 +662,6 @@
         "runtime": {
           "lib/netstandard1.3/System.Threading.ThreadPool.dll": {}
         }
-      },
-      "ExpressionBuilder/1.0.0": {
-        "type": "project",
-        "compile": {
-          "bin/placeholder/ExpressionBuilder.dll": {}
-        },
-        "runtime": {
-          "bin/placeholder/ExpressionBuilder.dll": {}
-        }
       }
     }
   },
@@ -2863,17 +2854,11 @@
         "system.threading.threadpool.4.0.10.nupkg.sha512",
         "system.threading.threadpool.nuspec"
       ]
-    },
-    "ExpressionBuilder/1.0.0": {
-      "type": "project",
-      "path": "../ExpressionBuilder/ExpressionBuilder.csproj",
-      "msbuildProject": "../ExpressionBuilder/ExpressionBuilder.csproj"
     }
   },
   "projectFileDependencyGroups": {
     ".NETCoreApp,Version=v2.0": [
       "Binbin.Linq.PredicateBuilder >= 2.0.1",
-      "ExpressionBuilder >= 1.0.0",
       "GraphQL >= 2.0.0",
       "Microsoft.NETCore.App >= 2.0.0",
       "Newtonsoft.Json >= 11.0.2"
@@ -2908,11 +2893,7 @@
       },
       "frameworks": {
         "netcoreapp2.0": {
-          "projectReferences": {
-            "C:\\projects\\ServiceTemplate\\ExpressionBuilder\\ExpressionBuilder.csproj": {
-              "projectPath": "C:\\projects\\ServiceTemplate\\ExpressionBuilder\\ExpressionBuilder.csproj"
-            }
-          }
+          "projectReferences": {}
         }
       },
       "warningProperties": {

@@ -60,11 +60,13 @@ namespace Models
             return list.Skip(state.Skip).Take(state.Take);
         }
 
-        public static IQueryable<T> Apply<T>(this IQueryable<T> list, QueryState state) where T: class
+        public static PagedDataResult<T> Apply<T>(this IQueryable<T> list, QueryState state) where T: class
         {
-            return list.ApplySorting(state)
-                .ApplyFilter(state)
-                .ApplyPaging(state);
+            var sortAndFilter = list
+                .ApplySorting(state)
+                .ApplyFilter(state);
+
+            return sortAndFilter.ApplyPaging(state).ToPagedResult(sortAndFilter.Count());
         }
 
 

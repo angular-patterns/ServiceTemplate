@@ -26,18 +26,14 @@ namespace Business.Services
 
         public PagedDataResult<ReviewView> GetReviews(QueryState state)
         {
-            return this.Context.ReviewViews
-                .Apply(state)
-                .ToPagedResult(this.Context.ReviewViews.Count());
+            return this.Context.ReviewViews.Apply(state);
         }
 
         public PagedDataResult<ApplicationData> GetApplicationsByReview(string reviewBusinessId, QueryState state)
         {
             var param = new SqlParameter("@ReviewBusinessId", reviewBusinessId);
             var queryable = Context.ApplicationDatas.FromSql("GetApplicationsByReview @ReviewBusinessId", param);
-            return queryable
-                .Apply(state)
-                .ToPagedResult(queryable.Count());
+            return queryable.Apply(state);
         }
         
     }

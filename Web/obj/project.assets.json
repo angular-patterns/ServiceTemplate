@@ -5227,21 +5227,11 @@
           "bin/placeholder/Entities.dll": {}
         }
       },
-      "ExpressionBuilder/1.0.0": {
-        "type": "project",
-        "compile": {
-          "bin/placeholder/ExpressionBuilder.dll": {}
-        },
-        "runtime": {
-          "bin/placeholder/ExpressionBuilder.dll": {}
-        }
-      },
       "Models/1.0.0": {
         "type": "project",
         "framework": ".NETCoreApp,Version=v2.0",
         "dependencies": {
           "Binbin.Linq.PredicateBuilder": "2.0.1",
-          "ExpressionBuilder": "1.0.0",
           "GraphQL": "2.0.0",
           "Newtonsoft.Json": "11.0.2"
         },
@@ -13701,11 +13691,6 @@
       "type": "project",
       "path": "../Entities/Entities.csproj",
       "msbuildProject": "../Entities/Entities.csproj"
-    },
-    "ExpressionBuilder/1.0.0": {
-      "type": "project",
-      "path": "../ExpressionBuilder/ExpressionBuilder.csproj",
-      "msbuildProject": "../ExpressionBuilder/ExpressionBuilder.csproj"
     },
     "Models/1.0.0": {
       "type": "project",
