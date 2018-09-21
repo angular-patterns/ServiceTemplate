@@ -25,25 +25,28 @@ namespace Models
                 Total = count
             };
         }
-        public static IOrderedQueryable<T> ApplySorting<T>(this IQueryable<T> list, QueryState state)
+        public static IQueryable<T> ApplySorting<T>(this IQueryable<T> list, QueryState state)
         {
-            IOrderedQueryable<T> orderedQueryable = null;
-
-            foreach (var sort in state.Sort)
+            if (state.Sort != null)
             {
-                if (orderedQueryable == null)
-                    orderedQueryable = sort.Dir == "asc"
-                        ? list.OrderBy(GetPropertySelector<T>(sort.Field))
-                        : list.OrderByDescending(GetPropertySelector<T>(sort.Field));
-                else
+                IOrderedQueryable<T> orderedQueryable = null;
+                foreach (var sort in state.Sort)
                 {
-                    orderedQueryable = sort.Dir == "asc"
-                        ? orderedQueryable.ThenBy(GetPropertySelector<T>(sort.Field))
-                        : orderedQueryable.ThenByDescending(GetPropertySelector<T>(sort.Field));
+                    if (orderedQueryable == null)
+                        orderedQueryable = sort.Dir == "asc"
+                            ? list.OrderBy(GetPropertySelector<T>(sort.Field))
+                            : list.OrderByDescending(GetPropertySelector<T>(sort.Field));
+                    else
+                    {
+                        orderedQueryable = sort.Dir == "asc"
+                            ? orderedQueryable.ThenBy(GetPropertySelector<T>(sort.Field))
+                            : orderedQueryable.ThenByDescending(GetPropertySelector<T>(sort.Field));
+                    }
                 }
-            }
 
-            return orderedQueryable;
+                return orderedQueryable ?? list;
+            }
+            return list;
         }
 
         public static Expression<Func<T, bool>> FilterBy<T>(this Expression<Func<T, bool>> t, FilterLogic logic, Expression<Func<T, bool>> other)
@@ -58,9 +61,9 @@ namespace Models
             return t.And(other);
         }
 
-        public static IQueryable<T> ApplySpecificFilter<T>(this IQueryable<T> list, FilterLogic logic, FilterDescriptor filter) where T: class
+        public static Expression<Func<T, bool>> ApplyFilter<T>(this Expression<Func<T,bool>> predicate, FilterLogic logic, FilterDescriptor filter) where T: class
         {
-            var predicate = PredicateBuilder.True<T>();
+            //var predicate = PredicateBuilder.False<T>();
             
             switch (filter.Operator)
             {
@@ -73,7 +76,8 @@ namespace Models
                     break;
 
                 case FilterOperator.IsEqualTo:
-                    predicate = predicate.FilterBy(logic, CreatePredicateExpression<T>(filter.Field, "Equals", filter.Value));
+                    //predicate = predicate.FilterBy(logic, CreatePredicateExpression<T>(filter.Field, "Equals", filter.Value));
+                    predicate = predicate.FilterBy(logic, CreatePredicateExpression<T>(Equals<T>(filter.Field, filter.Value)));
                     break;
 
                 case FilterOperator.IsNotEqualTo:
@@ -94,31 +98,55 @@ namespace Models
                     predicate = predicate.FilterBy(logic, Inverse(CreatePredicateExpression<T>(filter.Field, "IsEmpty", filter.Value)));
                     break;
                 case FilterOperator.IsNull:
-                    predicate = predicate.FilterBy(logic, CreatePredicateNullExpression<T>(filter.Field));
+                    predicate = predicate.FilterBy(logic, CreatePredicateExpression<T>(IsNull<T>(filter.Field)));
                     break;
                 case FilterOperator.IsNotNull:
-                    predicate = predicate.FilterBy(logic, Inverse(CreatePredicateNullExpression<T>(filter.Field)));
+                    predicate = predicate.FilterBy(logic, CreatePredicateExpression<T>(Expression.Not(IsNull<T>(filter.Field))));
                     break;
+
 
             }
 
 
 
-            list = list.Where(predicate);
-            return list;
+            return predicate;
         }
 
-        private static Expression<Func<T, bool>> CreatePredicateNullExpression<T>(string field)
+        private static Expression Equals<T> (string field, object value)
+        {
+            var target = Expression.Parameter(typeof(T));
+            var memberAccess = CreateMemberAccess(target, field);
+            var actualValue = Expression.Constant(value, memberAccess.Type);
+            return Expression.Equal(memberAccess, actualValue);
+
+        }
+
+        private static Expression GreaterThan<T>(string field, object value)
+        {
+            var target = Expression.Parameter(typeof(T));
+            var memberAccess = CreateMemberAccess(target, field);
+            var actualValue = Expression.Constant(value, memberAccess.Type);
+            return Expression.GreaterThan(memberAccess, actualValue);
+        }
+
+        private static Expression IsNull<T>(string field)
         {
             var target = Expression.Parameter(typeof(T));
             var memberAccess = CreateMemberAccess(target, field);
             var actualValue = Expression.Constant(null, memberAccess.Type);
+            return Expression.Equal(memberAccess, actualValue);
 
-            var expression = Expression.Equal(memberAccess, actualValue);
+        }
+
+        private static Expression<Func<T, bool>> CreatePredicateExpression<T>(Expression expression)
+        {
+            var target = Expression.Parameter(typeof(T));
             var predicate = Expression.Lambda(expression, target);
             var typedExpression = (Expression<Func<T, bool>>)predicate;
             return typedExpression;
+
         }
+
 
         private static Expression<Func<T, bool>> CreatePredicateExpression<T>(string field, string comparer, object value) where T: class
         {
@@ -139,10 +167,12 @@ namespace Models
         {
             if (state.Filter != null)
             {
+                var predicate = PredicateBuilder.True<T>();
                 foreach (var filter in state.Filter.Filters)
                 {
-                    list = list.ApplySpecificFilter(state.Filter.Logic, filter);
+                    predicate = predicate.ApplyFilter(state.Filter.Logic, filter);
                 }
+                list = list.Where(predicate);
             }
             return list;
         }
