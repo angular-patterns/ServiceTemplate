@@ -24,6 +24,9 @@ namespace Models
 
             foreach (var sort in state.Sort)
             {
+                if (sort.Dir == null)
+                    continue;
+
                 if (orderedQueryable == null)
                     orderedQueryable = sort.Dir == "asc"
                         ? list.OrderBy(GetPropertySelector<T>(sort.Field))
