@@ -41,6 +41,7 @@ var ReviewService = /** @class */ (function (_super) {
         this.fetch(state)
             .subscribe(function (x) {
             var dr = kendo_data_query_1.process(x.data, { group: state.group });
+            dr.total = x.total;
             console.log(dr);
             _super.prototype.next.call(_this, dr);
         });

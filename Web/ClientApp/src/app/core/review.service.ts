@@ -20,6 +20,7 @@ export class ReviewService extends BehaviorSubject<GridDataResult> {
         this.fetch(state)
             .subscribe(x => { 
                 var dr: DataResult = process(x.data, { group: state.group });
+                dr.total = x.total;
                 console.log(dr);
                 super.next(dr);
             });

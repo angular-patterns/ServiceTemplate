@@ -28,13 +28,15 @@ namespace Schemas
         {
             if (value == null)
                 return (object)null;
-            int result1;
-            if (int.TryParse(value.ToString(), out result1))
-                return (object)result1;
-            long result2;
-            if (long.TryParse(value.ToString(), out result2))
-                return (object)result2;
-            return (object)value;
+            //int result1;
+            //if (int.TryParse(value.ToString(), out result1))
+            //    return (object)result1;
+            //long result2;
+            //if (long.TryParse(value.ToString(), out result2))
+            //    return (object)result2;
+            //return (object)value;
+
+            return Convert.ChangeType(value, typeof(string));
         }
 
         public override object ParseLiteral(IValue value)

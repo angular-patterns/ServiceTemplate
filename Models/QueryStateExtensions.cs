@@ -65,7 +65,6 @@ namespace Models
             var sortAndFilter = list
                 .ApplySorting(state)
                 .ApplyFilter(state);
-
             return sortAndFilter.ApplyPaging(state).ToPagedResult(sortAndFilter.Count());
         }
 
