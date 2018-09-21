@@ -16,11 +16,13 @@ import { Observable } from 'rxjs';
   ]
 })
 export class AppComponent implements OnInit {
+  groups: GroupDescriptor[] = [];
   view: Observable<GridDataResult>;
   public state: State = {
     skip: 0,
     take: 5,
     sort: [],
+    group: [],
     // Initial filter descriptor
     filter: {
       logic: 'and',
@@ -36,7 +38,10 @@ export class AppComponent implements OnInit {
   public ngOnInit(): void {    
   }
 
-
+  public groupChange(groups: GroupDescriptor[]): void {
+    this.state.group = groups;
+    this.reviewService.reviews(this.state);
+}
 
   public dataStateChange(state: DataStateChangeEvent): void {
     this.state = state;

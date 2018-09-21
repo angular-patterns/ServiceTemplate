@@ -6,6 +6,7 @@ import gql from 'graphql-tag';
 import { map, tap } from 'rxjs/operators';
 import { GridDataResult } from '@progress/kendo-angular-grid';
 import { BehaviorSubject } from 'rxjs/BehaviorSubject';
+import { GroupDescriptor, DataResult, process } from '@progress/kendo-data-query';
 
 @Injectable()
 export class ReviewService extends BehaviorSubject<GridDataResult> {
@@ -15,8 +16,13 @@ export class ReviewService extends BehaviorSubject<GridDataResult> {
 
     }
     reviews(state: any): void {
+
         this.fetch(state)
-            .subscribe(x => super.next(x));
+            .subscribe(x => { 
+                var dr: DataResult = process(x.data, { group: state.group });
+                console.log(dr);
+                super.next(dr);
+            });
     }
 
     fetch(state: any): Observable<GridDataResult> {

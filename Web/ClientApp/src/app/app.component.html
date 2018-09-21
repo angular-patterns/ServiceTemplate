@@ -19,7 +19,9 @@
           [scrollable]="'none'"
         
           (dataStateChange)="dataStateChange($event)"
-
+          [groupable]="true"
+          [group]="state.group"
+          (groupChange)="groupChange($event)"
         >
         <kendo-grid-column field="recordCount" title="Record Count" [filterable]="false"> width="30"></kendo-grid-column>
         <kendo-grid-column field="total" title="Total" [filterable]="false"> width="30"></kendo-grid-column>

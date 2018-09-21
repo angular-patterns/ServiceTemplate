@@ -12,14 +12,33 @@ select
 	count(*) as RecordCount, x.Total, round(count(*)*100/convert(float, x.Total),2,1) as Percentage, x.BusinessID, x.Message, x.Category as Category, x.SubCategory as SubCategory, x.CreatedOn as CreatedOn
 from (
 	select 
-		1 as Total,
+		3 as Total,
 		'00040' as BusinessID,
 		'Message' as Message,
 		'Category' as Category,
 		'Sub Category' as SubCategory,
 		 CONVERT(DATETIME, '2012-08-17', 111) as CreatedOn
+
+	union (
+		select 
+			3 as Total,
+			'00050' as BusinessID,
+			'My Message' as Message,
+			'Category' as Category,
+			'Apples' as SubCategory,
+			 CONVERT(DATETIME, '2012-08-18', 111) as CreatedOn
+	)
+		union (
+		select 
+			3 as Total,
+			'00060' as BusinessID,
+			'This is a new message' as Message,
+			'Category' as Category,
+			'Apples' as SubCategory,
+			 CONVERT(DATETIME, '2012-08-18', 111) as CreatedOn
+	) 
+ 
 ) x
-group by x.Total, x.BusinessID, x.Message, x.Category, x.SubCategory, x.CreatedOn
 
 
 drop view ReviewView

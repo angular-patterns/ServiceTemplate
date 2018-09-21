@@ -14,10 +14,12 @@ var review_service_1 = require("./core/review.service");
 var AppComponent = /** @class */ (function () {
     function AppComponent(reviewService) {
         this.reviewService = reviewService;
+        this.groups = [];
         this.state = {
             skip: 0,
             take: 5,
             sort: [],
+            group: [],
             // Initial filter descriptor
             filter: {
                 logic: 'and',
@@ -28,6 +30,10 @@ var AppComponent = /** @class */ (function () {
         this.reviewService.reviews(this.state);
     }
     AppComponent.prototype.ngOnInit = function () {
+    };
+    AppComponent.prototype.groupChange = function (groups) {
+        this.state.group = groups;
+        this.reviewService.reviews(this.state);
     };
     AppComponent.prototype.dataStateChange = function (state) {
         this.state = state;

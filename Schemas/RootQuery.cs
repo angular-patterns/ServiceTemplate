@@ -88,6 +88,17 @@ namespace Schemas
        
     }
 
+    public class InputGroupDescriptorType : InputObjectGraphType<GroupDescriptor>
+    {
+        public InputGroupDescriptorType()
+        {
+            Field(t => t.Field, nullable: true);
+            Field(t => t.Dir, nullable: true);
+        }
+
+    }
+
+
     public class InputFilterDescriptorType : InputObjectGraphType<FilterDescriptor>
     {
         public InputFilterDescriptorType()
@@ -131,7 +142,7 @@ namespace Schemas
         {
             Field(t => t.Skip);
             Field(t => t.Take);
-            Field<ListGraphType<StringGraphType>>("group", resolve: ctx => ctx.Source.Group);
+            Field<ListGraphType<InputGroupDescriptorType>>("group", resolve: ctx => ctx.Source.Group);
             Field<ListGraphType<InputSortDescriptorType>>("sort", resolve: ctx => ctx.Source.Sort);
             Field<InputFilterStateType>("filter", resolve: ctx => ctx.Source.Filter);
 

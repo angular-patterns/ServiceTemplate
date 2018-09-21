@@ -28,6 +28,7 @@ var apollo_angular_1 = require("apollo-angular");
 var graphql_tag_1 = require("graphql-tag");
 var operators_1 = require("rxjs/operators");
 var BehaviorSubject_1 = require("rxjs/BehaviorSubject");
+var kendo_data_query_1 = require("@progress/kendo-data-query");
 var ReviewService = /** @class */ (function (_super) {
     __extends(ReviewService, _super);
     function ReviewService(apollo) {
@@ -38,7 +39,11 @@ var ReviewService = /** @class */ (function (_super) {
     ReviewService.prototype.reviews = function (state) {
         var _this = this;
         this.fetch(state)
-            .subscribe(function (x) { return _super.prototype.next.call(_this, x); });
+            .subscribe(function (x) {
+            var dr = kendo_data_query_1.process(x.data, { group: state.group });
+            console.log(dr);
+            _super.prototype.next.call(_this, dr);
+        });
     };
     ReviewService.prototype.fetch = function (state) {
         var _this = this;
