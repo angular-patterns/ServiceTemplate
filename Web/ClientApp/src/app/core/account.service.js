@@ -55,10 +55,9 @@ var AccountService = /** @class */ (function () {
     };
     AccountService = __decorate([
         core_1.Injectable(),
-        __metadata("design:paramtypes", [http_1.HttpClient, typeof (_a = typeof apollo_angular_1.Apollo !== "undefined" && apollo_angular_1.Apollo) === "function" && _a || Object])
+        __metadata("design:paramtypes", [http_1.HttpClient, apollo_angular_1.Apollo])
     ], AccountService);
     return AccountService;
-    var _a;
 }());
 exports.AccountService = AccountService;
 var templateObject_1, templateObject_2, templateObject_3;

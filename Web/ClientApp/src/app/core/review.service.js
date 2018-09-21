@@ -42,13 +42,12 @@ var ReviewService = /** @class */ (function (_super) {
     };
     ReviewService.prototype.fetch = function (state) {
         var _this = this;
+        console.log(JSON.stringify(state));
         this.loading = true;
         return this.apollo.query({
-            query: graphql_tag_1.default(templateObject_1 || (templateObject_1 = __makeTemplateObject(["\n            query GetReviews($skip: Int!, $take: Int!, $sort: [InputSortDescriptorType]) {\n                reviews(skip: $skip, take: $take, sort: $sort) {\n                  data {\n                    recordCount\n                    total\n                    percentage\n                    businessId\n                    message\n                    category\n                    subCategory\n                  }\n                  total\n                }\n              }"], ["\n            query GetReviews($skip: Int!, $take: Int!, $sort: [InputSortDescriptorType]) {\n                reviews(skip: $skip, take: $take, sort: $sort) {\n                  data {\n                    recordCount\n                    total\n                    percentage\n                    businessId\n                    message\n                    category\n                    subCategory\n                  }\n                  total\n                }\n              }"]))),
+            query: graphql_tag_1.default(templateObject_1 || (templateObject_1 = __makeTemplateObject(["\nquery GetReviews($state: InputQueryStateType!) {\n  reviews(state: $state) {\n    data {\n      recordCount\n      total\n      percentage\n      businessId\n      message\n      category\n      subCategory\n    }\n    total\n  }\n}"], ["\nquery GetReviews($state: InputQueryStateType!) {\n  reviews(state: $state) {\n    data {\n      recordCount\n      total\n      percentage\n      businessId\n      message\n      category\n      subCategory\n    }\n    total\n  }\n}"]))),
             variables: {
-                skip: state.skip,
-                take: state.take,
-                sort: state.sort
+                state: state
             },
             fetchPolicy: 'network-only'
         })
@@ -59,10 +58,9 @@ var ReviewService = /** @class */ (function (_super) {
     };
     ReviewService = __decorate([
         core_1.Injectable(),
-        __metadata("design:paramtypes", [typeof (_a = typeof apollo_angular_1.Apollo !== "undefined" && apollo_angular_1.Apollo) === "function" && _a || Object])
+        __metadata("design:paramtypes", [apollo_angular_1.Apollo])
     ], ReviewService);
     return ReviewService;
-    var _a;
 }(BehaviorSubject_1.BehaviorSubject));
 exports.ReviewService = ReviewService;
 var templateObject_1;

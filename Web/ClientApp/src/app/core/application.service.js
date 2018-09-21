@@ -60,10 +60,9 @@ var ApplicationService = /** @class */ (function (_super) {
     };
     ApplicationService = __decorate([
         core_1.Injectable(),
-        __metadata("design:paramtypes", [typeof (_a = typeof apollo_angular_1.Apollo !== "undefined" && apollo_angular_1.Apollo) === "function" && _a || Object])
+        __metadata("design:paramtypes", [apollo_angular_1.Apollo])
     ], ApplicationService);
     return ApplicationService;
-    var _a;
 }(BehaviorSubject_1.BehaviorSubject));
 exports.ApplicationService = ApplicationService;
 var templateObject_1;

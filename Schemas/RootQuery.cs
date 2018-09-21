@@ -34,7 +34,7 @@ namespace Schemas
             long result2;
             if (long.TryParse(value.ToString(), out result2))
                 return (object)result2;
-            return (object)null;
+            return (object)value;
         }
 
         public override object ParseLiteral(IValue value)
@@ -131,6 +131,7 @@ namespace Schemas
         {
             Field(t => t.Skip);
             Field(t => t.Take);
+            Field<ListGraphType<StringGraphType>>("group", resolve: ctx => ctx.Source.Group);
             Field<ListGraphType<InputSortDescriptorType>>("sort", resolve: ctx => ctx.Source.Sort);
             Field<InputFilterStateType>("filter", resolve: ctx => ctx.Source.Filter);
 

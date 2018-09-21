@@ -20,28 +20,26 @@ export class ReviewService extends BehaviorSubject<GridDataResult> {
     }
 
     fetch(state: any): Observable<GridDataResult> {
-
+      console.log(JSON.stringify(state));
         this.loading = true;
         return this.apollo.query({
             query: gql`
-            query GetReviews($skip: Int!, $take: Int!, $sort: [InputSortDescriptorType]) {
-                reviews(skip: $skip, take: $take, sort: $sort) {
-                  data {
-                    recordCount
-                    total
-                    percentage
-                    businessId
-                    message
-                    category
-                    subCategory
-                  }
-                  total
-                }
-              }`,
+query GetReviews($state: InputQueryStateType!) {
+  reviews(state: $state) {
+    data {
+      recordCount
+      total
+      percentage
+      businessId
+      message
+      category
+      subCategory
+    }
+    total
+  }
+}`,
             variables: {
-                skip: state.skip,
-                take: state.take,
-                sort: state.sort
+                state: state
             },
             fetchPolicy: 'network-only'
         })

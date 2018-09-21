@@ -12,6 +12,8 @@ namespace Models
 
         public SortDescriptor[] Sort { get; set; }
 
+        public string[] Group { get; set; }
+
         public FilterState Filter { get; set; }
        
     }

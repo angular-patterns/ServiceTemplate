@@ -6,30 +6,30 @@ namespace Models
 {
     public enum FilterOperator
     {
-        IsEqualTo, 
-        IsNotEqualTo,
-        IsNull,
-        IsNotNull,
+        EQ, //IsEqualTo, 
+        NEQ, //IsNotEqualTo,
+        ISNULL, //IsNull,
+        ISNOTNULL, //IsNotNull,
 
         // date
-        IsAfterOrEqualTo,
-        IsAfter,
-        IsBeforeOrEqualTo,
-        IsBefore,
+        ISAFTEROREQUALTO, //IsAfterOrEqualTo,
+        ISAFTER, //IsAfter,
+        ISBEFOREOREQUALTO, //IsBeforeOrEqualTo,
+        ISBEFORE, //IsBefore,
         
         // string
-        Contains, 
-        DoesNotContain,
-        StartsWith,
-        EndsWith, 
-        IsEmpty, 
-        IsNotEmpty,
+        CONTAINS, //Contains, 
+        DOESNOTCONTAIN, //DoesNotContain,
+        STARTSWITH, //StartsWith,
+        ENDSWITH, //EndsWith, 
+        ISEMPTY, //IsEmpty, 
+        ISNOTEMPTY, //IsNotEmpty,
 
         // numeric
-        IsGreaterThanOrEqualto,
-        IsGreaterThan,
-        IsLessThanOrEqualTo,
-        IsLessThan
+        ISGREATERTHANOREQUALTO, // IsGreaterThanOrEqualto,
+        ISGREATERTHAN, //IsGreaterThan,
+        ISLESSTHANOREQUALTO, //IsLessThanOrEqualTo,
+        ISLESSTHAN //IsLessThan
 
     }
 

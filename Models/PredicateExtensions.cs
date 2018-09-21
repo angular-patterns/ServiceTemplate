@@ -14,58 +14,58 @@ namespace Models
 
             switch (filter.Operator)
             {
-                case FilterOperator.Contains:
+                case FilterOperator.CONTAINS:
                     predicate = predicate.FilterBy(logic, CreatePredicate<T>(filter.Field, Expressions.FromMethod("Contains", filter.Value)));
                     break;
-                case FilterOperator.DoesNotContain:
+                case FilterOperator.DOESNOTCONTAIN:
                     predicate = predicate.FilterBy(logic, CreatePredicate<T>(filter.Field, Expressions.FromMethod("!Contains", filter.Value)));
                     break;
-                case FilterOperator.IsEqualTo:
+                case FilterOperator.EQ:
                     predicate = predicate.FilterBy(logic, CreatePredicate<T>(filter.Field, Expressions.FromMethod("Equals", filter.Value)));
                     break;
-                case FilterOperator.IsNotEqualTo:
+                case FilterOperator.NEQ:
                     predicate = predicate.FilterBy(logic, CreatePredicate<T>(filter.Field, Expressions.FromMethod("!Equals", filter.Value)));
                     break;
-                case FilterOperator.EndsWith:
+                case FilterOperator.ENDSWITH:
                     predicate = predicate.FilterBy(logic, CreatePredicate<T>(filter.Field, Expressions.FromMethod("EndsWith", filter.Value)));
                     break;
-                case FilterOperator.StartsWith:
+                case FilterOperator.STARTSWITH:
                     predicate = predicate.FilterBy(logic, CreatePredicate<T>(filter.Field, Expressions.FromMethod("StartsWith", filter.Value)));
                     break;
-                case FilterOperator.IsEmpty:
+                case FilterOperator.ISEMPTY:
                     predicate = predicate.FilterBy(logic, CreatePredicate<T>(filter.Field, Expressions.FromMethod("Equals", string.Empty)));
                     break;
-                case FilterOperator.IsNotEmpty:
+                case FilterOperator.ISNOTEMPTY:
                     predicate = predicate.FilterBy(logic, CreatePredicate<T>(filter.Field, Expressions.FromMethod("!Equals", string.Empty)));
                     break;
-                case FilterOperator.IsNull:
+                case FilterOperator.ISNULL:
                     predicate = predicate.FilterBy(logic, CreatePredicate<T>(filter.Field, Expressions.IsNull));
                     break;
-                case FilterOperator.IsNotNull:
+                case FilterOperator.ISNOTNULL:
                     predicate = predicate.FilterBy(logic, CreatePredicate<T>(filter.Field, Expressions.IsNotNull));
                     break;
-                case FilterOperator.IsGreaterThan:
+                case FilterOperator.ISGREATERTHAN:
                     predicate = predicate.FilterBy(logic, CreatePredicate<T>(filter.Field, Expressions.FromBinaryExpression(Expression.GreaterThan, filter.Value)));
                     break;
-                case FilterOperator.IsGreaterThanOrEqualto:
+                case FilterOperator.ISGREATERTHANOREQUALTO:
                     predicate = predicate.FilterBy(logic, CreatePredicate<T>(filter.Field, Expressions.FromDateExpression(Expression.GreaterThanOrEqual, filter.Value)));
                     break;
-                case FilterOperator.IsLessThan:
+                case FilterOperator.ISLESSTHAN:
                     predicate = predicate.FilterBy(logic, CreatePredicate<T>(filter.Field, Expressions.FromBinaryExpression(Expression.LessThan, filter.Value)));
                     break;
-                case FilterOperator.IsLessThanOrEqualTo:
+                case FilterOperator.ISLESSTHANOREQUALTO:
                     predicate = predicate.FilterBy(logic, CreatePredicate<T>(filter.Field, Expressions.FromBinaryExpression(Expression.LessThanOrEqual, filter.Value)));
                     break;
-                case FilterOperator.IsAfter:
+                case FilterOperator.ISAFTER:
                     predicate = predicate.FilterBy(logic, CreatePredicate<T>(filter.Field, Expressions.FromDateExpression(Expression.GreaterThan, filter.Value)));
                     break;
-                case FilterOperator.IsAfterOrEqualTo:
+                case FilterOperator.ISAFTEROREQUALTO:
                     predicate = predicate.FilterBy(logic, CreatePredicate<T>(filter.Field, Expressions.FromDateExpression(Expression.GreaterThanOrEqual, filter.Value)));
                     break;
-                case FilterOperator.IsBefore:
+                case FilterOperator.ISBEFORE:
                     predicate = predicate.FilterBy(logic, CreatePredicate<T>(filter.Field, Expressions.FromDateExpression(Expression.LessThan, filter.Value)));
                     break;
-                case FilterOperator.IsBeforeOrEqualTo:
+                case FilterOperator.ISBEFOREOREQUALTO:
                     predicate = predicate.FilterBy(logic, CreatePredicate<T>(filter.Field, Expressions.FromDateExpression(Expression.LessThanOrEqual, filter.Value)));
                     break;
 
