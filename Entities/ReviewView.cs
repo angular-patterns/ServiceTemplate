@@ -5,6 +5,23 @@ using System.Text;
 namespace Entities
 {
     /*
+     * 
+     * 
+create view ReviewView as
+select  
+	count(*) as RecordCount, x.Total, round(count(*)*100/convert(float, x.Total),2,1) as Percentage, x.BusinessID, x.Message, x.Category as Category, x.SubCategory as SubCategory
+from (
+	select 
+		1 as Total,
+		'00040' as BusinessID,
+		'Message' as Message,
+		'Category' as Category,
+		'Sub Category' as SubCategory
+
+) x
+group by x.Total, x.BusinessID, x.Message, x.Category, x.SubCategory
+
+
 drop view ReviewView
 create view ReviewView as
 select  count(*) as RecordCount, x.Total, round(count(*)*100/convert(float, x.Total),2,1) as Percentage, rt.BusinessID, rt.Message, rdi2.DisplayValue as Category, rdi3.DisplayValue as SubCategory

@@ -5241,7 +5241,9 @@
         "framework": ".NETCoreApp,Version=v2.0",
         "dependencies": {
           "Binbin.Linq.PredicateBuilder": "2.0.1",
-          "ExpressionBuilder": "1.0.0"
+          "ExpressionBuilder": "1.0.0",
+          "GraphQL": "2.0.0",
+          "Newtonsoft.Json": "11.0.2"
         },
         "compile": {
           "bin/placeholder/Models.dll": {}
@@ -12498,7 +12500,7 @@
       ]
     },
     "System.Security.Cryptography.Xml/4.4.2": {
-      "sha512": "q9Dren/YP5jhRCkDvLfuaPpMTQzP97ANvzq/OoGgwK8YdLRSTABS9oW5/23OKoM2DRCuBrh4qaecD2YNhPtuzQ==",
+      "sha512": "1m+fKVrApgKYMRuE0MF0vGjqy4XqAp1rCtyAzMXhJajMDDytMh/rHk9hp4M7KKk3QQZoWJUvyUY7xcw74w+JiQ==",
       "type": "package",
       "path": "system.security.cryptography.xml/4.4.2",
       "files": [
@@ -13731,23 +13733,23 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\michael.kang\\.nuget\\packages\\": {},
+    "C:\\Users\\mike\\.nuget\\packages\\": {},
     "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "E:\\projects\\servicetemplate\\Web\\Web.csproj",
+      "projectUniqueName": "C:\\projects\\ServiceTemplate\\Web\\Web.csproj",
       "projectName": "Web",
-      "projectPath": "E:\\projects\\servicetemplate\\Web\\Web.csproj",
-      "packagesPath": "C:\\Users\\michael.kang\\.nuget\\packages\\",
-      "outputPath": "E:\\projects\\servicetemplate\\Web\\obj\\",
+      "projectPath": "C:\\projects\\ServiceTemplate\\Web\\Web.csproj",
+      "packagesPath": "C:\\Users\\mike\\.nuget\\packages\\",
+      "outputPath": "C:\\projects\\ServiceTemplate\\Web\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
       ],
       "configFilePaths": [
-        "C:\\Users\\michael.kang\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\mike\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
@@ -13760,8 +13762,8 @@
       "frameworks": {
         "netcoreapp2.0": {
           "projectReferences": {
-            "E:\\projects\\servicetemplate\\Container\\Container.csproj": {
-              "projectPath": "E:\\projects\\servicetemplate\\Container\\Container.csproj"
+            "C:\\projects\\ServiceTemplate\\Container\\Container.csproj": {
+              "projectPath": "C:\\projects\\ServiceTemplate\\Container\\Container.csproj"
             }
           }
         }

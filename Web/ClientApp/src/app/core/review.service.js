@@ -59,9 +59,10 @@ var ReviewService = /** @class */ (function (_super) {
     };
     ReviewService = __decorate([
         core_1.Injectable(),
-        __metadata("design:paramtypes", [apollo_angular_1.Apollo])
+        __metadata("design:paramtypes", [typeof (_a = typeof apollo_angular_1.Apollo !== "undefined" && apollo_angular_1.Apollo) === "function" && _a || Object])
     ], ReviewService);
     return ReviewService;
+    var _a;
 }(BehaviorSubject_1.BehaviorSubject));
 exports.ReviewService = ReviewService;
 var templateObject_1;

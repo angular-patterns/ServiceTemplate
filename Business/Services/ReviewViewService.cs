@@ -28,9 +28,9 @@ namespace Business.Services
         {
             
             return this.Context.ReviewViews
-                .ApplySorting(state)
+                //.ApplySorting(state)
                 .ApplyFilter(state)
-                .ApplyPaging(state)
+                //.ApplyPaging(state)
                 .ToPagedResult(this.Context.ReviewViews.Count());
         }
 

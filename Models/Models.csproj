@@ -6,19 +6,12 @@
 
   <ItemGroup>
     <PackageReference Include="Binbin.Linq.PredicateBuilder" Version="2.0.1" />
+    <PackageReference Include="GraphQL" Version="2.0.0" />
+    <PackageReference Include="Newtonsoft.Json" Version="11.0.2" />
   </ItemGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\ExpressionBuilder\ExpressionBuilder.csproj" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Reference Include="GraphQL">
-      <HintPath>C:\Users\michael.kang\.nuget\packages\graphql\2.0.0\lib\netstandard2.0\GraphQL.dll</HintPath>
-    </Reference>
-    <Reference Include="Newtonsoft.Json">
-      <HintPath>C:\Users\michael.kang\.nuget\packages\newtonsoft.json\11.0.2\lib\netstandard2.0\Newtonsoft.Json.dll</HintPath>
-    </Reference>
   </ItemGroup>
 
 </Project>

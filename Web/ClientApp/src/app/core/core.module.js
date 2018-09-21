@@ -42,8 +42,9 @@ var CoreModule = /** @class */ (function () {
                 application_service_1.ApplicationService
             ]
         }),
-        __metadata("design:paramtypes", [apollo_angular_1.Apollo, apollo_angular_link_http_1.HttpLink])
+        __metadata("design:paramtypes", [typeof (_a = typeof apollo_angular_1.Apollo !== "undefined" && apollo_angular_1.Apollo) === "function" && _a || Object, typeof (_b = typeof apollo_angular_link_http_1.HttpLink !== "undefined" && apollo_angular_link_http_1.HttpLink) === "function" && _b || Object])
     ], CoreModule);
     return CoreModule;
+    var _a, _b;
 }());
 exports.CoreModule = CoreModule;

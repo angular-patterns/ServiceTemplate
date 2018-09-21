@@ -94,10 +94,10 @@ namespace Models
                     predicate = predicate.FilterBy(logic, Inverse(CreatePredicateExpression<T>(filter.Field, "IsEmpty", filter.Value)));
                     break;
                 case FilterOperator.IsNull:
-                    predicate = predicate.FilterBy(logic, CreatePredicateExpression<T>(filter.Field, "Equals", null));
+                    predicate = predicate.FilterBy(logic, CreatePredicateNullExpression<T>(filter.Field));
                     break;
                 case FilterOperator.IsNotNull:
-                    predicate = predicate.FilterBy(logic, Inverse(CreatePredicateExpression<T>(filter.Field, "Equals", null)));
+                    predicate = predicate.FilterBy(logic, Inverse(CreatePredicateNullExpression<T>(filter.Field)));
                     break;
 
             }
@@ -108,7 +108,7 @@ namespace Models
             return list;
         }
 
-        private static Expression<Func<T, bool>> CreateNullCheck<T>(string field)
+        private static Expression<Func<T, bool>> CreatePredicateNullExpression<T>(string field)
         {
             var target = Expression.Parameter(typeof(T));
             var memberAccess = CreateMemberAccess(target, field);

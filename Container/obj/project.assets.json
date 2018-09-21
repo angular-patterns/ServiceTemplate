@@ -1271,7 +1271,9 @@
         "framework": ".NETCoreApp,Version=v2.0",
         "dependencies": {
           "Binbin.Linq.PredicateBuilder": "2.0.1",
-          "ExpressionBuilder": "1.0.0"
+          "ExpressionBuilder": "1.0.0",
+          "GraphQL": "2.0.0",
+          "Newtonsoft.Json": "11.0.2"
         },
         "compile": {
           "bin/placeholder/Models.dll": {}
@@ -4466,23 +4468,23 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\michael.kang\\.nuget\\packages\\": {},
+    "C:\\Users\\mike\\.nuget\\packages\\": {},
     "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "E:\\projects\\servicetemplate\\Container\\Container.csproj",
+      "projectUniqueName": "C:\\projects\\ServiceTemplate\\Container\\Container.csproj",
       "projectName": "Container",
-      "projectPath": "E:\\projects\\servicetemplate\\Container\\Container.csproj",
-      "packagesPath": "C:\\Users\\michael.kang\\.nuget\\packages\\",
-      "outputPath": "E:\\projects\\servicetemplate\\Container\\obj\\",
+      "projectPath": "C:\\projects\\ServiceTemplate\\Container\\Container.csproj",
+      "packagesPath": "C:\\Users\\mike\\.nuget\\packages\\",
+      "outputPath": "C:\\projects\\ServiceTemplate\\Container\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
       ],
       "configFilePaths": [
-        "C:\\Users\\michael.kang\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\mike\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
@@ -4495,11 +4497,11 @@
       "frameworks": {
         "netcoreapp2.0": {
           "projectReferences": {
-            "E:\\projects\\servicetemplate\\Business\\Business.csproj": {
-              "projectPath": "E:\\projects\\servicetemplate\\Business\\Business.csproj"
+            "C:\\projects\\ServiceTemplate\\Business\\Business.csproj": {
+              "projectPath": "C:\\projects\\ServiceTemplate\\Business\\Business.csproj"
             },
-            "E:\\projects\\servicetemplate\\Schemas\\Schemas.csproj": {
-              "projectPath": "E:\\projects\\servicetemplate\\Schemas\\Schemas.csproj"
+            "C:\\projects\\ServiceTemplate\\Schemas\\Schemas.csproj": {
+              "projectPath": "C:\\projects\\ServiceTemplate\\Schemas\\Schemas.csproj"
             }
           }
         }
